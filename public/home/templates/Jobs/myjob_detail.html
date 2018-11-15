@@ -1,0 +1,867 @@
+<main>
+    <div ng-include="'/home/templates/headerVendorView.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
+                                <li class="breadcrumb-item active">My jobs</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+        <div id="vendor-st1" class="tab-pane">
+            <section class="team-list">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="detail-detail">
+                                <ul class="reception-events">
+                                    <li><a ui-sref="myjobs"><span class="detail-arrow myjobdet"><img class="ellip" src="/home/img/left-arrows.svg" alt="engagemen"></span></a></li>
+                                </ul>
+                                <md-content>
+                                    <md-tabs md-dynamic-height="" md-border-bottom="">
+                                        <md-tab label="job Details">
+                                            <md-content class="md-padding">
+                                                <div class="row">
+                                                    <div class="col-md-8 col-sm-8">
+                                                        <div class="caterers-card vendor-items">
+                                                            <div class="card-head">
+                                                                <h6>{{jobDetail.title}}</h6><br/>
+                                                                <h6 style="width:100%">Description</h6>
+                                                                <span class="favourite" style="cursor: pointer;" ng-click="markasfavourite(jobDetail._id)">Save to Favourite</span>
+                                                                <p style="width:100%" class="card-detail-card">{{jobDetail.description}}</p>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="caterers-card vendor-items">
+                                                            <div class="venue-info">
+
+                                                                <ul class="items-details details-1">
+                                                                    <h6>Event Details</h6>
+                                                                    <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Event name</li>
+                                                                    <li class="venue-date-list">{{jobDetail.project_detail.events.name}}</li>
+                                                                    <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Start Date</li>
+                                                                    <li class="venue-date-list">{{jobDetail.project_detail.events.start_date|date}}(Duration:{{jobDetail.project_detail.events.duration}})</li>
+                                                                    <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Address</li>
+                                                                    <li class="venue-date-list">{{jobDetail.project_detail.events.address}}</li>
+                                                                    <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; No of Pax</li>
+                                                                    <li class="venue-date-list">500+</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <!--div class="caterers-card vendor-items">
+                                                            <div class="venue-info">
+
+                                                                <ul class="items-details details-1">
+                                                                    <h6>Food and restrictions</h6>
+                                                                    <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Food</li>
+                                                                    <li class="venue-date-list">Veg and non veg</li>
+                                                                    <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Food Restrictions</li>
+                                                                    <li class="venue-date-list"><ul class="food-restrict"><li>1. Onion</li>
+                                                                            <li>50 meals</li>
+                                                                            <li>2. Diabtic</li>
+                                                                            <li>18 meals</li></ul></li>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div-->
+                                                    </div>
+                                                    <div class="col-md-4  col-sm-4">
+                                                        <div class="project-sidebar">
+                                                            <h6 class="proj-status">Project status</h6>
+                                                            <div class="progress progress-striped">			
+                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{task_completion_percentage}}%">
+                                                                </div>
+                                                            </div>
+                                                            <span>{{task_completion_percentage}}% Complete </span>
+                                                            <ul class="myjob-listing">
+                                                                <li>{{complete_milestones}}/{{total_milestones}} milestones complete</li>
+                                                                <li>Budget <span class="bud-myjob">{{jobDetail.budget}}</span></li>
+                                                                <li>{{overdue_payment_count}} payment overdue</li>
+                                                                <h5>Client details</h5>
+                                                                <li>{{jobDetail.postedBy_User[0].firstname+" "+ jobDetail.postedBy_User[0].lastname}} <span class="bud-myjob">{{jobDetail.postedBy_User[0].email}}</span></li>
+                                                                <li>4.7/5 Rating <span class="bud-myjob rated-planner">Top Rated planner</span></li>
+                                                                <li>12 Job Posted<span class="bud-myjob">08 Awarded</span></li>
+                                                                <li>Location <span class="bud-myjob">{{jobDetail.postedBy_User[0].location}}</span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="Milestones">
+                                            <md-content class="md-padding">
+                                                <div class="row">
+                                                    <div class="col-md-8 col-sm-8">
+                                                        <div class="accordion event-m-accordion myjob-milestones" id="em-accordion" ng-if="onGoingMilestones.length>0">
+                                                            <div class="mile"><h6>Current milestones</h6></div>
+                                                            <div class="card" ng-repeat="milestone in onGoingMilestones">
+                                                                <div class="card-header no-border" id="heading_{{milestone._id}}">
+                                                                    <button class="btn btn-link collapsed milestone-btn-new" type="button" data-toggle="collapse" data-target="#collapse_{{milestone._id}}" aria-expanded="false" aria-controls="collapse_{{milestone._id}}">
+                                                                        <div class="vendor-items miles-card">
+                                                                            <div class=" milestones-info">
+                                                                                <ul class="items-details details-1 milestones">
+                                                                                    <li class="milestone-1">{{milestone.title}}</li>
+                                                                                    <li>Start Date: {{milestone.start_date |date}}</li>
+                                                                                    <li>End Date: {{milestone.end_date |date}}</li>
+                                                                                    <li> 
+                                                                                        <div class="dropdown demo-project">
+                                                                                            <a class=" dropdown-toggle current-milestone" type="" data-toggle="dropdown" aria-expanded="false">
+                                                                                                <img class="ellip" src="/home/img/more.svg" alt="arrow"/>
+                                                                                            </a>
+                                                                                            <ul class="dropdown-menu">
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram" ng-click="MilestonefindById(milestone._id)">Edit Milestone</span>                                                                                        
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram" ng-click="removeMilestone(milestone._id)">Delete Milestone</span>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </button>
+                                                                </div>
+                                                                <div id="collapse_{{milestone._id}}" class="collapse" aria-labelledby="heading_{{milestone._id}}" data-parent="#em-accordion" style="">
+
+                                                                    <div class="card-body">
+                                                                        <div class="taskinvites">Tasks &nbsp; {{milestone.completed_tasks_count}}/{{milestone.tasks_count}} completed 
+                                                                            <div class="progress progress-striped milestone-progress">			
+                                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{milestone.task_completion_percentage}}%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <table class="table accordion-table">
+                                                                            <tbody>
+                                                                                <tr ng-repeat="task in milestone.tasks">
+                                                                                    <td class="checkbox">
+                                                                                        <input ng-click="updateTaskStatus(milestone._id,task._id)" type="checkbox" id="check_{{task._id}}" ng-model="checkbox.mystatus[task._id]" >
+                                                                                        <span class="custom-checkbox"></span>
+                                                                                    </td>
+                                                                                    <td ng-if="task.status==true"><strike>{{task.title}}</strike></td>
+                                                                                    <td ng-if="task.status!=true">{{task.title}}</td>
+                                                                                    <!--<td>John Smith</td>-->
+                                                                                    <td class="invited">Overdue,{{task.date | date}}</td>
+                                                                                    <td><div class="dropdown demo-project">
+                                                                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                                                                <img class="ellip" src="/home/img/more.svg" alt="arrow"/></button>
+                                                                                            <ul class="dropdown-menu">
+                                                                                                <li>
+                                                                                                    <span data-toggle="modal" data-target="#EditTask" ng-click="TaskfindById(milestone._id,task._id)">Edit Task</span>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span ng-click="removeTask(milestone._id,task._id)">Remove Task</span>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>	
+                                                                        <div style="cursor:pointer;" ng-click="createNewTask(milestone._id)" data-toggle="modal" data-target="#AddTask" class="taskinvites" >
+                                                                            +Add Task
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="accordion event-m-accordion myjob-milestones" id="em-accordion" ng-if="upComingMilestones.length>0">
+                                                            <div class="mile"><h6>Upcoming milestones</h6></div>
+                                                            <div class="card" ng-repeat="milestone in upComingMilestones">
+                                                                <div class="card-header no-border" id="heading_{{milestone._id}}">
+                                                                    <button class="btn btn-link collapsed milestone-btn-new" type="button" data-toggle="collapse" data-target="#collapse_{{milestone._id}}" aria-expanded="false" aria-controls="collapse_{{milestone._id}}">
+                                                                        <div class="vendor-items miles-card">
+                                                                            <div class=" milestones-info">
+                                                                                <ul class="items-details details-1 milestones">
+                                                                                    <li class="milestone-1">{{milestone.title}}</li>
+                                                                                    <li >Start Date: {{milestone.start_date |date}}</li>
+                                                                                    <li>End Date: {{milestone.end_date |date}}</li>
+                                                                                    <li> 
+                                                                                        <div class="dropdown demo-project">
+                                                                                            <a class=" dropdown-toggle current-milestone" type="" data-toggle="dropdown" aria-expanded="false">
+                                                                                                <img class="ellip" src="/home/img/more.svg" alt="arrow"/>
+                                                                                            </a>
+                                                                                            <ul class="dropdown-menu">
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram" ng-click="MilestonefindById(milestone._id)">Edit Milestone</span>                                                                                        
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram" ng-click="removeMilestone(milestone._id)">Delete Milestone</span>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </button>
+                                                                </div>
+                                                                <div id="collapse_{{milestone._id}}" class="collapse" aria-labelledby="heading_{{milestone._id}}" data-parent="#em-accordion" style="">
+
+                                                                    <div class="card-body">
+                                                                        <div class="taskinvites">Tasks &nbsp; {{milestone.completed_tasks_count}}/{{milestone.tasks_count}} completed 
+                                                                            <div class="progress progress-striped milestone-progress">			
+                                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{milestone.task_completion_percentage}}%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <table class="table accordion-table">
+                                                                            <tbody>
+                                                                                <tr ng-repeat="task in milestone.tasks">
+                                                                                    <td class="checkbox">
+                                                                                        <input ng-click="updateTaskStatus(milestone._id,task._id)" type="checkbox" id="check_{{task._id}}" ng-model="checkbox.mystatus[task._id]" >
+                                                                                        <span class="custom-checkbox"></span>
+                                                                                    </td>
+                                                                                    <td ng-if="task.status==true"><strike>{{task.title}}</strike></td>
+                                                                                    <td ng-if="task.status!=true">{{task.title}}</td>
+                                                                                    <!--<td>John Smith</td>-->
+                                                                                    <td class="invited">Overdue,{{task.date|date}}</td>
+                                                                                    <td><div class="dropdown demo-project">
+                                                                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                                                                <img class="ellip" src="/home/img/more.svg" alt="arrow"/></button>
+                                                                                            <ul class="dropdown-menu">
+                                                                                                <li>
+                                                                                                    <span data-toggle="modal" data-target="#EditTask" ng-click="TaskfindById(milestone._id,task._id)">Edit Task</span>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span ng-click="removeTask(milestone._id,task._id)">Remove Task</span>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>	
+                                                                        <div style="cursor:pointer;" ng-click="createNewTask(milestone._id)" data-toggle="modal" data-target="#AddTask" class="taskinvites" >
+                                                                            +Add Task
+                                                                        </div>																	
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                     <!--   <div class="accordion event-m-accordion myjob-milestones" id="em-accordion">
+
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingOne">
+                                                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsethree" aria-expanded="false" aria-controls="collapseOne">
+                                                                        <div class="vendor-items miles-card">
+                                                                            <div class=" milestones-info">
+                                                                                <ul class="items-details details-1 milestones">
+                                                                                    <li class="milestone-1">Milestone 1 Findisht the first set of tasks</li>
+                                                                                    <li class="update">Start Date: 12th Aug 2018</li>
+                                                                                    <li class="update">End Date: 23rd Aug 2018</li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </button>
+                                                                </div>
+                                                                <div id="collapsethree" class="collapse" aria-labelledby="headingOne" data-parent="#em-accordion" style="">
+
+                                                                    <div class="card-body">
+                                                                        <div class="taskinvites">Tasks &nbsp; 02/04 completed <div class="progress progress-striped milestone-progress">			
+                                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <table class="table accordion-table">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="checkbox">
+                                                                                        <input type="checkbox" id="" class="" name="" value="">
+                                                                                        <span class="custom-checkbox"></span>
+                                                                                    </td>
+                                                                                    <td>Task name goes here. It is a cut of a certain character Count</td>
+                                                                                    <td>John Smith</td>
+                                                                                    <td class="invited">Overdue,12th Aug 2018</td>
+                                                                                    <td><div class="dropdown demo-project">
+                                                                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                                                                <img class="ellip" src="/home/img/more.svg" alt="arrow"/></button>
+                                                                                            <ul class="dropdown-menu">
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram">Agar Graham</span>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram">Fox Mulder</span>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram">Agar Graham</span>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="checkbox">
+                                                                                        <input type="checkbox" id="" class="" name="" value="">
+                                                                                        <span class="custom-checkbox"></span>
+                                                                                    </td>
+                                                                                    <td>Task name goes here. It is a cut of a certain character Count</td>
+                                                                                    <td>John Smith</td>
+                                                                                    <td class="invited">Overdue,12th Aug 2018</td>
+                                                                                    <td><div class="dropdown demo-project">
+                                                                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                                                                <img class="ellip" src="/home/img/more.svg" alt="arrow"/></button>
+                                                                                            <ul class="dropdown-menu">
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram">Agar Graham</span>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram">Fox Mulder</span>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram">Agar Graham</span>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="checkbox">
+                                                                                        <input type="checkbox" id="" class="" name="" value="">
+                                                                                        <span class="custom-checkbox"></span>
+                                                                                    </td>
+                                                                                    <td>Task name goes here. It is a cut of a certain character Count</td>
+                                                                                    <td>John Smith</td>
+                                                                                    <td class="invited">Overdue,12th Aug 2018</td>
+                                                                                    <td><div class="dropdown demo-project">
+                                                                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                                                                <img class="ellip" src="/home/img/more.svg" alt="arrow"/></button>
+                                                                                            <ul class="dropdown-menu">
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram"></span>
+                                                                                                    <h5>Agar Graham</h5>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram"></span>
+                                                                                                    <h5>Fox Mulder</h5>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <span class="Agar-Gram"></span>
+                                                                                                    <h5>Agar Graham</h5>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="checkbox">
+                                                                                        <input type="checkbox" id="" class="" name="" value="">
+                                                                                        <span class="custom-checkbox"></span>
+                                                                                    </td>
+                                                                                    <td><strike>Task name goes here. It is a cut of a certain character Count</strike></td>
+                                                                            <td>John Smith</td>
+                                                                            <td class="invited">Overdue,12th Aug 2018</td>
+                                                                            <td><div class="dropdown demo-project">
+                                                                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                                                        <img class="ellip" src="/home/img/more.svg" alt="arrow"/></button>
+                                                                                    <ul class="dropdown-menu">
+                                                                                        <li>
+                                                                                            <span class="Agar-Gram"></span>
+                                                                                            <h5>Agar Graham</h5>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <span class="Agar-Gram"></span>
+                                                                                            <h5>Fox Mulder</h5>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <span class="Agar-Gram"></span>
+                                                                                            <h5>Agar Graham</h5>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>																		
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+                                                        <!--<div class="caterers-card vendor-items miles-card">
+                                                            <div class="venue-info">
+                                                                <ul class="items-details details-1 milestones">
+                                                                    <li class="milestone-1">{{milestone.title}}</li>
+                                                                    <li>Start Date: 12th Aug 2018</li>
+                                                                    <li>End Date: 23rd Aug 2018</li>
+                                                                    <li><div class="progress progress-striped">
+                                                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                                                <span> </span>
+                                                                            </div>
+            
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="caterers-card vendor-items miles-card">
+                                                            <div class="venue-info">
+                                                                <ul class="items-details details-1 milestones">
+                                                                    <li class="milestone-1">Milestone 3</li>
+                                                                    <li>Start Date: 12th Aug 2018</li>
+                                                                    <li>End Date: 23rd Aug 2018</li>
+                                                                    <li><div class="progress progress-striped">
+                                                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                                                <span> </span>
+                                                                            </div>
+            
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>-->
+                                                        <!--<div class="add more mile">
+                                                            <span>+ Add milestones</span>
+                                                        </div>
+                                                        <div class="mile"><h6>Milestones updated by the Vendor</h6></div>
+                                                        <div class="caterers-card vendor-items miles-card">
+                                                            <div class="venue-info">
+                                                                <ul class="items-details details-1 milestones">
+                                                                    <li class="milestone-1">Milestone 4</li>
+                                                                    <li class="update">Start Date: 12th Aug 2018</li>
+                                                                    <li class="update">End Date: 23rd Aug 2018</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="buttons-box">
+                                                            <button class="button reject">Reject</button>
+                                                            <div class="propse-btnn">
+                                                                <button class="button purpose">Propose now</button>
+                                                                <button class="button accept">Accept milestone</button>
+                                                            </div>
+                                                        </div>-->
+                                                    </div>
+                                                    <div class="col-md-4  col-sm-4">
+                                                        <div class="project-sidebar">
+                                                            <button type="button" class="create-milestome-btnn" data-toggle="modal" data-target="#AddMilestone"> Create milestone</button>
+                                                            <h6 class="proj-status">Project status</h6>
+                                                            <div class="progress progress-striped">			
+                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{task_completion_percentage}}%">
+                                                                </div>
+                                                            </div>
+                                                            <span>{{task_completion_percentage}}% Complete </span>
+                                                            <ul class="myjob-listing">
+                                                                <li>{{complete_milestones}}/{{total_milestones}} milestones complete</li>
+                                                                <li>Budget <span class="bud-myjob">{{jobDetail.budget}}</span></li>
+                                                                <li>{{overdue_payment_count}} payment overdue</li>
+                                                                <h5>Client details</h5>
+                                                                <li>{{jobDetail.postedBy_User[0].firstname+" "+ jobDetail.postedBy_User[0].lastname}} <span class="bud-myjob">{{jobDetail.postedBy_User[0].email}}</span></li>
+                                                                <li>4.7/5 Rating <span class="bud-myjob rated-planner">Top Rated planner</span></li>
+                                                                <li>12 Job Posted<span class="bud-myjob">08 Awarded</span></li>
+                                                                <li>Location <span class="bud-myjob">{{jobDetail.postedBy_User[0].location}}</span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="payments">
+                                            <md-content class="md-padding">
+                                                <div class="row">
+                                                    <div class="col-md-8 col-sm-8">
+                                                        <div class="milestone-payment">
+                                                            <table class="table accordion-table vendor-table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th>Milestone</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Due Date</th>
+                                                                        <th>Status</th>
+                                                                        <th></th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                    <tr class="vendor-rw mile-row" ng-repeat="payment in allPayments">
+                                                                        <td>{{payment.milestone_detail[0].title}}</td>
+                                                                        <td>{{payment.amount}}</td>
+                                                                        <td>{{payment.due_date|date}}</td>
+                                                                        <td>
+                                                                            <span ng-if="payment.payment_status=='paid'" class="paid-color">Paid</span>
+                                                                            <span ng-if="payment.payment_status=='pending'" class="overdue-color">Pending</span>
+                                                                            <span ng-if="payment.payment_status=='overdue'" class="pending-color">Overdue</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span ng-if="payment.payment_status=='paid'" class="say-thank">Say Thanks</span>
+                                                                            <span ng-if="payment.payment_status!='paid'" class="say-thank-1">Send Reminder</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="dropdown demo-project">
+                                                                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                                                    <img class="ellip" src="/home/img/more-down.svg" alt="arrow"/></button>
+                                                                                <ul class="dropdown-menu">
+                                                                                    <li>
+                                                                                        <span class="Agar-Gram" ng-click="updateStatus(payment._id,true)">Mark as Paid</span>                                                                                        
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <span class="Agar-Gram" ng-click="updateStatus(payment._id,false)">Mark as Pending/Overdue</span>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <span class="Agar-Gram" ng-click="findById(payment._id)" data-toggle="modal" data-target="#EditPayment">Edit payment schedule</span>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <span class="Agar-Gram"  ng-click="removePayment(payment._id)">Delete payment schedule</span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4  col-sm-4">
+                                                        <div class="project-sidebar">
+                                                            <button type="button" class="create-milestome-btnn" data-toggle="modal" data-target="#AddPayment">Add Payment date</button>
+                                                            <h6 class="proj-status">Project status</h6>
+                                                            <div class="progress progress-striped">			
+                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{task_completion_percentage}}%">
+                                                                </div>
+                                                            </div>
+                                                            <span>{{task_completion_percentage}}% Complete </span>
+                                                            <ul class="myjob-listing">
+                                                                <li>{{complete_milestones}}/{{total_milestones}} milestones complete</li>
+                                                                <li>Budget <span class="bud-myjob">{{jobDetail.budget}}</span></li>
+                                                                <li>{{overdue_payment_count}} payment overdue</li>
+                                                                <h5>Client details</h5>
+                                                                <li>{{jobDetail.postedBy_User[0].firstname+" "+ jobDetail.postedBy_User[0].lastname}} <span class="bud-myjob">{{jobDetail.postedBy_User[0].email}}</span></li>
+                                                                <li>4.7/5 Rating <span class="bud-myjob rated-planner">Top Rated planner</span></li>
+                                                                <li>12 Job Posted<span class="bud-myjob">08 Awarded</span></li>
+                                                                <li>Location <span class="bud-myjob">{{jobDetail.postedBy_User[0].location}}</span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="Messages">
+                                            <md-content class="md-padding">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 m-auto">
+                                                        <div class="msg-outer" ng-repeat="message in jobDetail.messages">
+                                                            <div class="message-name" ng-if="message.msg_by == currentUser._id">
+                                                                <span class="you-circle">You</span>
+                                                            </div>
+                                                            <div class="message-name" ng-if="message.msg_by != currentUser._id">
+                                                                <span class="you-circle-1" ng-if="message.msg_by == message.bid_by">{{(message.bid_by_detail[0].firstname + ' ' + message.bid_by_detail[0].lastname) | nickname}}</span>
+                                                                <span class="you-circle-1" ng-if="message.msg_by == message.job_by">{{(message.job_by_detail[0].firstname + ' ' + message.job_by_detail[0].lastname) | nickname}}</span>
+                                                            </div>
+                                                            <div class="caterers-card vendor-items message">
+                                                                <p class="card-detail-card">{{message.content}}</p>
+                                                                <span class="msgs">{{message.created_at|date :'HH:mm a'}} {{message.created_at|date}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <!--div class="msg-outer">
+                                                            <div class="message-name">
+                                                                <span class="you-circle-1">Js</span>
+                                                            </div>
+                                                            <div class="caterers-card vendor-items message">
+                                                                <p class="card-detail-card">Sangeet dolor sit amet, consectetur adipiscing elit,
+                                                                    Sangeet dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                                <span class="msgs">12:00pm Today</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="msg-outer">
+                                                            <div class="message-name">
+                                                                <span class="you-circle">You</span>
+                                                            </div>
+                                                            <div class="caterers-card vendor-items message">
+                                                                <p class="card-detail-card">Sangeet dolor sit amet, consectetur adipiscing elit,
+                                                                    Sangeet dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                                <span class="msgs">12:00pm Today</span>
+                                                            </div>
+                                                        </div>
+                                                        <span class="resume-box">
+                                                            <img class="ellip" src="/home/img/attach.svg" alt="attach"/>&nbsp; Resume.docx
+                                                        </span-->
+                                                        <div class="send-message-btn-box">
+                                                            <textarea ng-model="content" class="form-control"></textarea>
+                                                            <button ng-click="SendMsg(content)" class="send-msgg msg-milestone">Send</button>
+                                                        </div>
+                                                        <!--<div class="atach-file"><img class="attach-img" ng-src="home/img/attach.svg" src="home/img/attach.svg"> &nbsp; Attach File</div>-->
+                                                    </div>
+                                                    <div class="col-md-4  col-sm-4">
+                                                        <div class="project-sidebar">
+                                                            <h6 class="proj-status">Project status</h6>
+                                                            <div class="progress progress-striped">			
+                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{task_completion_percentage}}%">
+                                                                </div>
+                                                            </div>
+                                                            <span>{{task_completion_percentage}}% Complete </span>
+                                                            <ul class="myjob-listing">
+                                                                <li>{{complete_milestones}}/{{total_milestones}} milestones complete</li>
+                                                                <li>Budget <span class="bud-myjob">{{jobDetail.budget}}</span></li>
+                                                                <li>{{overdue_payment_count}} payment overdue</li>
+                                                                <h5>Client details</h5>
+                                                                <li>{{jobDetail.postedBy_User[0].firstname+" "+ jobDetail.postedBy_User[0].lastname}} <span class="bud-myjob">{{jobDetail.postedBy_User[0].email}}</span></li>
+                                                                <li>4.7/5 Rating <span class="bud-myjob rated-planner">Top Rated planner</span></li>
+                                                                <li>12 Job Posted<span class="bud-myjob">08 Awarded</span></li>
+                                                                <li>Location <span class="bud-myjob">{{jobDetail.postedBy_User[0].location}}</span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <!--<md-tab label="Activity">
+                                            <md-content class="md-padding">
+                                            </md-content>
+                                        </md-tab>-->
+                                    </md-tabs>
+                                </md-content>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Bootstrap Modal to add new milestone -->
+        <div class="modal fade" id="AddMilestone" role="dialog">
+            <div class="modal-dialog">
+                <form ng-submit="addMilestone()">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; Add Milestone</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="add-member-modl">
+                                <div class="form-group ">
+                                    <label>Title</label>
+                                    <input ng-model="newMilestone.title" type="text" class="form-control" ng-required="true">
+                                </div>
+                                <div class="form-group milestone-date">   
+                                    <label>Start Date</label>
+                                    <md-datepicker md-open-on-focus ng-model="newMilestone.start_date"></md-datepicker>
+                                </div>
+
+                                <div class="form-group milestone-date">   
+                                    <label>End Date</label>
+                                    <md-datepicker md-open-on-focus ng-model="newMilestone.end_date"></md-datepicker>
+                                </div>
+                                <h5>Tasks</h5>
+                                <hr/>
+                                <div class="half-input" ng-repeat="n in []| range:taskcount">
+                                    <h6>Task {{n + 1}}</h6>
+                                    <div class="form-group advance_search_outer">
+                                        <label>Title</label>
+                                        <input type="text" class="form-control" ng-focus="focus[n] = true" ng-model="newMilestone.tasks[n].title">
+
+                                    </div>
+                                    <div class="halfn">
+                                        <div class="form-group milestone-date">
+                                            <label>Date</label>
+                                            <md-datepicker md-open-on-focus  ng-model="newMilestone.tasks[n].date"></md-datepicker>
+                                            <!--<input type="text" class="form-control" ng-model="post.event[n].start_date" placeholder="20/10/2018">-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group add-more" >
+                                    <a href="javascript:void(0)" ng-click="incCount()">+Add more</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mod-footr">
+                            <button type="submit" class="btn btn-default">Add milestone Invite</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>    
+        <!-- Bootstrap Modal to edit milestone -->
+        <div class="modal fade" id="EditMilestone" role="dialog">
+            <div class="modal-dialog">
+                <form ng-submit="MilestoneupdateById()">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; Edit Milestone</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="add-member-modl">
+                                <div class="form-group ">
+                                    <label>Title</label>
+                                    <input ng-model="editMilestone.title" type="text" class="form-control" ng-required="true">
+                                </div>
+                                <div class="form-group milestone-date">   
+                                    <label>Start Date</label>
+                                    <md-datepicker md-open-on-focus ng-model="editMilestone.start_date"></md-datepicker>
+                                </div>
+
+                                <div class="form-group milestone-date">   
+                                    <label>End Date</label>
+                                    <md-datepicker md-open-on-focus ng-model="editMilestone.end_date"></md-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mod-footr">
+                            <button type="submit" class="btn btn-default">Edit milestone</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>   
+        <!-- Bootstrap Modal to edit -->
+        <div class="modal fade" id="EditTask" role="dialog">
+            <div class="modal-dialog">
+                <form ng-submit="TaskupdateById()">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp;Edit Task</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="add-member-modl">
+                                <div class="half-input">
+                                    <div class="form-group advance_search_outer">
+                                        <label>Title</label>
+                                        <input type="text" class="form-control" ng-model="editTask.title">
+
+                                    </div>
+                                    <div class="halfn">
+                                        <div class="form-group milestone-date">
+                                            <label>Date</label>
+                                            <md-datepicker md-open-on-focus ng-model="editTask.date"></md-datepicker>
+                                            <!--<input type="text" class="form-control" ng-model="post.event[n].start_date" placeholder="20/10/2018">-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mod-footr">
+                            <button type="submit" class="btn btn-default">Edit Task</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>   
+        <!-- Bootstrap Modal to edit -->
+        <div class="modal fade" id="AddTask" role="dialog">
+            <div class="modal-dialog">
+                <form ng-submit="addTaskinMilestone()">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; Add Task</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="add-member-modl">
+                                <div class="half-input">
+                                    <div class="form-group advance_search_outer">
+                                        <label>Title</label>
+                                        <input type="text" class="form-control" ng-model="newtask.title">
+
+                                    </div>
+                                    <div class="halfn">
+                                        <div class="form-group milestone-date">
+                                            <label>Date</label>
+                                            <md-datepicker md-open-on-focus ng-model="newtask.date"></md-datepicker>
+                                            <!--<input type="text" class="form-control" ng-model="post.event[n].start_date" placeholder="20/10/2018">-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mod-footr">
+                            <button type="submit" class="btn btn-default">Add Task</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Bootstrap Modal to add Payment -->
+        <div class="modal fade" id="AddPayment" role="dialog">
+            <div class="modal-dialog">
+                <form ng-submit="addPayment()">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; New Payment Date</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="add-member-modl">
+                                <div ng-if="listMilestones" class="form-group milestone-date">   
+                                    <label>Select Milestone</label>
+                                    <select class="form-control" ng-model="newPayment.milestone_id">
+                                        <option ng-repeat="milestone in listMilestones" value="{{milestone._id}}">{{milestone.title}}</option>
+                                    </select>
+                                </div>
+                                <!--                        <div class="form-group">
+                                                            <label>Title</label>
+                                                            <input ng-model="newPayment.title" type="text" class="form-control" ng-required="true">
+                                                        </div>-->
+                                <div class="form-group milestone-date">
+                                    <label>Amount</label>
+                                    <input ng-model="newPayment.amount" type="number" class="form-control" ng-required="true">
+                                </div>
+                                <div class="form-group milestone-date">   
+                                    <label>Date</label>
+                                    <md-datepicker md-open-on-focus ng-model="newPayment.due_date"></md-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mod-footr">
+                            <button type="submit" class="btn btn-default">Add Payment Date</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+<!-- Bootstrap Modal to edit Payment -->
+        <div class="modal fade" id="EditPayment" role="dialog">
+            <div class="modal-dialog">
+                <form ng-submit="updateById()">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp;Edit Payment Date</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="add-member-modl">
+                                <div ng-if="listMilestones" class="form-group milestone-date">   
+                                    <label>Select Milestone</label>
+                                    <select class="form-control" ng-model="editPayment.milestone_id">
+                                        <option ng-repeat="milestone in listMilestones" value="{{milestone._id}}">{{milestone.title}}</option>
+                                    </select>
+                                </div>
+                                <!--                        <div class="form-group">
+                                                            <label>Title</label>
+                                                            <input ng-model="newPayment.title" type="text" class="form-control" ng-required="true">
+                                                        </div>-->
+                                <div class="form-group milestone-date">
+                                    <label>Amount</label>
+                                    <input ng-model="editPayment.amount" type="number" class="form-control" ng-required="true">
+                                </div>
+                                <div class="form-group milestone-date">   
+                                    <label>Date</label>
+                                    <md-datepicker md-open-on-focus ng-model="editPayment.due_date"></md-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer mod-footr">
+                            <button type="submit" class="btn btn-default">Edit Payment Date</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</main>

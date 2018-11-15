@@ -1,0 +1,67 @@
+<div id="vendor-st1" class="tab-pane">
+    <h5>Enter title and basic info</h5>
+    <div class="form-group">
+        <label>Job title</label>
+        <input type="text" class="form-control" ng-model="jobdata.title" name="title" placeholder="" ng-minlength="3" ng-required="true">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" class="form-control" ng-model="jobdata.description" name="description" placeholder="">
+    </div>
+     <div class="form-group">
+        <label>Duration</label>
+        <select class="form-control" name="duration" ng-model="jobdata.duration">
+            <option value="1 Day">1 Day</option>
+            <option value="2 Days">2 Days</option>
+            <option value="3 Days">3 Days</option>
+        </select>
+    </div>
+    <!--div class="half-input">
+        <div class="form-group">
+            <label>Start date</label>
+            <md-datepicker md-open-on-focus md-hide-icons="calendar" md-min-date="today" ng-model="jobdata.start_date"></md-datepicker>
+        </div>
+        <div class="form-group">
+            <label>Duration</label>
+            <select class="form-control" name="duration" ng-model="jobdata.duration">
+                <option value="1 Day">1 Day</option>
+                <option value="2 Days">2 Days</option>
+                <option value="3 Days">3 Days</option>
+            </select>
+        </div>
+    </div-->
+    <div class="half-input">
+        <div class="form-group">
+            <label>Experience level required {{radiovalue}} </label>
+            <input type="text" class="form-control" ng-model="jobdata.experience_required" name="event_number"  ng-required="true">
+        </div>
+        <div class="form-group">
+            <div class="btn-group bordr-btm values" data-toggle="buttons">
+                <label class="btn event_number">
+                    <input type="radio" data-ng-model="radiovalue" name="total_events" value="1">
+                    <span class="glyphicon">1</span>
+                </label>
+                <label class="btn event_number">
+                    <input type="radio" data-ng-model="radiovalue" name="total_events" value="2">
+                    <span class="glyphicon">2</span>
+                </label>
+                <label class="btn event_number">
+                    <input type="radio" data-ng-model="radiovalue" name="total_events" value="3">
+                    <span class="glyphicon">3</span>
+                </label>
+                <label class="btn event_number"> 
+                    <input type="radio" data-ng-model="radiovalue" name="total_events" value="4">
+                    <span class="glyphicon">4</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <!--div class="form-group">
+        <label>Experience level Required</label>
+        <input type="text" class="form-control" ng-model="jobdata.experience_required" name="experience_required" placeholder="">
+    </div-->
+    <div class="btn-sec">
+        <button type="button" ng-disabled="new_job.title.$invalid || new_job.start_date.$invalid || new_job.duration.$invalid" class="btn btn-primary btn-st" ng-click="movetonext('PostJob.jobdetails',2)">Continue</button>
+    </div>
+</div>

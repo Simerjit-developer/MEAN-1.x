@@ -1,0 +1,92 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Data Tables
+        <small>advanced tables</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Hover Data Table</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="{'active': (activeUser === user)}" ng-click='setActive(user)' ng-repeat='user in users track by $index'>
+                          <td>{{user.title}}</td>
+                          <td>{{user.firstname}}</td>
+                          <td>{{user.lastname}}</td>
+                          <td> {{user.phone}}</td>
+                          <td>{{user.location}}</td>
+                          <td>{{user.created}}</td>
+                          <td>
+                              <a ui-sref="editUser({id: user._id})">Edit</a>
+                                <a ng-click="deletePost(user.firstname, user._id)">Delete</a>
+                          </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Title</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Phone</th>
+                            <th>Location</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
+    <div class='col-sm-4'>
+        <h3>Published posts</h3>
+        <ul class="list-group">
+            <li ng-show="!posts.length">No posts have been published</li>
+
+            <li ng-repeat='post in posts track by $index'
+                class="list-group-item"
+                ng-class="{'active': (activePost === post)}"
+                ng-click='setActive(post)'>
+
+                <h4 class="list-group-item-heading">{{post.title}}</h4>
+                <p class="list-group-item-text">{{post.body.substr(0, 140)}}</p>
+            </li>
+        </ul>
+    </div>
+    <!-- /Sidebar -->
+
+    <!-- Page Content -->
+    <div class='col-sm-8 full-height'>
+        <h2>{{activePost.title}}</h2>
+        <div btf-markdown='activePost.body'></div>
+    </div>
+</div>

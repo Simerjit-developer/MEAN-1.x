@@ -1,0 +1,37 @@
+<div id="vendor-st3" class="tab-pane">
+    <h5>Company contact details</h5>
+    <div class="form-group">
+        <label>Primary email id</label>
+        <input type="email" class="form-control" ng-model="post.primary_email" name="primary_email">
+    </div>
+    <div class="form-group">
+        <label>Address for communication</label>
+        <input type="text" class="form-control" ng-model="post.address" placeholder="">
+    </div>
+    <div class="half-input">
+        <div class="form-group">
+            <label>City</label>
+            <select class="form-control select_customize" ng-model="post.city">
+                <option value="{{city.name}}" ng-repeat="city in cities">{{city.name}}</option>
+            </select>
+            <!--<input type="text" class="form-control" ng-model="post.city" placeholder="">-->
+        </div>
+        <div class="form-group">
+            <label>State</label>
+            <input type="text" class="form-control" ng-model="post.state" placeholder="">
+        </div>
+        <div class="form-group">
+            <label>Country</label>
+            <input type="text" class="form-control" ng-model="post.country" placeholder="">
+        </div>
+        <div class="form-group">
+            <label>Pincode</label>
+            <input type="text" class="form-control" ng-model="post.pincode" placeholder="">
+        </div>
+    </div>
+    <div class="btn-sec">
+        <button type="button" class="btn-back" ui-sref="registerBusiness.serviceandcost"><i class="fas fa-arrow-left"></i></button>
+        <button type="button" class="btn btn-primary btn-st" ng-disabled="vendor_reg.primary_email.$invalid" ng-click="movetoawards()">Continue</button>
+        <button type="button" class="btn-skip" ng-click="movetoawards()">Skip this step</button>
+    </div>
+</div>

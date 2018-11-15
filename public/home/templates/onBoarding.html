@@ -1,0 +1,100 @@
+<main>
+    <div ng-include="'/home/templates/headerbeforelogin.html'"></div>
+    <section class="wedslide">
+        <div class="container">
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="text-center box">
+                            <div class="slideimg"><img class="" src="/home/img/slide5.png" alt="First slide"></div>
+                            <div class="content">
+                                <h3>Plan your weddings efficiently</h3>
+                                <p>Because no detail is too small. Plan every step using the digitally enhanced DOST platform and collaborate seamlessly.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="carousel-item ">
+                        <div class="text-center box">
+                            <div class="slideimg"><img class="" src="/home/img/slide4.png" alt="First slide"></div>
+                            <div class="content">
+                                <h3>Search, filter and choose from top rated vendors.</h3>
+                                <p>Pick from thousands of vendors across over ten vendor categories, be guided by our trusted reviews, or log in to shortlist your favorites.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item ">
+                        <div class="text-center box">
+                            <div class="slideimg"><img class="" src="/home/img/slide1.png" alt="First slide"></div>
+                            <div class="content">
+                                <h3>Post a Job</h3>
+                                <p>Having a hard time picking from thousands of vendors? Simply post your requirements and DOST will match your needs to the most suited vendors!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item ">
+                        <div class="text-center box">
+                            <div class="slideimg"><img class="" src="/home/img/slide2.png" alt="First slide"></div>
+                            <div class="content">
+                                <h3>Become a registered vendor.</h3>
+                                <p>List your business and get access to all the opportunities in your area</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item ">
+                        <div class="text-center box">
+                            <div class="slideimg"><img class="" src="/home/img/slide3.png" alt="First slide"></div>
+                            <div class="content">
+                                <h3>Get real time analytics about things that matter.</h3>
+                                <p>Track vendor efficacy, track your team's performance, receive business insights, and more!</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <a style="cursor: pointer;" class="carousel-control-prev" data-target="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"><img src="/home/img/left-arw.png"/></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a style="cursor: pointer;" class="carousel-control-next" data-target="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"><img src="/home/img/right-arw.png"/></span>
+                    <span class="sr-only">Next</span>
+                </a>
+				 <ol class="carousel-indicators reg-caroul">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3" class=""></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="4" class=""></li>
+                </ol>
+            </div>
+        </div>
+
+    </section>		
+
+    <section class="register" ng-controller="onBoardingCtrl">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-12">
+                    <form name="Reg" ng-submit="PhoneAlreadyExists()">
+                    <div class="d-flex">
+                        <input type="tel" name="phone" placeholder="Enter your phone number" intl-tel-input ng-model="user.phone" intl-tel-input-options="{ preferredCountries: ['in', 'sg','us'] }" class="form-control mr-3" ng-required="true" >
+                        <!--<input type="password" class="form-control mr-3" placeholder="Enter your phone number">-->																	 
+                        <button ng-disabled="Reg.$pristine && Reg.$invalid && Reg.$dirty" type="submit"  class="continuebtn  btnwidth btn  btn-lg">Register</button>
+                    </div>
+                        <span class="error" ng-show="Reg.phone.$error.phoneNumber">
+                        Please enter a correct phone number!
+                    </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,84 @@
+<main>
+    <div ng-include="'/home/templates/headerVendorView.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
+                                <li class="breadcrumb-item active">My jobs</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+
+        <section class="result-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11 m-auto">
+                        <div class="my-jobs-sec">
+                            <div class="live-jobs" ng-if="onGoingJobs.length>0">
+                                <h6>Live Jobs &nbsp;  <img class="red-heart-1" ng-src="home/img/green-dot.svg" src="home/img/green-dot.svg"></h6>
+                            </div>
+                            <div class="caterers-card" ng-repeat="job in onGoingJobs">
+                                <a ui-sref="myjob_detail({id:job.livejob._id})">
+                                <div class="card-head live-job-head">
+                                    <ul class="live-job-list">
+                                        <li class="live-desc-job"><h6>{{job.livejob.title}} <img ng-if="job.favourites.length>0" class="red-heart" ng-src="home/img/red-heart.svg" src="home/img/red-heart.svg"></h6>
+                                            <span class="job-bottom-list">Client: {{job.user_detail.firstname+' '+job.user_detail.lastname}} &nbsp; Start Date: {{job.livejob.jobDetails['Start date'] | date}} &nbsp; Duration: Day(s)</span>
+                                        </li>
+                                        <li><span class="team-member-icon color-1 live-color"><img class="like-immg" ng-src="home/img/dollar-symbol.svg" src="home/img/dollar-symbol.svg"></span>
+                                            <span class="bud-live"><small>Budget</small><br>{{job.budget}} </span> 
+                                        </li>
+                                        <li><span class="team-member-icon color-1 live-color-1"><img class="like-immg" ng-src="home/img/dollar-symbol.svg" src="home/img/dollar-symbol.svg"></span>
+                                            <span class="bud-live"><small>Milestones</small><br>3/5 complete </span> 
+                                        </li>
+                                        <li><span class="team-member-icon color-1 live-color-2"><img class="like-immg" ng-src="home/img/dollar-symbol.svg" src="home/img/dollar-symbol.svg"></span>
+                                            <span class="bud-live"><small>payments</small><br>paid </span> 
+                                        </li>
+                                    </ul>			
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="my-jobs-sec">
+                            <div class="live-jobs" ng-if="upComingJobs.length>0">
+                                <h6>Upcoming Jobs &nbsp;  <img class="red-heart-1" ng-src="home/img/green-dot.svg" src="home/img/green-dot.svg"></h6>
+                            </div>
+                            <div class="caterers-card" ng-repeat="job in upComingJobs">
+                                <a ui-sref="myjob_detail({id:job.livejob._id})">
+                                <div class="card-head live-job-head">
+                                    <ul class="live-job-list">
+                                        <li class="live-desc-job"><h6>{{job.livejob.title}} <img ng-if="job.favourites.length>0" class="red-heart" ng-src="home/img/red-heart.svg" src="home/img/red-heart.svg"></h6>
+                                            <span class="job-bottom-list">Client: {{job.user_detail[0].firstname+' '+job.user_detail[0].lastname}} &nbsp; Start Date: {{job.livejob.jobDetails['Start date'] | date}} &nbsp; Duration: Day(s)</span>
+                                        </li>
+                                        <li><span class="team-member-icon color-1 live-color"><img class="like-immg" ng-src="home/img/dollar-symbol.svg" src="home/img/dollar-symbol.svg"></span>
+                                            <span class="bud-live"><small>Budget</small><br>{{job.budget}} </span> 
+                                        </li>
+                                        <li><span class="team-member-icon color-1 live-color-1"><img class="like-immg" ng-src="home/img/dollar-symbol.svg" src="home/img/dollar-symbol.svg"></span>
+                                            <span class="bud-live"><small>Milestones</small><br>3/5 complete </span> 
+                                        </li>
+                                        <li><span class="team-member-icon color-1 live-color-2"><img class="like-immg" ng-src="home/img/dollar-symbol.svg" src="home/img/dollar-symbol.svg"></span>
+                                            <span class="bud-live"><small>payments</small><br>paid </span> 
+                                        </li>
+                                    </ul>			
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--div class="col-md-1">
+                        <div class="menu-live-jobs">
+                            <span class="list-live"><img class="like-immg" ng-src="home/img/menu.png" src="home/img/menu.png"></span> &nbsp;
+                            <span class="list-live-1"><img class="like-immg" ng-src="home/img/menu2.png" src="home/img/menu2.png"></span>
+                        </div>
+                    </div-->
+                </div>
+            </div>
+        </section><!--/.Result-Sec End Here -->
+    </section><!--/.content-sec-->
+</main>

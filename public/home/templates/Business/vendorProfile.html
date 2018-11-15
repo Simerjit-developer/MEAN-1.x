@@ -1,0 +1,318 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a>Home</a></li>
+                                <li class="breadcrumb-item"><a>Marketplace</a></li>
+                                <li class="breadcrumb-item active">Browse vendors</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+        <section class="profile_vr">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-9 col-sm-9">
+                        <div class="vr_inner">
+                            <a ui-sref="marketPlace" class="back"><i class="fas fa-angle-left"></i></a>
+                            <div class="head-sec">
+                                <h3>Vendor profile</h3>
+                                <div class="vr_result">
+                                    <a><i class="fas fa-check-circle"></i> Registered</a>
+                                    <a><i class="far fa-star"></i> Save to favorites</a>
+                                    <a><i class="far fa-bookmark"></i> Top rated vendor <span>96% Positive reviews</span></a>
+                                </div>
+                            </div>
+                            <div class="profile-inner">
+                                <div class="img-sec">
+                                    <img src="/home/img/bg.jpg" alt="Banner_Image">
+                                </div>
+                                <div class="vendor_details">
+                                    <div class="vendor_card">
+                                        <div class="card_header">
+                                            <div class="vendor_nm">
+                                                <div class="vendor_avtar">
+                                                    <a>
+                                                        <img src="/home/img/bg.jpg" alt="avatar">
+                                                    </a>
+                                                </div>
+                                                <div class="vendor-name">
+                                                    <p>{{business.company_name}}</p>
+                                                    <span>Vendor type: Photography</span>
+                                                </div>
+                                            </div>
+                                            <div class="vendor_ps">
+                                                <div class="vendor-position">
+                                                    <p>Owner: <span>V Khanna</span></p>
+                                                </div>
+                                                <div class="vendor_location">
+                                                    <p>{{business.city}},{{business.country}}</p>
+                                                </div>
+                                            </div>
+                                        </div><!--/.Card-Header-->
+                                        <div class="card_body">
+                                            <h6>Summary</h6>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                        </div>
+                                    </div><!--/.Vendor-Card-->
+                                    <div class="vendor_card" ng-if="business.award">
+                                        <div class="card_header">
+                                            <h3 class="awards"><span><i class="fas fa-trophy"></i></span> Awards and recognitions</h3>
+                                        </div>
+                                        <div class="card_body">
+                                            <ul class="award_list">
+                                                <li ng-repeat="award in business.award">
+                                                    <h5>{{award.awardname}} <span>Year {{award.awardyear}}</span></h5>
+                                                    <p>From XYZ corporations</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!--/.end-here-->
+                                    <div class="vendor_card">
+                                        <div class="card_header">
+                                            <h3 class="rating"><span><i class="fas fa-star"></i></span> Job rating</h3>
+                                            <div class="vr_rating">
+                                                <ul class="star_rating">
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li><i class="fas fa-star"></i></li>
+                                                    <span>4.9/5</span>
+                                                </ul>
+                                                <span class="reviews">(16 reviews)</span>
+                                            </div>
+                                        </div>
+                                        <div class="card_body">
+                                            <div class="rating_outer">
+                                                <p>Rating breakdown</p>
+                                                <ul class="raing_list">
+                                                    <li>
+                                                        <h6>Quality</h6>
+                                                        <div class="rating-sec">
+                                                            <ul class="rating-inner">
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <span>5/5</span>
+                                                            </ul>
+                                                            <span>(16 reviews)</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <h6>Budget</h6>
+                                                        <div class="rating-sec">
+                                                            <ul class="rating-inner">
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <span>5/5</span>
+                                                            </ul>
+                                                            <span>(16 reviews)</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <h6>Professionalism</h6>
+                                                        <div class="rating-sec">
+                                                            <ul class="rating-inner">
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <span>5/5</span>
+                                                            </ul>
+                                                            <span>(16 reviews)</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <h6>Punctuality</h6>
+                                                        <div class="rating-sec">
+                                                            <ul class="rating-inner">
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <span>5/5</span>
+                                                            </ul>
+                                                            <span>(16 reviews)</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <h6>Response Time</h6>
+                                                        <div class="rating-sec">
+                                                            <ul class="rating-inner">
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <li><i class="fas fa-star"></i></li>
+                                                                <span>5/5</span>
+                                                            </ul>
+                                                            <span>(16 reviews)</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div><!--/.end-here-->
+                                    <div class="vendor_card">
+                                        <div class="card_header">
+                                            <h3 class="history"><span><i class="fas fa-suitcase"></i></span> Job History</h3>
+                                            <div class="tabing-sec">
+                                                <span>Total Jobs 18</span>
+                                                <span>Completed 17</span>
+                                                <span>Ongoing 1</span>
+                                            </div>
+                                        </div><!--/.Card-Header-->
+                                        <div class="card_body job_his">
+                                            <ul class="history_details">
+                                                <li>
+                                                    <div class="head-sec">
+                                                        <div class="job-title">
+                                                            <h5>Need quality caterers for a punjabi wedding</h5>
+                                                            <span class="date">Start date: 12 Aug 2018</span>
+                                                            <span class="status">Ongoing</span>
+                                                        </div>
+                                                        <div class="job_info">
+                                                            <h5>Client: Jack nicholson</h5>
+                                                            <h5>Budget: $1200</h5>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="head-sec">
+                                                        <div class="job-title">
+                                                            <h5>Need quality caterers for a punjabi wedding</h5>
+                                                            <span class="date">Start date: 12 Aug 2018</span>
+                                                            <span class="status completed">Completed in Sept 2017</span>
+                                                        </div>
+                                                        <div class="job_info">
+                                                            <h5>Client: Jack nicholson</h5>
+                                                            <h5>Budget: $1200</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feedback-sec">
+                                                        <p class="head">Client feedback</p>
+                                                        <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."</p>
+                                                        <ul class="feed-rating">
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <span>4.9/5</span>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="head-sec">
+                                                        <div class="job-title">
+                                                            <h5>Need quality caterers for a punjabi wedding</h5>
+                                                            <span class="date">Start date: 12 Aug 2018</span>
+                                                        </div>
+                                                        <div class="job_info">
+                                                            <h5>Client: Jack nicholson</h5>
+                                                            <h5>Budget: $1200</h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feedback-sec">
+                                                        <p class="head">No Client feedback <a>Request for feedback</a></p>
+
+                                                        <ul class="feed-rating">
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            <span>4.9/5</span>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="head-sec">
+                                                        <div class="job-title">
+                                                            <h5>Need quality caterers for a punjabi wedding</h5>
+                                                            <span class="date">Start date: 12 Aug 2018</span>
+                                                            <span class="status completed">Completed in Sept 2017</span>
+                                                        </div>
+                                                        <div class="job_info">
+                                                            <h5>Client: Jack nicholson</h5>
+                                                            <h5>Budget: $1200</h5>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div><!--/.Vendor-Card-->
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/.col-md-9-->
+                    <div class="col-md-3 col-sm-3">
+                        <div class="sidebar_outer">
+                            <div class="head-sec">
+                                <a class="btn-message"><i class="fas fa-envelope"></i>Send a message</a>
+                                <a class="btn-clear">Invite to a job</a>
+                            </div>
+                            <ul class="details-side">
+                                <h6>Vendor Details</h6>
+                                <li>Established in <span>{{business.established_in}}</span></li>
+                                <li>Opening time<span>8:00 am</span></li>
+                                <li>Closing time<span>5:00 pm</span></li>
+                                <li>Starting price <span class="price">${{business.starting_price}}</span></li>
+                            </ul>
+                            <ul class="details-side" ng-if="business.highlights">
+                                <h6>Vendor highlights</h6>
+                                <li ng-repeat="highlight in business.highlights">{{highlight.title}}</li>
+                            </ul>
+                            <ul class="details-side contact">
+                                <h6>Contact Info</h6>
+                                <li>
+                                    <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                                    <div class="text">
+                                        <p>Phone</p>
+                                        <a>{{business.company_phone}}</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                                    <div class="text">
+                                        <p>Primary email</p>
+                                        <a>{{business.primary_email}}</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon"><i class="fab fa-facebook-f"></i></div>
+                                    <div class="text">
+                                        <p>Facebook</p>
+                                        <a>john.d@facebook.com</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon"><i class="fab fa-instagram"></i></div>
+                                    <div class="text">
+                                        <p>Instagram</p>
+                                        <a>john.d@instagram.com</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--/.Vendor Profile Section End Here -->
+    </section><!--/.content-sec-->
+</main>

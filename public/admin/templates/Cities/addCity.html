@@ -1,0 +1,66 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Cities
+            <small>Preview</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Cities</a></li>
+            <li class="active">Add</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add City</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form enctype="multipart/form-data" role="form" ng-submit="add(post)">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="VendorType Title">Name</label>
+                                <input type='text' placeholder='Title' ng-model='post.name' name='title' class='form-control'>
+                                <!--<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">-->
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Bulk Upload</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form enctype="multipart/form-data" role="form" ng-submit="bulk_add(post)">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="VendorType Title">File</label>
+                                <input type="file" onchange="angular.element(this).scope().uploadCSV(this)" name="file" accept="*.csv">
+                                <!--<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">-->
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </form>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+</div>

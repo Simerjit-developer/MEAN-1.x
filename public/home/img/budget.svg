@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="11px" viewBox="0 0 14 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Budget</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Tasks" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tasks-Copy" transform="translate(-53.000000, -353.000000)" fill="#747474">
+            <path d="M65.6,353 L54.4,353 C53.623,353 53.007,353.611875 53.007,354.375 L53,362.625 C53,363.388125 53.623,364 54.4,364 L65.6,364 C66.377,364 67,363.388125 67,362.625 L67,354.375 C67,353.611875 66.377,353 65.6,353 L65.6,353 Z M65.6,362.625 L54.4,362.625 L54.4,358.5 L65.6,358.5 L65.6,362.625 L65.6,362.625 Z M65.6,355.75 L54.4,355.75 L54.4,354.375 L65.6,354.375 L65.6,355.75 L65.6,355.75 Z" id="Budget"></path>
+        </g>
+    </g>
+</svg>

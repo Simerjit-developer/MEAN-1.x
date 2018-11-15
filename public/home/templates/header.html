@@ -1,0 +1,290 @@
+<header class="st_header" ng-controller="globalCtrl">
+    <nav class="navbar navbar-expand-lg navbar-light st_menu">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img src="/home/img/logo1.png" alt="Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dark-menu" aria-controls="dark-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="dark-menu">
+                <ul class="navbar-nav mr-auto left_menu">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref="home">Home</a>
+                    </li>
+                    <li class="nav-item" ng-class="{'active': activePage.projects == true}"> 
+                        <a class="nav-link" ui-sref="projectlist">Projects</a>
+                    </li>
+                    
+                    <li class="nav-item" ng-class="{'active': activePage.planner == true}">
+                        <a class="nav-link" data-toggle="modal" data-target="#SelectProject">Planner</a>
+<!--                        <a class="nav-link" ui-sref="taskList({id:project._id})">Planner</a>-->
+                    </li>
+                    <li class="nav-item" ng-class="{'active': activePage.marketplace == true}">
+                        <a class="nav-link coming-img" href="/dost#/marketPlace"><img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">Marketplace</a>
+                    </li>
+					
+                    <li class="nav-item" ng-class="{'active': activePage.jobs == true}">
+                        <a class="nav-link coming-img"><img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">Jobs</a>
+                    </li>
+                    <li class="nav-item" ng-class="{'active': activePage.performance == true}">
+                        <a class="nav-link coming-img"><img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">Performance</a>
+                    </li>
+                    <li class="search-icon" style="display: none;">
+                        <a class="nav-link"><img src="/home/img/search-1.svg" alt="avatar"></a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav ml-auto right_menu">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <span> <a class="nav-link" href="" style="margin-right:16px;">
+                                    <img src="/home/img/plus-plus.svg" alt="avatar">
+                                </a></span>
+                            <div class="dropdown-content">
+                                <a ui-sref="taskList({id:project._id})"><img src="/home/img/event-add.svg" alt="add"> &nbsp; Add a task</a>
+                                <a data-toggle="modal" data-target="#AddEvent"><img src="/home/img/event-star.svg" alt="star"> &nbsp; Add an event</a>
+                                <a data-toggle="modal" data-target="#addGuest"><img src="/home/img/event-user.svg" alt="star">&nbsp; Add a guest</a>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="nav-item" style="display: none;">
+                        <a class="nav-link" href="#"><i class="far fa-calendar-alt"></i></a>
+                    </li>
+                    <li class="nav-item" style="display: none;">
+                        <a class="nav-link" href="#"><span class="message"><i class="far fa-envelope"></i><i class="indicator"></i></span></a>
+                    </li>
+                    <li class="nav-item" style="display: none;">
+                        <a class="nav-link" href="#"><span class="notification"><i class="fas fa-bell"></i><i class="indicator"></i></span></a>
+                    </li>
+                    <li class="nav-item dropdown" ng-if="currentUser">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><span class="avatar">
+                                <img ng-if="currentUser.image" src="{{currentUser.image}}" alt="avatar">
+                                <img ng-if="!currentUser.image" src="/home/img/bg.jpg" alt="avatar">
+                                <i class="notice"></i></span>{{currentUser.firstname}} {{currentUser.lastname}}</a>
+                        <div class="dropdown-menu">
+                            <div class="body-sec">
+                                <div class="avatar-sec">
+                                    <img ng-if="currentUser.image" src="{{currentUser.image}}" alt="avatar">
+                                    <img ng-if="!currentUser.image" src="/home/img/bg.jpg" alt="avatar">
+                                </div>
+                                <div class="profile-dt">
+                                    <p>{{currentUser.firstname}} {{currentUser.lastname}}</p>
+                                    <a href="#">{{currentUser.email}}</a>
+                                    <a href="/dost#/editUser" class="btn btn-info btn-pro">Planner profile</a>
+                                </div>
+                            </div>
+                            <div class="footer-sec">
+                                <a style="cursor:pointer;" data-toggle="modal" data-target="#SwitchView">Switch profile</a>
+                                <a href="/logout" class="log_out">Sign out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+<!-- Add Guest Modal starts here -->
+<div class="modal fade add-guest-pop" id="addGuest" role="dialog" >
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Add Guest</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form ng-submit="addGuest()" >
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <div class="form-group">   
+                            <label>Project</label>
+                            <select class="form-control" ng-model="newEvent.project_id">
+                                <option ng-repeat="project in projectlist" value="{{project._id}}">{{project.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">   
+                            <label>From</label>
+                            <select class="form-control" ng-model="newEvent.from">
+                                <option value="Bride">Bride</option>
+                                <option value="Groom">Groom</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Name</label>
+                            <input type="text" class="form-control" ng-model="guest.name" placeholder="Raj Chopra">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/user.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>Email Id</label>
+                            <input type="text" class="form-control" ng-model="guest.email" placeholder="raj.chopra@company.com">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/emails.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>Phone</label>
+                            <input type="text" class="form-control" ng-model="guest.phone" placeholder="91-9324331312">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/tablet.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>Location</label>
+                            <select class="form-control" ng-model="guest.location" >
+                                <option value="{{city.name}}" ng-repeat="city in cities">{{city.name}}</option>
+                            </select>
+                            <!--<input type="text" class="form-control" ng-model="guest.location" placeholder="Heydrabad">-->
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/location.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>Group</label>
+                            <div class="dropdown demo-project">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">{{guest.group}}
+                                    <span class="down-arr-icon-new"><img src="/home/img/down-arr.svg" alt="down arrow"></span></button>
+                                <ul class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -177px, 0px); top: 0px; left: 0px; will-change: transform; width:100%">
+                                    <li>
+                                        <input type="radio" ng-model='guest.group' name="group" class="form-check-input" value="Family">
+                                        <i class="custom-check"></i>
+                                        Family
+                                    </li>
+                                    <li>
+                                        <input type="radio" ng-model='guest.group' name="group" class="form-check-input" value="Friends">
+                                        <i class="custom-check"></i>
+                                        Friends
+                                    </li>
+                                    <li>
+                                        <input type="radio" ng-model='guest.group' name="group" class="form-check-input" value="Others">
+                                        <i class="custom-check"></i> 
+                                        Others
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mod-footr">
+                    <button type="submit" class="btn btn-default guest-clr">Add Guest</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- Bootstrap Modal for Add an Event -->
+<div class="modal fade" id="AddEvent" role="dialog">
+    <div class="modal-dialog">
+        <form ng-submit="addNewEvent()">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; Add Event</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <div ng-if="!project._id" class="form-group">   
+                            <label>Project</label>
+                            <select class="form-control" ng-model="newEvent.project_id">
+                                <option ng-repeat="project in projectlist" value="{{project._id}}">{{project.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Event Name</label>
+                            <input ng-model="newEvent.name" type="text" ng-focus="focusInput = true" class="form-control" placeholder="Mehndi" ng-required="true">
+                            <input type="hidden" ng-model="newEvent.event_id">
+                            <ul class="advance_search_inner" ng-show="focusInput">
+                                <li ng-repeat="event in events| filter:newEvent.name" ng-click="newEvent.name = event.name; focusInput = false; newEvent.event_id = event._id">
+                                    {{event.name}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group">   
+                            <label>Date</label>
+                            <md-datepicker md-min-date="project.start_date" md-max-date="project.end_date" md-open-on-focus ng-model="newEvent.start_date"></md-datepicker>
+                        </div>
+
+                        <div class="form-group">   
+                            <label>Duration</label>
+                            <select class="form-control" ng-model="newEvent.duration">
+                                <option value="1 Day">1 Day</option>
+                                <option value="2 Days">2 Days</option>
+                                <option value="3 Days">3 Days</option>
+                            </select>
+                            <!--<input type="text" class="form-control" ng-model="newEvent.duration" placeholder="1 Day(s)" ng-required="true">-->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mod-footr">
+                    <button type="submit" class="btn btn-default">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Select a Project from list -->
+<div class="modal fade" id="SelectProject" role="dialog">
+    <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; Select Project</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <div class="form-group" ng-repeat="project in projectlist">   
+                            <label>
+                                <!--<a data-dismiss="modal" ui-sref="taskList({id:project._id})">{{project.name}}</a>-->
+                                <a ng-click="navigateToPlanner('taskList',project._id)">{{project.name}}</a>
+                            </label>
+                            <!--select class="form-control" ng-model="newEvent.project_id">
+                                <option ng-repeat="project in projectlist" value="{{project._id}}">{{project.name}}</option>
+                            </select-->
+                        </div>
+                    </div>
+                </div>
+                <!--div class="modal-footer mod-footr">
+                    <button type="submit" class="btn btn-default">Send</button>
+                </div-->
+            </div>
+    </div>
+</div>
+
+<!-- Switch View -->
+<div class="modal fade" id="SwitchView" role="dialog">
+    <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; Select View</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <div class="form-group">   
+                            <label><a data-dismiss="modal" ui-sref="projectlist">Planner</a></label>
+                            <!--<label><a data-dismiss="modal" ui-sref="taskList({id:project._id})">Guest</a></label>-->
+                        </div>
+                        <div class="form-group">
+                            <label><a data-dismiss="modal" ui-sref="browseJobs">Vendor</a></label>
+                        </div>
+                         <div class="form-group">
+                            <label><a data-dismiss="modal" ui-sref="myInvitations">Guest</a></label>
+                        </div>
+                    </div>
+                </div>
+                <!--div class="modal-footer mod-footr">
+                    <button type="submit" class="btn btn-default">Send</button>
+                </div-->
+            </div>
+    </div>
+</div>
+</header><!--./st_header-->
+

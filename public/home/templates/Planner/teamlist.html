@@ -1,0 +1,387 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="team-list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div ng-include="'/home/templates/Planner/sidebar.html'"></div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="team-list-heading">
+                            <h5>Team</h5>
+                            <span><a><img class="sort-list-icon" ng-src="home/img/sort-button-1.svg"/></a>
+                                <a><img class="sort-list-icon" ng-src="home/img/sort-button.svg"/></a></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" ng-repeat="team in project.team">
+                                <div class="team-list-box">
+                                    <div class="team-inner-box-1">
+                                        <ul>
+                                            <li class="flag">
+                                                <img ng-if="(team.detail | typeOf) =='undefined'" ng-src="home/img/flag-red.svg"/>
+                                                <img ng-if="(team.detail| typeOf) !='undefined'" ng-src="home/img/flag.svg"/>
+                                            </li>
+                                            <li class="center-img-box"><span class="js-circle">{{team.name | nickname:" "| uppercase}}</span>
+                                                <h6>{{team.name}}</h6>
+                                                <p>{{team.email}}</p>
+                                                <p>{{team.phone}}</p>
+                                            </li>
+                                            <li class="icon-team-list more-option" ng-if="!assigned_project">
+                                                <div class="btn-group circle-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a ng-click="removeTeamMember(team._id)">Remove</a></li>
+                                                    </ul>
+                                                </div>
+                                                <a><img class="more" ng-src="home/img/more.svg"/></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="team-list-events">
+                                        <h6>Events</h6>
+                                        <form>
+                                            <input type="text" name="mehendi" value="Mehendi">
+                                            <input type="text" name="Reception" value="Reception">
+                                            <input type="text" name="mehendi" value="+1">
+                                        </form>
+                                    </div>
+                                    <div class="details-completed">
+                                        <ul>
+                                            <li>
+                                                <span>Tasks</span>
+                                            </li>
+                                            <li class="completed-txt">
+                                                <span class="prog-clr">12/16 completed</span>
+                                            </li>
+                                        </ul>
+                                        <div class="progress progress-new progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--div class="col-md-4">
+                                <div class="team-list-box">
+                                    <div class="team-inner-box-1">
+                                        <ul>
+                                            <li class="flag"><a href="#"><img class="" ng-src="home/img/flag-red.svg"/></a></li>
+                                            <li class="center-img-box box-new"><span class="js-circle">JS</span>
+                                                <h6>Jack Garter</h6>
+                                                <p>jack@company.com</p>
+                                                <p>9421232123</p>
+                                            </li>
+                                            <li class="icon-team-list more-option">
+                                                <div class="btn-group circle-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><h6>Projects in Budget</h6></li>
+                                                        <li><a href="#">In Budget</a></li>
+                                                        <li><a href="#">Slightly over Budget</a></li>
+                                                        <li><a href="#">Over Budget</a></li>
+                                                    </ul>
+                                                </div>
+                                                <a href="#"><img class="more" ng-src="home/img/more.svg"/></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="team-list-events">
+                                        <h6>Events</h6>
+                                        <form>
+                                            <input type="text" name="mehendi" value="Mehendi">
+                                            <input type="text" name="Reception" value="Reception">
+                                            <input type="text" name="mehendi" value="+1">
+                                        </form>
+                                    </div>
+                                    <div class="details-completed">
+                                        <ul>
+                                            <li>
+                                                <span>Tasks</span>
+                                            </li>
+                                            <li class="completed-txt">
+                                                <span class="prog-clr clr-1">12/16 completed</span>
+                                            </li>
+                                        </ul>
+                                        <div class="progress progress-new progress-xs new-clor">
+                                            <div class="progress-bar progress-bar-danger dngr-clr" style="width: 55%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="team-list-box">
+                                    <div class="team-inner-box-1">
+                                        <ul>
+                                            <li class="flag"><a href="#"><img class="" ng-src="home/img/flag.svg"/></a></li>
+                                            <li class="center-img-box"><span class="js-circle">JS</span>
+                                                <h6>Jack Garter</h6>
+                                                <p>jack@company.com</p>
+                                                <p>9421232123</p>
+                                            </li>
+                                            <li class="icon-team-list more-option">
+                                                <div class="btn-group circle-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><h6>Projects in Budget</h6></li>
+                                                        <li><a href="#">In Budget</a></li>
+                                                        <li><a href="#">Slightly over Budget</a></li>
+                                                        <li><a href="#">Over Budget</a></li>
+                                                    </ul>
+                                                </div>
+                                                <a href="#"><img class="more" ng-src="home/img/more.svg"/></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="team-list-events">
+                                        <h6>Events</h6>
+                                        <form>
+                                            <input type="text" name="mehendi" value="Mehendi">
+                                            <input type="text" name="Reception" value="Reception">
+                                            <input type="text" name="mehendi" value="+1">
+                                        </form>
+                                    </div>
+                                    <div class="details-completed">
+                                        <ul>
+                                            <li>
+                                                <span>Tasks</span>
+                                            </li>
+                                            <li class="completed-txt">
+                                                <span class="prog-clr">12/16 completed</span>
+                                            </li>
+                                        </ul>
+                                        <div class="progress progress-new progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="team-list-box">
+                                    <div class="team-inner-box-1">
+                                        <ul>
+                                            <li class="flag"><a href="#"><img class="" ng-src="home/img/flag.svg"/></a></li>
+                                            <li class="center-img-box"><span class="js-circle">JS</span>
+                                                <h6>Jack Garter</h6>
+                                                <p>jack@company.com</p>
+                                                <p>9421232123</p>
+                                            </li>
+                                            <li class="icon-team-list more-option">
+                                                <div class="btn-group circle-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><h6>Projects in Budget</h6></li>
+                                                        <li><a href="#">In Budget</a></li>
+                                                        <li><a href="#">Slightly over Budget</a></li>
+                                                        <li><a href="#">Over Budget</a></li>
+                                                    </ul>
+                                                </div>
+                                                <a href="#"><img class="more" ng-src="home/img/more.svg"/></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="team-list-events">
+                                        <h6>Events</h6>
+                                        <form>
+                                            <input type="text" name="mehendi" value="Mehendi">
+                                            <input type="text" name="Reception" value="Reception">
+                                            <input type="text" name="mehendi" value="+1">
+                                        </form>
+                                    </div>
+                                    <div class="details-completed">
+                                        <ul>
+                                            <li>
+                                                <span>Tasks</span>
+                                            </li>
+                                            <li class="completed-txt">
+                                                <span class="prog-clr">12/16 completed</span>
+                                            </li>
+                                        </ul>
+                                        <div class="progress progress-new progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="team-list-box">
+                                    <div class="team-inner-box-1">
+                                        <ul>
+                                            <li class="flag"><a href="#"><img class="" ng-src="home/img/flag.svg"/></a></li>
+                                            <li class="center-img-box"><span class="js-circle">JS</span>
+                                                <h6>Jack Garter</h6>
+                                                <p>jack@company.com</p>
+                                                <p>9421232123</p>
+                                            </li>
+                                            <li class="icon-team-list more-option">
+                                                <div class="btn-group circle-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><h6>Projects in Budget</h6></li>
+                                                        <li><a href="#">In Budget</a></li>
+                                                        <li><a href="#">Slightly over Budget</a></li>
+                                                        <li><a href="#">Over Budget</a></li>
+                                                    </ul>
+                                                </div>
+                                                <a href="#"><img class="more" ng-src="home/img/more.svg"/></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="team-list-events">
+                                        <h6>Events</h6>
+                                        <form>
+                                            <input type="text" name="mehendi" value="Mehendi">
+                                            <input type="text" name="Reception" value="Reception">
+                                            <input type="text" name="mehendi" value="+1">
+                                        </form>
+                                    </div>
+                                    <div class="details-completed">
+                                        <ul>
+                                            <li>
+                                                <span>Tasks</span>
+                                            </li>
+                                            <li class="completed-txt">
+                                                <span class="prog-clr">12/16 completed</span>
+                                            </li>
+                                        </ul>
+                                        <div class="progress progress-new progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="team-list-box">
+                                    <div class="team-inner-box-1">
+                                        <ul>
+                                            <li class="flag"><a href="#"><img class="" ng-src="home/img/flag.svg"/></a></li>
+                                            <li class="center-img-box"><span class="js-circle">JS</span>
+                                                <h6>Jack Garter</h6>
+                                                <p>jack@company.com</p>
+                                                <p>9421232123</p>
+                                            </li>
+                                            <li class="icon-team-list more-option">
+                                                <div class="btn-group circle-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><h6>Projects in Budget</h6></li>
+                                                        <li><a href="#">In Budget</a></li>
+                                                        <li><a href="#">Slightly over Budget</a></li>
+                                                        <li><a href="#">Over Budget</a></li>
+                                                    </ul>
+                                                </div>
+                                                <a href="#"><img class="more" ng-src="home/img/more.svg"/></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="team-list-events">
+                                        <h6>Events</h6>
+                                        <form>
+                                            <input type="text" name="mehendi" value="Mehendi">
+                                            <input type="text" name="Reception" value="Reception">
+                                            <input type="text" name="mehendi" value="+1">
+                                        </form>
+                                    </div>
+                                    <div class="details-completed">
+                                        <ul>
+                                            <li>
+                                                <span>Tasks</span>
+                                            </li>
+                                            <li class="completed-txt">
+                                                <span class="prog-clr">12/16 completed</span>
+                                            </li>
+                                        </ul>
+                                        <div class="progress progress-new progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div-->
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="members">
+                            <a style="cursor: pointer;" ng-if="!assigned_project" class="add-member" data-toggle="modal" data-target="#myModal"><img class="follow" ng-src="home/img/follow.svg"/>Add a Member</a>
+                        </div>
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>Add team member</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="add-member-modl">
+                                            <div class="form-group">
+                                                <label> Name</label>
+                                                <input type="text" class="form-control" ng-model="post.name" placeholder="Raj Chopra">
+                                                <div class="modl-img">
+                                                    <img class="" ng-src="home/img/user.svg">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">   
+                                                <label>Email Id</label>
+                                                <input type="text" class="form-control" ng-model="post.email" placeholder="raj.chopra@company.com">
+                                                <div class="modl-img">
+                                                    <img class="" ng-src="home/img/emails.svg">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">   
+                                                <label>Phone</label>
+                                                <div style="width:100%">
+                                                <input type="tel" name="phone_intl" intl-tel-input ng-model="post.phone" intl-tel-input-options="{ preferredCountries: ['in', 'sg','us']}" class="form-control" ng-required="true" >
+                                                </div>
+                                                <!--<input type="text" class="form-control" ng-model="post.phone" placeholder="91-9324331312">-->
+                                                <div class="modl-img">
+                                                    <img class="" ng-src="home/img/tablet.svg">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">   
+                                                <label>Location</label>
+                                                <select class="form-control" ng-model="post.location">
+                                                    <option ng-repeat="city in cities">{{city.name}}</option>
+                                                </select>
+                                                <!--<input type="text" class="form-control" ng-model="post.location" placeholder="Heydrabad">-->
+                                                <div class="modl-img">
+                                                    <img class="" ng-src="home/img/location.svg">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">   
+                                                <label>Custom message(Optional)</label>
+                                                <input type="text" class="form-control" ng-model="post.message" placeholder="Welcome to the team:)">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer mod-footr">
+                                        <button type="button" ng-click="addMember(post,project._id)" class="btn btn-default" data-dismiss="modal">Send Invite</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <ul class="total-team">
+                            <li>Total Team <span>{{project.team.length}}</span></li>
+                            <li>Registered <span class="color">05</span></li>
+                            <li>Assigned task to <span>06</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

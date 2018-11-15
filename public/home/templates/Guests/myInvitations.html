@@ -1,0 +1,117 @@
+<main>
+    <div ng-include="'/home/templates/headerguestView.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a>Home</a></li>
+                                <li class="breadcrumb-item"><a >Invitations</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+
+        <section class="result-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 m-auto col-sm-10">
+                        <div class="ivitation-info">
+                            <div class="invite-head">
+                                <ul>
+                                    <li><span class="unread"></span></li>
+                                    <li><h4>Unread invitations</h4></li>
+                                </ul>
+                            </div>
+                            <div class="invite-content" ng-repeat="invitation in myInvitations" ng-if="(invitation.eventsInvited | unreadInvitations: 1 ) ==true">
+                                <h5>{{invitation._id.project_name}}</h5>
+                                <div class="caterers-card" ng-repeat="eventinvitation in invitation.eventsInvited" ng-if="eventinvitation.event_data.guest_response==1">
+                                    <ul class="reception-invite">
+                                        <li class="recept-cake"></li>
+                                        <li class="reception-view">{{eventinvitation.event.name}}</li>
+                                        <li class="invite-on"><span>On:</span> &nbsp; {{eventinvitation.event.start_date | date:'d MMM, yyyy'}}</li>
+                                        <li class="invite-by"><span>Invited By:</span>&nbsp; {{eventinvitation.invited_by.user_detail[0].firstname}} {{eventinvitation.invited_by.user_detail[0].lastname}}</li>
+                                        <li class="invite-invite"><a style="cursor:pointer;" class="view-invite" data-toggle="modal" data-target="#myModal{{eventinvitation.event._id}}" data-id="{{eventinvitation.event._id}}">View Invitation</a></li>
+                                    </ul>
+                                     <!-- Invitation Popup -->
+                                <div class="modal fade myinvite" id="myModal{{eventinvitation.event._id}}" role="dialog">
+                                    <div class="modal-dialog invite-model">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<span class="left-arr-1"><img src="/home/img/left-arrow-invite.svg" alt="down arrow"/></span>
+							<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+						</div>
+                                                <div class="modal-body">
+                                                    <div class="reception-text">
+                                                        <h3>{{invitation._id.groom_name}}</h3>
+                                                        <span class="and">& </span>
+                                                        <h3>{{invitation._id.bride_name}}</h3>
+                                                        <span class="hounor">Request the honour of your presense at our<br/> <span class="honour-color">{{eventinvitation.event.name}}</span> on <span class="honour-color"> {{eventinvitation.event.start_date | date:'d MMM, yyyy'}} </span> at <span class="honour-color">{{eventinvitation.event.start_date | date:'h a'}}</span>
+                                                        </span>
+                                                        <h4 class="venue">Venue</h4>
+                                                        <span class="Rutherford">578 Rutherford Unions Suits 454</span>
+                                                    </div>
+                                                </div>
+					</div>
+				</div>
+				<div class="modal-footer mod-footr invite-btnnn">
+					<!--<span class="cancelled" data-dismiss="modal" ng-click="response(eventinvitation.invitation_id, 2 )">Decline</span>-->
+<!--					<button type="submit" class="btn btn-default remove-user" ng-click="response(eventinvitation.invitation_id, 3 )">Accept Invite</button>-->
+<button type="button" class="btn btn-default remove-user" data-dismiss="modal" ui-sref="eventsdetail({id:eventinvitation.invitation_id,event_id:eventinvitation.event._id})">View Event</button>
+                                        
+				</div>
+			</div>
+                                <!-- Invitation Popup ends here -->
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="invite-head">
+                                <ul>
+                                    <li><span class="unread accept"></span></li>
+                                    <li><h4>Accepted Invitation</h4></li>
+                                </ul>
+                            </div>
+                            <div class="invite-content" ng-repeat="invitation in myInvitations" ng-if="(invitation.eventsInvited | unreadInvitations: 3 ) ==true">
+                                <h5>{{invitation._id.project_name}}</h5>
+                                <div class="caterers-card" ng-repeat="eventinvitation in invitation.eventsInvited" ng-if="eventinvitation.event_data.guest_response==3">
+                                    <ul class="reception-invite">
+                                        <li class="recept-cake cake"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                        <li class="reception-view">{{eventinvitation.event.name}}</li>
+                                        <li class="invite-on"><span>On:</span> &nbsp; {{eventinvitation.event.start_date | date:'d MMM, yyyy'}}</li>
+                                        <li class="invite-by"><span>Invited By:</span>&nbsp; {{eventinvitation.invited_by.user_detail[0].firstname}} {{eventinvitation.invited_by.user_detail[0].lastname}}</li>
+                                        <li class="invite-invite"><a class="view-invite open-event" ui-sref="eventsdetail({id:eventinvitation.invitation_id,event_id:eventinvitation.event._id})">Open Event</a></li>
+                                    </ul>
+                                </div>
+                                <!--div class="caterers-card">
+                                    <ul class="reception-invite">
+                                        <li class="recept-cake cake"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                        <li class="reception-view">Engagment</li>
+                                        <li class="invite-on"><span>On:</span> &nbsp; 12th july 2018</li>
+                                        <li class="invite-by"><span>Invited By:</span>&nbsp; Suresh chawla</li>
+                                        <li class="invite-invite"><a class="view-invite open-event" href="#">Open Event</a></li>
+                                    </ul>
+                                </div>
+                                <div class="caterers-card">
+                                    <ul class="reception-invite">
+                                        <li class="recept-cake sangeet"><span><img class="like-immg" src="/home/img/sangeeth.svg" alt="engagemen"></span></li>
+                                        <li class="reception-view">Sangeeth</li>
+                                        <li class="invite-on"><span>On:</span> &nbsp; 12th july 2018</li>
+                                        <li class="invite-by"><span>Invited By:</span>&nbsp; Suresh chawla</li>
+                                        <li class="invite-invite"><a class="view-invite open-event" href="#">Open Event</a></li>
+                                    </ul>
+                                </div-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+        </section><!--/.Result-Sec End Here -->
+    </section><!--/.content-sec-->
+</main>

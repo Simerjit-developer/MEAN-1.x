@@ -1,0 +1,258 @@
+<main>
+    <div ng-include="'/home/templates/headerVendorView.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
+                                <li class="breadcrumb-item active">Browse jobs</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+
+        <section class="result-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <div class="filed-inner-sec">
+                            <form class="filter-form" id="" name="Filter-Form" method="post" action="">
+                                <div class="head-sec">
+                                    <h6>Filter</h6><input type="reset" value="Reset Filters">
+                                </div>
+                                <div class="filed-sec">
+                                    <div class="head-sec">
+                                        <h6>Ratings</h6>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 5
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 4
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 3 - 4
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> < 2
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filed-sec">
+                                    <div class="head-sec">
+                                        <h6>Experience in years</h6>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 5 +
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 3 - 4
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 2 - 3
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 1 - 2 
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> < 1 
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filed-sec">
+                                    <div class="head-sec">
+                                        <h6>Budget in dollars</h6>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 10,000+
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 8,000+
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 6,000+
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 3,000+
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> < 3,000
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="add-more">
+                                    <button type="button">Add more filters</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!--/.col-md-2 end here -->
+                    <div class="col-md-10 col-sm-10">
+                        <section class="browse-jobs">
+                            <div class="browse-top-head">
+                                <h5>Browse Jobs</h5>
+                                <div class="serach-text-box">
+                                    <input type="text"  placeholder="Enter your keyword seprated by comma"/>
+                                    <a class="text-search-job">Search Job</a>
+                                </div>
+                            </div>
+                            <div class="head-sec">
+                                <h6>Showing {{livejobs.length}} results</h6> 
+                                <select class="short-filter">
+                                    <option>Sort by: Highest Rating first</option>
+                                </select>
+                            </div>
+                            <div class="caterers-card" ng-repeat="job in livejobs">
+                                <div class="card-head">
+                                    <a ui-sref="jobDetail({id:job._id})"><h6>{{job.title}}</h6></a>
+                                    <label class="start-job">Starts Immediatly</label>
+
+                                    <span class="flag-icon-clr" >
+                                        <span ng-if="job.favourites.length>0" ng-click="markasfavourite(job._id)">Filled</span>
+                                        <!--<ng-include style="cursor: pointer;" class="like-immg" src="'/home/img/like.svg'" ng-click="markasfavourite(job._id)"/>-->
+                                        <img ng-if="job.favourites.length==0" style="cursor: pointer;" class="like-immg" src="/home/img/like.svg" alt="Calander-Icon" ng-click="markasfavourite(job._id)">
+                                    </span>
+                                    <ul class="event-budget">
+                                        <li>
+                                            <p><label>Event name: Wedding</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>Budget: $1200</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>No of Guest: 1400</label></p>
+                                        </li>
+                                    </ul>
+                                    <p class="card-detail-card">{{job.description}}</p>
+                                    <ul class="event-budget">
+                                        <li><span class="team-member-icon color-1"><img class="like-immg" ng-src="home/img/like.svg"></span>
+                                            <p>Verified Job</p>
+                                        </li>
+                                        <li><span class="team-member-icon"><img class="like-imgg" ng-src="home/img/like.svg"></span>
+                                            <p class="planner-color">Top Rated Planner</p>
+                                        </li>
+                                        <li class="right-bids">
+                                            <div class="bids">
+                                                <label class="posted-ago">{{job.jobDetails['Start date'] | datediff}}</label><span class="bids-color">14 Bids new</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--div class="caterers-card">
+                                <div class="card-head">
+                                    <h6>Need quality caterers for a punjabi wedding.</h6><label class="start-job">Starts Immediatly</label>
+
+                                    <span class="flag-icon-clr">
+                                        <img class="like-immg" src="/home/img/like.svg" alt="Calander-Icon">
+                                    </span>
+                                    <ul class="event-budget">
+                                        <li>
+                                            <p><label>Event name: Wedding</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>Budget: $1200</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>No of Guest: 1400</label></p>
+                                        </li>
+                                    </ul>
+                                    <p class="card-detail-card">Sangeet dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <ul class="event-budget">
+                                        <li><span class="team-member-icon color-1"><img class="like-immg" ng-src="home/img/like.svg"></span>
+                                            <p>Verified Job</p>
+                                        </li>
+                                        <li><span class="team-member-icon"><img class="like-imgg" ng-src="home/img/like.svg"></span>
+                                            <p class="planner-color">Top Rated Planner</p>
+                                        </li>
+                                        <li class="right-bids">
+                                            <div class="bids">
+                                                <label class="posted-ago">Posted 2 days ago</label><span class="bids-color">14 Bids new</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="caterers-card">
+                                <div class="card-head">
+                                    <h6>Need quality caterers for a punjabi wedding.</h6><label class="start-job">Starts Immediatly</label>
+                                    <span class="flag-icon-clr">
+                                        <img class="like-immg" src="/home/img/like-fill.svg" alt="Calander-Icon">
+                                    </span>
+                                    <ul class="event-budget">
+                                        <li>
+                                            <p><label>Event name: Wedding</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>Budget: $1200</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>No of Guest: 1400</label></p>
+                                        </li>
+                                    </ul>
+                                    <p class="card-detail-card">Sangeet dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <ul class="event-budget">
+                                        <li><span class="team-member-icon color-1"><img class="like-immg" ng-src="home/img/like.svg"></span>
+                                            <p>Verified Job</p>
+                                        </li>
+                                        <li><span class="team-member-icon"><img class="like-imgg" ng-src="home/img/like.svg"></span>
+                                            <p class="planner-color">Top Rated Planner</p>
+                                        </li>
+                                        <li class="right-bids">
+                                            <div class="bids">
+                                                <label class="posted-ago">Posted 2 days ago</label><span class="bids-color">14 Bids new</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div-->
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section><!--/.Result-Sec End Here -->
+    </section><!--/.content-sec-->
+</main>

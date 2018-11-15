@@ -1,0 +1,168 @@
+<main>
+    <div ng-include="'/home/templates/headerVendorView.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
+                                <li class="breadcrumb-item active">My bids</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+
+        <section class="result-sec my_bids">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11 m-auto">
+                        <div class="my-jobs-sec">
+                            <div class="my_bid_heading">
+                                Invites
+                            </div>
+                             <ul class="mybid-job-list">
+                                <li class="mybid-projectname">
+                                    PROJECT NAME
+                                </li>
+                                <li class="mybid-li">
+                                    CLIENT
+                                </li>
+                                <li class="mybid-li">
+                                    BUDGET
+                                </li>
+                                <li class="mybid-li">
+                                    DURATION
+                                </li>
+                                <li class="mybid-li"></li>
+                                <li class="mybid-li"></li>
+                            </ul>
+                            <div class="caterers-card no-margin-top" ng-repeat="invite in myInvites" ng-if="myInvites.length>0">
+                                <div class="card-head live-job-head">
+                                    <ul class="live-job-list">
+                                        <li class="mybid-projectname"><h6>{{invite.livejob.title}}</h6>
+                                            <span class="job-bottom-list">{{invite.created_at | date |datediff}}</span>
+                                        </li>
+                                        <li class="mybid-li">
+                                            <span class="mybid-clientinfo">
+                                                {{invite.user_detail[0].firstname+" "+invite.user_detail[0].lastname}}  
+                                            </span>
+                                        </li>
+                                        <li class="mybid-li">
+                                            <span class="mybid-clientinfo">
+                                            INR {{invite.budget}}
+                                            </span>
+                                        </li>
+                                        <li class="mybid-li">
+                                            <span class="mybid-clientinfo">
+                                            {{invite.duration}} days
+                                            </span>
+                                        </li >
+                                        <li class="mybid-li">
+                                            <span ng-click="acceptInvitation(invite._id)" class="btn btn-primary accept_invite_btn">Accept Invite </span>
+                                        </li>
+                                        <li class="mybid-li last">
+                                            <div class="dropdown demo-project">
+                                                <a class=" dropdown-toggle current-milestone" type="" data-toggle="dropdown" aria-expanded="false">
+                                                    <img class="ellip" src="/home/img/more.svg" alt="arrow"/>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <span class="Agar-Gram">Withdraw</span>                                                                                        
+                                                    </li>
+                                                    <li>
+                                                        <span class="Agar-Gram">Resubmit new bid</span>
+                                                    </li>
+                                                    <li>
+                                                        <!-- If already declined by planner -->
+                                                        <span class="Agar-Gram">Delete</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>			
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-jobs-sec">
+                            <div class="my_bid_heading">
+                                Recent Bids
+                            </div>
+                             <ul class="mybid-job-list">
+                                <li class="mybid-projectname">
+                                    PROJECT NAME
+                                </li>
+                                <li class="mybid-li">
+                                    CLIENT
+                                </li>
+                                <li class="mybid-li">
+                                    BUDGET
+                                </li>
+                                <li class="mybid-li">
+                                    DURATION
+                                </li>
+                                <li class="mybid-li">STATUS</li>
+                                <li class="mybid-li"></li>
+                            </ul>
+                            <div class="caterers-card no-margin-top" ng-repeat="bid in myBids">
+                                <div class="card-head live-job-head">
+                                    <ul class="live-job-list">
+                                        <li class="mybid-projectname"><h6>{{bid.livejob.title}}</h6>
+                                            <span class="job-bottom-list">{{bid.created_at | date |datediff}}</span>
+                                        </li>
+                                        <li class="mybid-li">
+                                            <span class="mybid-clientinfo">
+                                                {{bid.user_detail[0].firstname+" "+bid.user_detail[0].lastname}} 
+                                            </span>
+                                        </li>
+                                        <li class="mybid-li">
+                                            <span class="mybid-clientinfo">
+                                            INR {{bid.budget}}
+                                            </span>
+                                        </li>
+                                        <li class="mybid-li">
+                                            <span class="mybid-clientinfo">
+                                            {{bid.duration}} days
+                                            </span>
+                                        </li >
+                                        <li class="mybid-li">
+                                            <span class="mybid-clientinfo " ng-class="(bid.status==1?'blue':(bid.status==2?'green':(bid.status==3?'completed':(bid.status==4?'red':(bid.status==5?'purple':'')))))"> {{(bid.status==1?'Shortlisted':(bid.status==2?'Awarded':(bid.status==3?'Job Closed':(bid.status==4?'Declined':(bid.status==5?'Finalized':'No Response')))))}}</span>
+                                        </li>
+                                        <li class="mybid-li last">
+                                            <div class="dropdown demo-project">
+                                                <a class=" dropdown-toggle current-milestone" type="" data-toggle="dropdown" aria-expanded="false">
+                                                    <img class="ellip" src="/home/img/more.svg" alt="arrow"/>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <span class="Agar-Gram">Withdraw</span>                                                                                        
+                                                    </li>
+                                                    <li>
+                                                        <span class="Agar-Gram">Resubmit new bid</span>
+                                                    </li>
+                                                    <li ng-if="bid.status==4">
+                                                        <!-- If already declined by planner -->
+                                                        <span class="Agar-Gram" ng-click="remove(bid._id)">Delete</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>			
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--div class="col-md-1">
+                        <div class="menu-live-jobs">
+                            <span class="list-live"><img class="like-immg" ng-src="home/img/menu.png" src="home/img/menu.png"></span> &nbsp;
+                            <span class="list-live-1"><img class="like-immg" ng-src="home/img/menu2.png" src="home/img/menu2.png"></span>
+                        </div>
+                    </div-->
+                </div>
+            </div>
+        </section><!--/.Result-Sec End Here -->
+    </section><!--/.content-sec-->
+</main>

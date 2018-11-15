@@ -1,0 +1,25 @@
+<main>
+    <!--<div ng-include="'/home/templates/headerguestView.html'"></div>-->
+    <section class="content-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 m-auto col-sm-6">
+                    <div class="outer-rsvp-box">
+                        <div class="top-head-rsvp">
+                            <img src="/home/img/logo3.png" alt="logo">
+                            <h5 class="rsvp-content">You might have recieved 6 digit code via SMS or Email.Please 
+                                enter the code to verify yourself so that you can RSVP for the event.</h5>
+                        </div>
+                        <form ng-submit="verifyCode()" style="width: 100%;">
+                            <div class="form-group">
+                                <label for="text">Enter the code you recieved</label>
+                                <input type="text" ng-required="true" class="form-control" ng-model='data.invitation_code' placeholder="Enter code here">
+                            </div>
+                            <button class="button-content <!--verified-->">Verify</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/.content-sec-->
+</main>

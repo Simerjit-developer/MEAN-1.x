@@ -1,0 +1,205 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="team-list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 border-sides">
+                        <div ng-include="'/home/templates/Planner/sidebar.html'"></div>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <div class="outer_row" ng-repeat="job in myjobs">
+                        <div class="vendors-head">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h6>
+                                        {{job.project_detail.events.name}}
+                                    </h6>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="members" style="margin-top: 0;">
+                                        <a data-toggle="modal" data-target="#AddVendor" class="add-member"><img class="follow" ng-src="home/img/add-task.svg" src="home/img/add-task.svg">Add Vendor</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="vendor-detail-info">
+                            <table class="table accordion-table vendor-table">
+                                <tbody>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Location</th>
+                                        <th>Job Invited</th>
+                                        <th>Milestones</th>
+                                        <th>Application</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr class="vendor-rw" ng-repeat="detail in job.data_detail" ng-if="detail.myproposals.user.length>0">
+                                        <td><span class="mehndi-vendor">
+                                                
+                                                <img ng-if="!detail.service_detail[0].image" class="like-immg" src="/home/img/caterer.svg" alt="engagemen">
+                                                <ng-include ng-if="detail.service_detail[0].image" style="width:50px;" src="trustUrl(detail.service_detail[0].image)" />
+                                                <!--<img src="{{detail.service_detail[0].image}}" class="like-immg">-->
+                                            </span>
+                                            <span class="check-icon-circle"></span>
+                                            <!--<span>{{detail.service_detail[0].title}}</span>-->
+                                        </td>
+                                        <td>{{detail.myproposals.user[0].firstname+' '+detail.myproposals.user[0].lastname}}<br> <small>{{detail.myproposals.user[0].email}}</small><br><small>{{detail.service_detail[0].title}}</small></td>
+                                        <td>{{detail.myproposals.user[0].phone}}</td>
+                                        <td>{{detail.myproposals.user[0].location}}</td>
+                                        <td><button class="button accept" ng-if="detail.myproposals.status==5">Accepted</button>
+                                        <button class="button accept" ng-if="detail.myproposals.status==2">Pending</button>
+                                        </td>
+                                        <td><button class="button accept">Deployed</button></td>
+                                        <td><button class="button accept">Downloaded</button></td>
+                                        <td><span class="mehndi-vendor bell">
+                                                <img class="ellip" src="/home/img/not.svg" alt="engagemen">
+                                            </span>
+                                            <span class="check-icon-circle"></span></td>
+                                        <td><a ui-sref="vendors_detail({id:detail.livejob_id,userid:detail.myproposals.user[0]._id})"><img class="ellip" src="/home/img/ellipsis.svg" alt="arrow"/></a></td>
+                                    </tr>
+                                    <!--tr class="vendor-rw">
+                                        <td><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span>
+                                            <span class="check-icon-circle"></span>
+                                        </td>
+                                        <td>Suresh Chawala<br> <small>sureshchawala@gmail.com</small></td>
+                                        <td>9412343210</td>
+                                        <td>Heydrabad</td>
+                                        <td><button class="button pending">pending</button></td>
+                                        <td>Not deployed</td>
+                                        <td><button class="button accept">Downloaded</button></td>
+                                        <td><span class="mehndi-vendor bell"><img class="ellip" src="/home/img/not.svg" alt="engagemen"></span>
+                                            <span class="check-icon-circle"></span></td>
+                                        <td><img class="ellip" src="/home/img/ellipsis.svg" alt="arrow"/></td>
+                                    </tr-->
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                        <!--div class="vendors-head">
+                            <h6>
+                                Reception
+                            </h6>
+                        </div>
+                        <div class="vendor-detail-info">
+                            <table class="table accordion-table vendor-table">
+                                <tbody>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Location</th>
+                                        <th>Job Invited</th>
+                                        <th>Milestones</th>
+                                        <th>Application</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr class="vendor-rw">
+                                        <td><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span>
+                                            <span class="check-icon-circle"></span>
+                                        </td>
+                                        <td>Suresh Chawala<br> <small>sureshchawala@gmail.com</small></td>
+                                        <td>9412343210</td>
+                                        <td>Heydrabad</td>
+                                        <td><button class="button accept">Accept</button></td>
+                                        <td><button class="button accept">Deployed</button></td>
+                                        <td><button class="button accept">Downloaded</button></td>
+                                        <td><span class="mehndi-vendor bell"><img class="ellip" src="/home/img/not.svg" alt="engagemen"></span>
+                                        </td>
+                                        <td><img class="ellip" src="/home/img/ellipsis.svg" alt="arrow"/></td>
+                                    </tr>
+                                    <tr class="vendor-rw">
+                                        <td><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span>
+                                            <span class="check-icon-circle"></span>
+                                        </td>
+                                        <td>Suresh Chawala<br> <small>sureshchawala@gmail.com</small></td>
+                                        <td>9412343210</td>
+                                        <td>Heydrabad</td>
+                                        <td><button class="button pending">pending</button></td>
+                                        <td><button class="button pending">pending</button></td>
+                                        <td><button class="button pending">pending</button></td>
+                                        <td><span class="mehndi-vendor bell"><img class="ellip" src="/home/img/not.svg" alt="engagemen"></span>
+                                        </td>
+                                        <td><img class="ellip" src="/home/img/ellipsis.svg" alt="arrow"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Add Guest Modal starts here -->
+<div class="modal fade add-guest-pop" id="AddVendor" role="dialog" >
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Invite Vendor</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form ng-submit="inviteVendor()" >
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <div class="form-group">   
+                            <label>Event name</label>
+                            <select class="form-control" ng-model="newVendor.event_id" ng-change="fetchVendor(newVendor.event_id)">
+                                <option ng-repeat="event in project.events" value="{{event._id}}">{{event.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group" ng-if='vendorList'>   
+                            <label>Level 1 service name </label>
+                            <select class="form-control" ng-model="newVendor.vendortype_id" ng-change="fetchService(newVendor.event_id,newVendor.vendortype_id)">
+                                <option ng-repeat="vendor in vendorList" value="{{vendor._id}}">{{vendor.title}}</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group" ng-if='serviceList'>   
+                            <label>Level 2 service name</label>
+                            <select class="form-control" ng-model="newVendor.service_id">
+                                <option ng-repeat="service in serviceList" value="{{service._id}}">{{service.title}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Vendor Name</label>
+                            <input type="text" class="form-control" ng-model="guest.name" placeholder="Raj Chopra">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/user.svg">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">   
+                            <label>Phone</label>
+                            <input type="tel" class="form-control" ng-model="guest.phone" intl-tel-input ng-model="user.phone" intl-tel-input-options="{ preferredCountries: ['in', 'sg','us'] }" ng-required="true">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/tablet.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>Location</label>
+                            <select class="form-control" ng-model="guest.location" >
+                                <option value="{{city.name}}" ng-repeat="city in cities">{{city.name}}</option>
+                            </select>
+                            <!--<input type="text" class="form-control" ng-model="guest.location" placeholder="Heydrabad">-->
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/location.svg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mod-footr">
+                    <button type="submit" class="btn btn-default guest-clr">Add Vendor</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</main>

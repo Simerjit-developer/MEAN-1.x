@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="13px" viewBox="0 0 12 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Add new guest</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Guests" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Groups-dropdown" transform="translate(-1018.000000, -561.000000)">
+            <rect fill="#FAFAFA" x="0" y="0" width="1440" height="1179"></rect>
+            <g id="Group-4-Copy-2" transform="translate(1002.000000, 551.000000)" fill="#FFFFFF">
+                <path d="M22,16 C23.6575,16 25,14.6575 25,13 C25,11.3425 23.6575,10 22,10 C20.3425,10 19,11.3425 19,13 C19,14.6575 20.3425,16 22,16 L22,16 Z M22,18 C19.9975,18 16,19.1166667 16,21.3333333 L16,23 L28,23 L28,21.3333333 C28,19.1166667 24.0025,18 22,18 L22,18 Z" id="Add-new-guest"></path>
+            </g>
+        </g>
+    </g>
+</svg>

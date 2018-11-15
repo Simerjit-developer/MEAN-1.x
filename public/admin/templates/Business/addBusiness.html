@@ -1,0 +1,118 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Business
+            <small>Preview</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Business</a></li>
+            <li class="active">Add</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add Business</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form enctype="multipart/form-data" role="form" ng-submit="add(post)">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="VendorType Title">Vendor Type</label>
+                                <select ng-model='post.vendortype_id' class='form-control' ng-change="vendortypeChanged(post.vendortype_id)">
+                                    <option ng-repeat="vendortype in vendorTypes" value="{{vendortype._id}}">{{vendortype.title}}</option>
+                                </select>
+                                <!--<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">-->
+                            </div>
+                            <div class="form-group">
+                                <label for="Company Name">Company Name</label>
+                                <input type='text' ng-model='post.company_name' name='company_name' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="Established In">Established in</label>
+                                <input type='text' ng-model='post.established_in' name='established_in' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="Company Phone">Company Phone</label>
+                                <input type='text' ng-model='post.company_phone' name='company_phone' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="Starting Price">Starting Price</label>
+                                <input type='text' ng-model='post.starting_price' name='starting_price' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="Services">Services</label>
+                                <!--put in multiple checkbox -->
+                                <label class="check-outer" ng-repeat="service in services track by $index">
+                                    <input type="checkbox" ng-model="post.services[service._id][service.title]" class="form-check-input">
+                                    <span class="checkbox-new"></span>
+                                    {{service.title}}
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="Services">Highlights</label>
+                                <!--put in multiple checkbox -->
+                                <label class="check-outer" ng-repeat="highlight in highlights track by $index">
+                                    <input type="checkbox" ng-model="post.highlights[highlight._id][highlight.title]" class="form-check-input" value="">
+                                    <span class="checkbox-new"></span>
+                                    {{highlight.title}}
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="Primary Email">Primary email id</label>
+                                <input type='text' ng-model='post.primary_email' name='primary_email' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="Address">Address</label>
+                                <input type='text' ng-model='post.address' name='address' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="City">City</label>
+                                <input type='text' ng-model='post.city' name='city' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="State">State</label>
+                                <input type='text' ng-model='post.state' name='state' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="Country">Country</label>
+                                <input type='text' ng-model='post.country' name='country' class='form-control'>
+                            </div>
+                            <div class="form-group">
+                                <label for="Pincode">Pincode</label>
+                                <input type='text' ng-model='post.pincode' name='pincode' class='form-control'>
+                            </div>
+                            <div class="half-input" ng-repeat="n in []| range:awardcount">
+                                <div class="form-group">
+                                    <label>Award name</label>
+                                    <input type="text" class="form-control" ng-model="post.award[n].awardname" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Year</label>
+                                    <input type="text" class="form-control" ng-model="post.award[n].awardyear" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a href="javascript:void(0)" ng-click="awardcount = awardcount+1">+Add more</a>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+</div>

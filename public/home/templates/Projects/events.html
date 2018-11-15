@@ -1,0 +1,40 @@
+<!--<div id="vendor-st3" ng-init="eventcountt = post.no_of_events" class="tab-pane">-->
+<div id="vendor-st3" class="tab-pane">
+    <h5>Events</h5>
+    <div class="half-input" ng-repeat="n in []| range:eventcount">
+        <div class="form-group advance_search_outer">
+            <label>Event name</label>
+            <input type="text" class="form-control" ng-focus="focus[n]=true" ng-model="post.event[n].name" placeholder="Mehndi">
+            <input type="hidden" ng-model="post.event[n].event_id">
+            <ul class="advance_search_inner" ng-show="focus[n]">
+                <li ng-repeat="event in events | filter:post.event[n]" ng-click="post.event[n].name=event.name; focus[n]=false; post.event[n].event_id=event._id">
+                    {{event.name}}
+                </li>
+            </ul>
+        </div>
+        <div class="halfn">
+            <div class="form-group">
+                <label>Start date</label>
+                <md-datepicker md-open-on-focus md-hide-icons="calendar" md-min-date="post.start_date" md-max-date="post.end_date" ng-model="post.event[n].start_date"></md-datepicker>
+                <!--<input type="text" class="form-control" ng-model="post.event[n].start_date" placeholder="20/10/2018">-->
+            </div>
+            <div class="form-group">
+                <label>Duration</label>
+                <select class="form-control" ng-model="post.event[n].duration">
+                    <option value="1 Day">1 Day</option>
+                    <option value="2 Days">2 Days</option>
+                    <option value="3 Days">3 Days</option>
+                </select>
+                <!--<input type="text" class="form-control" ng-model="post.event[n].duration" placeholder="01 day(s)">-->
+            </div>
+        </div>
+    </div>
+    <div class="form-group add-more" >
+        <a href="javascript:void(0)" ng-click="incCount()">+Add more</a>
+    </div>
+    <div class="btn-sec">
+        <button type="button" class="btn-back" ui-sref="createProject.brideandgroom"><i class="fas fa-arrow-left"></i></button>
+        <button type="button" class="btn btn-primary btn-st" ng-click="movetonext('createProject.teams',4)">Continue</button>
+        <button type="button" class="btn-skip" ng-click="movetonext('createProject.teams',4)">Skip this step</button>
+    </div>
+</div>

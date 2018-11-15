@@ -1,0 +1,360 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a>Project</a></li>
+                                <li class="breadcrumb-item"><a>Planner</a></li>
+                                <li class="breadcrumb-item active">{{project.name}}</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="team-list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 border-sides">
+                        <div ng-include="'/home/templates/Planner/sidebar.html'"></div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="clients-section">
+                            <div class="client-head-section">
+                                <h6>Clients</h6>
+                                <div class="members client">
+                                    <a ng-if="!assigned_project" style="cursor: pointer;" class="add-member" class="btn btn-primary btn-planner" data-toggle="modal" data-target="#addClientModal"><img class="clients-edit" src="/home/img/user-add-client.svg" alt="down arrow">&nbsp; Add client</a>
+                                </div>
+                            </div>
+                            <div class="allocation-sec clients-card-sec">
+                                <ul class="card-sec" ng-repeat="(index,client) in all_clients">
+                                    <li class="clients-list">
+                                        <span class="client-icons">
+                                            {{client.name| nickname}}
+                                        </span>
+                                        <h5>{{client.name}}</h5>
+                                    </li>
+                                    <li>{{client.email}}</li>
+                                    <li>{{client.phone}}</li>
+                                    <li>{{client.location}}</li>
+                                    <li ng-if="!assigned_project">
+                                        <button ng-if="client.status == 0" class="button pending-app" ng-click="sendRequest(client)" type="button" data-hover="Send download Request" data-active=""><span>Pending app download</span></button>
+                                        <button ng-if="client.status == 1" class="button pending-app color-next-1" data-hover="App downloaded" data-active="" type="button"><span>App downloaded</span></button>
+                                        <button ng-if="client.status == 2 || client.status == 3" class="button pending-app color-next" ng-click="resendRequest(client)" data-hover="Resend Request" data-active="" type="button"><span>Request Sent</span></button>
+                                        <!--button class="button pending-app color-next" type="button" data-hover="Download request sent" data-active=""><span>Resend Request</span></button>
+                                        <button class="button pending-app color-next-1" type="button" data-hover="Download request sent" data-active=""><span>App downloaded</span></button>
+                                        <button class="button pending-app" type="button" data-hover="Download request sent" data-active=""><span>Send download Request</span></button-->
+                                        
+                                        
+                                    </li>
+                                    <li ng-if="!assigned_project">
+                                        <div class="dropdown demo-project clients-drop">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                                <span class="down-arr-icon white"><img class="exclamation" src="/home/img/more.svg" alt=""></span></button>
+                                            <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute;transform: translate3d(0px, 25px, 0px);top: 0px;left: 0px;will-change: transform;">
+                                                <li ng-click="findById(client._id)" data-toggle="modal" data-target="#editClientModal_{{index}}"><span><img class="clients-edit" src="/home/img/client-edit.svg" alt="down arrow"> &nbsp; Edit Client</span></li>
+                                                <li data-toggle="modal" data-target="#guestUploadModal_{{index}}"><span><img class="clients-edit" src="/home/img/usergroup.svg" alt="down arrow"> &nbsp; Allow guest upload</span></li>
+                                                <li data-toggle="modal" data-target="#shareMetricsModal_{{index}}"><span><img class="clients-edit" src="/home/img/client-chart.svg" alt="down arrow"> &nbsp; Share metrics</span></li>
+                                                <li ng-click="removeById(client._id)"><span><img class="clients-edit" src="/home/img/delete-client.svg" alt="down arrow"> &nbsp; Delete Client</span></li>													
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <!--  Edit Client Modal -->
+                                    <div class="modal fade add-guest-pop" id="editClientModal_{{index}}" role="dialog">
+                                        <div class="modal-dialog">					
+                                            <!-- Modal content-->
+                                            <form ng-submit="updateById(index)">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Add Client</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="add-member-modl">
+                                                            <div class="form-group">
+                                                                <label> Name</label>
+                                                                <input type="text" ng-model="my_client.name" class="form-control" placeholder="Raj Chopra">
+                                                                <div class="modl-img">
+                                                                    <img class="" ng-src="home/img/user.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">   
+                                                                <label>Email Id</label>
+                                                                <input ng-model="my_client.email" type="text" class="form-control" placeholder="raj.chopra@company.com">
+                                                                <div class="modl-img">
+                                                                    <img class="" ng-src="home/img/emails.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">   
+                                                                <label>Phone</label>
+                                                                <input type="tel" name="phone" placeholder="9324331312" intl-tel-input ng-model="my_client.phone" intl-tel-input-options="{ preferredCountries: ['in', 'sg','us'] }" class="form-control" ng-required="true" >
+                                                                <!--<input type="text" class="form-control" placeholder="91-9324331312">-->
+                                                                <div class="modl-img">
+                                                                    <img class="" ng-src="home/img/tablet.svg">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">   
+                                                                <label>Location</label>
+                                                                <select required="true" class="form-control" ng-model="my_client.location">
+                                                                    <option ng-repeat="city in cities">{{city.name}}</option>
+                                                                </select>
+                                                                <!--<input type="text" class="form-control" placeholder="Heydrabad">-->
+                                                                <div class="modl-img">
+                                                                    <img class="" ng-src="home/img/location.svg">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer mod-footr">
+                                                        <button type="submit" class="btn btn-default guest-clr clent-1">Update Client</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade add-guest-pop" id="guestUploadModal_{{index}}" role="dialog">
+                                        <div class="modal-dialog">					
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Allow guest upload</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">   
+                                                        <h6>Select groups to give upload access</h6>
+                                                        <ul class="client-groups">
+                                                            <li>
+                                                                <input type="checkbox" class="form-check-input" ng-model="guest_access.upload_access_groups['Family']">
+                                                                <i class="custom-check"></i>
+                                                                Family
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" class="form-check-input" ng-model="guest_access.upload_access_groups['Friends']">
+                                                                <i class="custom-check"></i>
+                                                                Friends
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" class="form-check-input" ng-model="guest_access.upload_access_groups['Acquaintances']">
+                                                                <i class="custom-check"></i>
+                                                                Acquaintances
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" class="form-check-input" ng-model="guest_access.upload_access_groups['Others']">
+                                                                <i class="custom-check"></i> 
+                                                                Others
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="form-group">   
+                                                        <label>Add creation of groups</label>
+                                                        <ul class="client-groups creation">
+                                                            <li>
+                                                                <div class="radio">
+                                                                    <input ng-model="guest_access.group_creation" value="yes" id="radio-1" name="radio" type="radio" checked>
+                                                                    <label for="radio-1" class="radio-label">Yes</label>
+                                                                </div>
+
+                                                                <div class="radio">
+                                                                    <input ng-model="guest_access.group_creation" value="no" id="radio-2" name="radio" type="radio">
+                                                                    <label for="radio-2" class="radio-label">No</label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer mod-footr">
+                                                    <button type="button" class="btn btn-default guest-clr clent-1" ng-click="allowGuestUpload(client._id,index)">Give access</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal fade add-guest-pop" id="shareMetricsModal_{{index}}" role="dialog">
+                                        <div class="modal-dialog">					
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Share metrics</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">   
+                                                        <h6>Select metrics to share with the client</h6>
+                                                        <ul class="client-groups">
+                                                            <li>
+                                                                <input ng-model="guest_access.share['Task']" type="checkbox" class="form-check-input" value="">
+                                                                <i class="custom-check"></i>
+                                                                Task completion
+                                                            </li>
+                                                            <li>
+                                                                <input ng-model="guest_access.share['Budget']" type="checkbox" class="form-check-input" value="">
+                                                                <i class="custom-check"></i>
+                                                                Budget and expenses
+                                                            </li>
+                                                            <li>
+                                                                <input ng-model="guest_access.share['Team']" type="checkbox" class="form-check-input" value="">
+                                                                <i class="custom-check"></i> 
+                                                                Team performance
+                                                            </li>
+                                                            <li>
+                                                                <input ng-model="guest_access.share['Job']" type="checkbox" class="form-check-input" value="">
+                                                                <i class="custom-check"></i> 
+                                                                Job performance
+                                                            </li>
+                                                            <li>
+                                                                <input ng-model="guest_access.share['Vendor']" type="checkbox" class="form-check-input" value="">
+                                                                <i class="custom-check"></i> 
+                                                                Vendor performance
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer mod-footr">
+                                                    <button type="button" class="btn btn-default guest-clr clent-1" ng-click="shareMetrics(client._id,index)">Share metrics</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </ul>
+
+                                <!--
+                                <ul class="card-sec">
+                                    <li class="clients-list">
+                                        <span class="client-icons">
+                                            SC
+                                        </span>
+                                        <h5>Suresh Chawala</h5>
+                                    </li>
+                                    <li>Suresh.ch@gmail.com</li>
+                                    <li>9433122133</li>
+                                    <li>Heydrabad</li>
+                                    <li><button class="button pending-app" type="button" data-hover="Download request sent" data-active=""><span>Send download Request</span></button></li>
+                                    <li>
+                                        <div class="dropdown demo-project clients-drop">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                                <span class="down-arr-icon white"><img class="exclamation" src="/home/img/more.svg" alt=""></span></button>
+                                            <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute;transform: translate3d(0px, 25px, 0px);top: 0px;left: 0px;will-change: transform;">
+                                                <li><span><img class="clients-edit" src="/home/img/client-edit.svg" alt="down arrow"> &nbsp; Edit Client</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/usergroup.svg" alt="down arrow"> &nbsp; Allow guest upload</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/client-chart.svg" alt="down arrow"> &nbsp; Share metrics</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/delete-client.svg" alt="down arrow"> &nbsp; Delete Client</span></li>													
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="card-sec">
+                                    <li class="clients-list">
+                                        <span class="client-icons icons-color">
+                                            SC
+                                        </span>
+                                        <h5>Suresh Chawala</h5>
+                                    </li>
+                                    <li>Suresh.ch@gmail.com</li>
+                                    <li>9433122133</li>
+                                    <li>Heydrabad</li>
+                                    <li><button class="button pending-app color-next-1" type="button" data-hover="Download request sent" data-active=""><span>App downloaded</span></button></li>
+                                    <li>
+                                        <div class="dropdown demo-project clients-drop">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                                <span class="down-arr-icon white"><img class="exclamation" src="/home/img/more.svg" alt=""></span></button>
+                                            <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute;transform: translate3d(0px, 25px, 0px);top: 0px;left: 0px;will-change: transform;">
+                                                <li><span><img class="clients-edit" src="/home/img/client-edit.svg" alt="down arrow"> &nbsp; Edit Client</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/usergroup.svg" alt="down arrow"> &nbsp; Allow guest upload</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/client-chart.svg" alt="down arrow"> &nbsp; Share metrics</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/delete-client.svg" alt="down arrow"> &nbsp; Delete Client</span></li>													
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="card-sec">
+                                    <li class="clients-list">
+                                        <span class="client-icons icons-color-1">
+                                            SC
+                                        </span>
+                                        <h5>Suresh Chawala</h5>
+                                    </li>
+                                    <li>Suresh.ch@gmail.com</li>
+                                    <li>9433122133</li>
+                                    <li>Heydrabad</li>
+                                    <li><button class="button pending-app color-next" type="button" data-hover="Download request sent" data-active=""><span>Resend Request</span></button></li>
+                                    <li class="action-clients">
+                                        <div class="dropdown demo-project clients-drop">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                                <span class="down-arr-icon white"><img class="exclamation" src="/home/img/more.svg" alt=""></span></button>
+                                            <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute;transform: translate3d(0px, 25px, 0px);top: 0px;left: 0px;will-change: transform;">
+                                                <li><span><img class="clients-edit" src="/home/img/client-edit.svg" alt="down arrow"> &nbsp; Edit Client</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/usergroup.svg" alt="down arrow"> &nbsp; Allow guest upload</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/client-chart.svg" alt="down arrow"> &nbsp; Share metrics</span></li>
+                                                <li><span><img class="clients-edit" src="/home/img/delete-client.svg" alt="down arrow"> &nbsp; Delete Client</span></li>													
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="modal fade add-guest-pop" id="addClientModal" role="dialog">
+        <div class="modal-dialog">					
+            <!-- Modal content-->
+            <form ng-submit="addClient()">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Add Client</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="add-member-modl">
+                            <div class="form-group">
+                                <label> Name</label>
+                                <input type="text" ng-model="data.name" class="form-control" placeholder="Raj Chopra">
+                                <div class="modl-img">
+                                    <img class="" ng-src="home/img/user.svg">
+                                </div>
+                            </div>
+                            <div class="form-group">   
+                                <label>Email Id</label>
+                                <input ng-model="data.email" type="text" class="form-control" placeholder="raj.chopra@company.com">
+                                <div class="modl-img">
+                                    <img class="" ng-src="home/img/emails.svg">
+                                </div>
+                            </div>
+                            <div class="form-group">   
+                                <label>Phone</label>
+                                <input type="tel" name="phone" placeholder="9324331312" intl-tel-input ng-model="data.phone" intl-tel-input-options="{ preferredCountries: ['in', 'sg','us'] }" class="form-control" ng-required="true" >
+                                <!--<input type="text" class="form-control" placeholder="91-9324331312">-->
+                                <div class="modl-img">
+                                    <img class="" ng-src="home/img/tablet.svg">
+                                </div>
+                            </div>
+                            <div class="form-group">   
+                                <label>Location</label>
+                                <select required="true" class="form-control" ng-model="data.location">
+                                    <option ng-repeat="city in cities">{{city.name}}</option>
+                                </select>
+                                <!--<input type="text" class="form-control" placeholder="Heydrabad">-->
+                                <div class="modl-img">
+                                    <img class="" ng-src="home/img/location.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mod-footr">
+                        <button type="submit" class="btn btn-default guest-clr clent-1">Add Client</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>

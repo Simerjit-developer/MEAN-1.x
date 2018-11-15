@@ -1,0 +1,92 @@
+<main>
+    <div ng-include="'/home/templates/headerguestView.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a>Home</a></li>
+                                <li class="breadcrumb-item"><a>Events</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+
+        <section class="result-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 m-auto col-sm-12">
+                        <div class="ivitation-info" ng-if="onGoingEvents.length>0">
+                            <div class="invite-head events">
+                                <ul>
+                                    <li><span class="unread"></span></li>
+                                    <li><h4>Ongoing Events</h4></li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4" style="margin-bottom: 10px;" ng-repeat="singleEvent in onGoingEvents">
+                                    <div class="evnt-box">
+                                        <ul class="reception-events">
+                                            <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                            <li><span class="budget-level">{{singleEvent.event.name}}</span><p class="budget-level-1">{{singleEvent.project_details.groom_name}} and {{singleEvent.project_details.bride_name}}'s</p></li>
+
+                                        </ul>
+                                        <p class="evnt-txt-desc">{{singleEvent.event.description}}</p>
+                                        <div ng-if="singleEvent.event_data.accomodation_request==true" class="provide-accomd">
+                                            <a class="accomd-detail" ui-sref="eventsdetail({id:singleEvent.invitation_id,event_id:singleEvent.event._id})">Provide accommodation details</a>
+                                        </div>
+                                        <div ng-if="singleEvent.event_data.food_restrictions_request==true" class="provide-accomd">
+                                            <a class="food-detail" ui-sref="eventsdetail({id:singleEvent.invitation_id,event_id:singleEvent.event._id})">Provide food details</a>
+                                        </div>
+                                        <div class="event-loc">
+                                            <ul>
+                                                <li>{{singleEvent.event.location}}</li>
+                                                <li style="text-align: right;">{{singleEvent.event.start_date | date}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ivitation-info" ng-if="upComingEvents.length>0">
+                            <div class="invite-head events">
+                                <ul>
+                                    <li><span class="unread"></span></li>
+                                    <li><h4>Upcoming Events</h4></li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4" style="margin-bottom: 10px;" ng-repeat="singleEvent in upComingEvents">
+                                    <div class="evnt-box">
+                                        <ul class="reception-events">
+                                            <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                            <li><span class="budget-level">{{singleEvent.event.name}}</span><p class="budget-level-1">{{singleEvent.project_details.groom_name}} and {{singleEvent.project_details.bride_name}}'s</p></li>
+
+                                        </ul>
+                                        <p class="evnt-txt-desc">{{singleEvent.event.description}}</p>
+                                        <div ng-if="singleEvent.event_data.accomodation_request==true" class="provide-accomd">
+                                            <a class="accomd-detail" ui-sref="eventsdetail({id:singleEvent.invitation_id,event_id:singleEvent.event._id})">Provide accommodation details</a>
+                                        </div>
+                                        <div ng-if="singleEvent.event_data.food_restrictions_request==true" class="provide-accomd">
+                                            <a class="food-detail" ui-sref="eventsdetail({id:singleEvent.invitation_id,event_id:singleEvent.event._id})">Provide food details</a>
+                                        </div>
+                                        <div class="event-loc">
+                                            <ul>
+                                                <li>{{singleEvent.event.location}}</li>
+                                                <li style="text-align: right;">{{singleEvent.event.start_date | date}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--/.Result-Sec End Here -->
+    </section><!--/.content-sec-->
+</main>

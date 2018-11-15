@@ -1,0 +1,1141 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <section class="st_wrapper" ng-init="view = 'list'">
+        <section class="project-listing">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="project-head-title">
+                            <ul class="listing">
+                                <li ng-click="my_projects()">My Projects</li>
+                                <li><a ng-click="assigned_projects()">Assigned Projects</a></li>
+                                <li><a ui-sref="createProject.basicinfo"><img class="shape-imgg" ng-src="home/img/shape.svg"/></a></li>
+                            </ul>
+                        </div>
+                        <div class="projectlist-tab">
+                            <div class="list-filters">
+                                <form>
+                                    <input type="text" placeholder="Search..." required="">
+                                    <select class="short-filter">
+                                        <option value="Sort by: Highest Rating first">Filter by:Client</option>
+                                    </select>
+                                    <select class="short-filter">
+                                        <option value="Sort by: Highest Rating first">Sort by:Date</option>
+                                    </select>
+                                    <div class="card-list-view">
+                                        <a style="cursor:pointer;" ng-click="view = 'list'; selected_view = 'list'" ng-class="{red_selected: selected_view == 'list'}">
+                                            <ng-include src="'/home/img/listview.svg'" />
+                                            <!--<img class="shape-imgg" ng-src="home/img/listview.svg"/>-->
+                                        </a>
+                                        <a style="cursor:pointer;" ng-click="view = 'grid';selected_view = 'grid'" ng-class="{red_selected: selected_view == 'grid'}">
+                                            <ng-include src="'/home/img/cardview.svg'" />
+                                            <!--<img class="shape-imgg" ng-src="home/img/cardview.svg"/>-->
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div ng-cloak="" class="fff">
+                                <md-content>
+                                    <md-tabs md-dynamic-height="" md-border-bottom="">
+                                        <md-tab label="All({{projects.length}})">
+                                            <md-content class="md-padding">
+                                                <table ng-if="view == 'list'" id="example2" class="table  table-hover dataTable project-table" role="grid" aria-describedby="example2_info">
+                                                    <thead>
+                                                        <tr role="row " class="header"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"><div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">PROJECT NAME</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">CLIENT</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">START DATE</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">LOCATION</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">DETAILS</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">BUDGET</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">TEAM</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">ACTIONS</th></tr>
+                                                    </thead>
+                                                    <tbody>                
+                                                        <tr role="row" class="odd" ng-repeat="project in projects">
+                                                            <td class="sorting_1">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span>{{project.name}}</span></td>
+                                                            <td class="indicate"><span class="dot high ">{{project.client.name}}</span>
+                                                            </td>
+                                                            <td><span>{{project.start_date| date: 'dd/MM/y'}}</span></td>
+                                                            <td><span>{{project.client.location}}</span></td>
+                                                            <td>
+                                                                <!--<span class="complete">80% Complete</span>-->
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group circle-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="dot-space-1"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <span class="bubble">
+                                                                            <li><h6>Projects in Budget</h6></li>
+                                                                            <li><a href="#">In Budget</a></li>
+                                                                            <li><a href="#">Slightly over Budget</a></li>
+                                                                            <li><a href="#">Over Budget</a></li>
+                                                                        </span>
+                                                                    </ul>
+                                                                </div>{{project.budget}}
+                                                            </td>
+                                                            <td> <div class="jsbullet">
+                                                                    <span class="team color{{$index + 1}}" ng-repeat="team in project.team| limitTo : 3 track by $index ">{{team.name| nickname:" " | uppercase}}</span>
+                                                                    <span ng-if="project.team.length - 3 > 0" class="team color4">+{{project.team.length - 3}}</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="d-flex" ng-if="assigned_projects_active==true">
+                                                                <a class="btn" ng-if='project.my_permissions.allow_guest_upload' title="Add Guests" ui-sref="project_input({id:project._id,view:'guest'})"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn" ng-if='project.my_permissions.share_metrics' ui-sref="taskList({id:project._id})"><img src="/home/img/clipboard.png"></a></li>
+                                                            </td>
+                                                            <td class="d-flex" ng-if="assigned_projects_active==false">
+                                                                <a class="btn" title="Add Team Member" ui-sref="teamList({id:project._id})"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn" title="Add Task" ui-sref="taskList({id:project._id})"> <img src="home/img/menuplus.png"></a>
+                                                                <a class="btn" title="Open Planner" ui-sref="teamList({id:project._id})"> <img src="home/img/clipboard.png"></a>												  
+                                                                <div title="Click to see actions" class="btn-group circle-btn card-details">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <img src="home/img/threedots.png">
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li>
+                                                                            <a class="btn btn-primary rename-user" data-toggle="modal" ng-click="renameproject._id = project._id; renameproject.name = project.name" data-target="#myModal"><img class="card-edit-icon" src="/home/img/rename-icon.svg">Rename</a>
+                                                                        </li>
+                                                                        <li><a ui-sref="project_input({id:project._id})"><img class="card-edit-icon" src="/home/img/editedit.svg">Update Details</a></li>
+                                                                        <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/clipboard.png">Open Planner</a></li>
+                                                                        <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/task-add-1.svg">Add a Task</a></li>
+                                                                        <li><a ui-sref="teamList({id:project._id})"><img class="card-edit-icon" src="/home/img/add-teammate.svg">Add a Teammate</a></li>
+                                                                        <li><a ng-click = "deletePost(project.name, project._id)"><img class="card-edit-icon" src="/home/img/delete-icon.svg"><span class="del-color">Delete Project</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>            
+                                                </table>
+                                                <div class="row" ng-if="view == 'list'">
+                                                    <div class="col-sm-5 col-12">
+                                                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{projects.length}} of {{projects.length}} <1></div>
+                                                    </div>
+                                                </div>
+                                                <!-- Grid View Starts here -->
+                                                <div class="grid-view-listing" ng-if="view == 'grid'">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-3" ng-repeat="project in projects">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+                                                                        <div ng-if="assigned_projects_active==false" class="btn-group circle-btn card-details" title="Click to see actions">
+                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                                    <img class="more" ng-src="home/img/more.svg"/>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu">
+                                                                                <li>
+                                                                                    <a class="btn btn-primary rename-user" data-toggle="modal" ng-click="renameproject._id=project._id; renameproject.name=project.name" data-target="#myModal"><img class="card-edit-icon" src="/home/img/rename-icon.svg">Rename</a>
+                                                                                </li>
+                                                                                <li><a ui-sref="project_input({id:project._id})"><img class="card-edit-icon" src="/home/img/editedit.svg">Update Details</a></li>
+                                                                                <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/clipboard.png">Open Planner</a></li>
+                                                                                <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/task-add-1.svg">Add a Task</a></li>
+                                                                                <li><a ui-sref="teamList({id:project._id})"><img class="card-edit-icon" src="/home/img/add-teammate.svg">Add a Teammate</a></li>
+                                                                                <li><a ng-click = "deletePost(project.name,project._id)"><img class="card-edit-icon" src="/home/img/delete-icon.svg"><span class="del-color">Delete Project</span></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <!--<a href="#"><img class="more" ng-src="home/img/more.svg"/></a>-->
+
+                                                                        <div class="box-head">
+                                                                            <h5><a ui-sref="viewProject({id:project._id})">{{project.name}}</a></h5>
+                                                                            <span>Client: {{project.client.name}}</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>{{project.start_date| date: 'dd/MM/y'}}</p></li>
+                                                                                <li><span>Location</span><p>{{project.client.location}}</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color{{$index + 1}}" ng-repeat="team in project.team| limitTo : 3 track by $index ">{{team.name| nickname:" " | uppercase}}</span>
+                                                                            <span ng-if="project.team.length - 3 > 0" class="team color4">+{{project.team.length - 3}}</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <!--ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr">80%</span>
+                                                                            </li>
+                                                                        </ul-->
+                                                                        <div class="progress progress-new progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box-create-box">
+                                                                        <div class="create-project-box">
+                                                                            <a ui-sref="createProject.basicinfo">
+                                                                                <div class="create-pro">
+                                                                                    <img class="plus-shape-icon" src="home/img/shape-1.svg">
+                                                                                </div>
+
+                                                                                <h5>Create New Project</h5>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="Active({{length.active}})">
+                                            <md-content class="md-padding">
+                                                <table ng-if="view == 'list'" id="example2" class="table  table-hover dataTable project-table" role="grid" aria-describedby="example2_info">
+                                                    <thead>
+                                                        <tr role="row " class="header"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"><div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">PROJECT NAME</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">CLIENT</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">START DATE</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">LOCATION</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">DETAILS</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">BUDGET</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">TEAM</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">ACTION</th></tr>
+                                                    </thead>
+                                                    <tbody>                
+                                                        <tr role="row" class="odd" ng-repeat="project in projects" ng-if="project.status == 1">
+                                                            <td class="sorting_1">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span>{{project.name}}</span></td>
+                                                            <td class="indicate"><span class="dot high ">{{project.client.name}}</span>
+                                                            </td>
+                                                            <td><span>{{project.start_date| date: 'dd/MM/y'}}</span></td>
+                                                            <td><span>{{project.client.location}}</span></td>
+                                                            <td>
+                                                                <!--<span class="complete">80% Complete</span>-->
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group circle-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="dot-space-1"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <span class="bubble">
+                                                                            <li><h6>Projects in Budget</h6></li>
+                                                                            <li><a href="#">In Budget</a></li>
+                                                                            <li><a href="#">Slightly over Budget</a></li>
+                                                                            <li><a href="#">Over Budget</a></li>
+                                                                        </span>
+                                                                    </ul>
+                                                                </div>{{project.budget}}
+                                                            </td>
+                                                            <td> <div class="jsbullet">
+                                                                    <span class="team color{{$index + 1}}" ng-repeat="team in project.team| limitTo : 3 track by $index ">{{team.name| nickname:" " | uppercase}}</span>
+                                                                    <span ng-if="project.team.length - 3 > 0" class="team color4">+{{project.team.length - 3}}</span>
+                                                                </div></td>
+                                                            <td class="d-flex" ng-if="assigned_projects_active==true"></td>
+                                                            <td class="d-flex" ng-if="assigned_projects_active==false">
+                                                                <a class="btn" title="Add Team Member" ui-sref="teamList({id:project._id})"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn" title="Add Task" ui-sref="taskList({id:project._id})"> <img src="home/img/menuplus.png"></a>
+                                                                <a class="btn" title="Open Planner" ui-sref="teamList({id:project._id})"> <img src="home/img/clipboard.png"></a>												  
+                                                                <div title="Click to see actions" class="btn-group circle-btn card-details">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <img src="home/img/threedots.png">
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li>
+                                                                            <a class="btn btn-primary rename-user" data-toggle="modal" ng-click="renameproject._id = project._id; renameproject.name = project.name" data-target="#myModal"><img class="card-edit-icon" src="/home/img/rename-icon.svg">Rename</a>
+                                                                        </li>
+                                                                        <li><a ui-sref="project_input({id:project._id})"><img class="card-edit-icon" src="/home/img/editedit.svg">Update Details</a></li>
+                                                                        <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/clipboard.png">Open Planner</a></li>
+                                                                        <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/task-add-1.svg">Add a Task</a></li>
+                                                                        <li><a ui-sref="teamList({id:project._id})"><img class="card-edit-icon" src="/home/img/add-teammate.svg">Add a Teammate</a></li>
+                                                                        <li><a ng-click = "deletePost(project.name, project._id)"><img class="card-edit-icon" src="/home/img/delete-icon.svg"><span class="del-color">Delete Project</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!--tr role="row" class="odd">
+                                                            <td class="sorting_1">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span>Taj Wedding</span></td>
+                                                            <td class="indicate"><span class="dot high ">Ray Croc</span>
+                                                            </td>
+                                                            <td><span>Heyderabad</span></td>
+                                                            <td><span>80% Completed</span></td>
+                                                            <td><span class="complete-1">60% Complete</span></td>
+                                                            <td>
+                                                                <div class="btn-group circle-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="dot-space"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <span class="bubble">
+                                                                            <li><h6>Projects in Budget</h6></li>
+                                                                            <li><a href="#">In Budget</a></li>
+                                                                            <li><a href="#">Slightly over Budget</a></li>
+                                                                            <li><a href="#">Over Budget</a></li>
+                                                                        </span>
+                                                                    </ul>
+                                                                </div>1,20,000
+                                                            </td>
+                                                            <td> <div class="jsbullet">
+                                                                    <span class="team color1">JS</span>
+                                                                    <span class="team color2">MS</span>
+                                                                    <span class="team color3">SS</span>
+                                                                    <span class="team color4">+1</span>
+                                                                </div></td>
+                                                            <td class="d-flex">
+                                                                <a class="btn"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn"> <img src="home/img/menuplus.png"></a>
+                                                                <a class="btn"> <img src="home/img/clipboard.png"></a>
+                                                                <a class="btn-1"> <img src="home/img/threedots.png"></a>													  
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="sorting_1">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span>Taj Wedding</span></td>
+                                                            <td class="indicate"><span class="dot high ">Ray Croc</span>
+                                                            </td>
+                                                            <td><span>Heyderabad</span></td>
+                                                            <td><span>80% Completed</span></td>
+                                                            <td><span class="complete">80% Complete</span></td>
+                                                            <td>
+                                                                <div class="btn-group circle-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="dot-space-2"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <span class="bubble">
+                                                                            <li><h6>Projects in Budget</h6></li>
+                                                                            <li><a href="#">In Budget</a></li>
+                                                                            <li><a href="#">Slightly over Budget</a></li>
+                                                                            <li><a href="#">Over Budget</a></li>
+                                                                        </span>
+                                                                    </ul>
+                                                                </div>1,20,000
+                                                            </td>
+                                                            <td> <div class="jsbullet">
+                                                                    <span class="team color1">JS</span>
+                                                                    <span class="team color2">MS</span>
+                                                                    <span class="team color3">SS</span>
+                                                                    <span class="team color4">+1</span>
+                                                                </div></td>
+                                                            <td class="d-flex">
+                                                                <a class="btn"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn"> <img src="home/img/menuplus.png"></a>
+                                                                <a class="btn"> <img src="home/img/clipboard.png"></a>
+                                                                <a class="btn-1"> <img src="home/img/threedots.png"></a>					
+                                                            </td>
+                                                        </tr>
+                                                        <tr role="row" class="odd">
+                                                            <td class="sorting_1">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span>Taj Wedding</span></td>
+                                                            <td class="indicate"><span class="dot high ">Ray Croc</span>
+                                                            </td>
+                                                            <td><span>Heyderabad</span></td>
+                                                            <td><span>80% Completed</span></td>
+                                                            <td><span class="complete-1">60% Complete</span></td>
+                                                            <td>
+                                                                <div class="btn-group circle-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="dot-space-1"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <span class="bubble">
+                                                                            <li><h6>Projects in Budget</h6></li>
+                                                                            <li><a href="#">In Budget</a></li>
+                                                                            <li><a href="#">Slightly over Budget</a></li>
+                                                                            <li><a href="#">Over Budget</a></li>
+                                                                        </span>
+                                                                    </ul>
+                                                                </div>1,20,000
+                                                            </td>
+                                                            <td>
+                                                                <div class="jsbullet">
+                                                                    <span class="team color1">JS</span>
+                                                                    <span class="team color2">MS</span>
+                                                                    <span class="team color3">SS</span>
+                                                                    <span class="team color4">+1</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="d-flex">
+                                                                <a class="btn"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn"> <img src="home/img/menuplus.png"></a>
+                                                                <a class="btn"> <img src="home/img/clipboard.png"></a>
+                                                                <a class="btn-1"> <img src="home/img/threedots.png"></a>
+                                                            </td>
+                                                        </tr><tr role="row" class="odd">
+                                                            <td class="sorting_1">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span>Taj Wedding</span></td>
+                                                            <td class="indicate"><span class="dot high ">Ray Croc</span>
+                                                            </td>
+                                                            <td><span>Heyderabad</span></td>
+                                                            <td><span>80% Completed</span></td>
+                                                            <td><span class="complete">80% Complete</span></td>
+                                                            <td>
+                                                                <div class="btn-group circle-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="dot-space"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <span class="bubble">
+                                                                            <li><h6>Projects in Budget</h6></li>
+                                                                            <li><a href="#">In Budget</a></li>
+                                                                            <li><a href="#">Slightly over Budget</a></li>
+                                                                            <li><a href="#">Over Budget</a></li>
+                                                                        </span>
+                                                                    </ul>
+                                                                </div>1,20,000
+                                                            </td>
+                                                            <td>
+                                                                <div class="jsbullet">
+                                                                    <span class="team color1">JS</span>
+                                                                    <span class="team color2">MS</span>
+                                                                    <span class="team color3">SS</span>
+                                                                    <span class="team color4">+1</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="d-flex">
+                                                                <a class="btn"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn"> <img src="home/img/menuplus.png"></a>
+                                                                <a class="btn"> <img src="home/img/clipboard.png"></a>	
+                                                                <a class="btn-1"> <img src="home/img/threedots.png"></a>
+                                                            </td>
+                                                        </tr-->
+                                                    </tbody>            
+                                                </table>
+                                                <div class="row" ng-if="view == 'list'">
+                                                    <div class="col-sm-5 col-12">
+                                                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{length.active}} of {{length.active}} <1></div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- Grid View Starts here -->
+                                                <div class="grid-view-listing" ng-if="view == 'grid'" >
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-3" ng-repeat="project in projects" ng-if="project.status == 1">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+<!--                                                                        <div class="icons-image">
+                                                                            <a href="#"> <img class="more-circle" src="home/img/more.svg"></a>	
+                                                                        </div>-->
+                                                                        <div ng-if="assigned_projects_active==false" class="btn-group circle-btn card-details" title="Click to see actions">
+                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                                    <img class="more" ng-src="home/img/more.svg"/>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu">
+                                                                                <li>
+                                                                                    <a class="btn btn-primary rename-user" data-toggle="modal" ng-click="renameproject._id=project._id; renameproject.name=project.name" data-target="#myModal"><img class="card-edit-icon" src="/home/img/rename-icon.svg">Rename</a>
+                                                                                </li>
+                                                                                <li><a ui-sref="project_input({id:project._id})"><img class="card-edit-icon" src="/home/img/editedit.svg">Update Details</a></li>
+                                                                                <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/clipboard.png">Open Planner</a></li>
+                                                                                <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/task-add-1.svg">Add a Task</a></li>
+                                                                                <li><a ui-sref="teamList({id:project._id})"><img class="card-edit-icon" src="/home/img/add-teammate.svg">Add a Teammate</a></li>
+                                                                                <li><a ng-click = "deletePost(project.name,project._id)"><img class="card-edit-icon" src="/home/img/delete-icon.svg"><span class="del-color">Delete Project</span></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-head">
+                                                                            <h5>{{project.name}}</h5>
+                                                                            <span>Client: {{project.client.name}}</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>{{project.start_date| date: 'dd/MM/y'}}</p></li>
+                                                                                <li><span>Location</span><p>{{project.client.location}}</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color{{$index + 1}}" ng-repeat="team in project.team| limitTo : 3 track by $index ">{{team.name| nickname:" " | uppercase}}</span>
+                                                                            <span ng-if="project.team.length - 3 > 0" class="team color4">+{{project.team.length - 3}}</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <!--ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr">80%</span>
+                                                                            </li>
+                                                                        </ul-->
+                                                                        <div class="progress progress-new progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box-create-box">
+                                                                        <div class="create-project-box">
+                                                                            <a ui-sref="createProject.basicinfo">
+                                                                                <div class="create-pro">
+                                                                                    <img class="plus-shape-icon" src="home/img/shape-1.svg">
+                                                                                </div>
+
+                                                                                <h5>Create New Project</h5>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="Completed({{length.completed}})">
+                                            <md-content class="md-padding">
+                                                <table ng-if="view == 'list'" id="example2" class="table  table-hover dataTable project-table" role="grid" aria-describedby="example2_info">
+                                                    <thead>
+                                                        <tr role="row " class="header"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"><div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">PROJECT NAME</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">CLIENT</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">START DATE</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">LOCATION</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">DETAILS</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">BUDGET</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">TEAM</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">ACTION</th></tr>
+                                                    </thead>
+                                                    <tbody>                
+                                                        <tr role="row" class="odd" ng-repeat="project in projects" ng-if="project.status == 2">
+                                                            <td class="sorting_1">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span>{{project.name}}</span></td>
+                                                            <td class="indicate"><span class="dot high ">{{project.client.name}}</span>
+                                                            </td>
+                                                            <td><span>{{project.start_date| date: 'dd/MM/y'}}</span></td>
+                                                            <td><span>{{project.client.location}}</span></td>
+                                                            <td>
+                                                                <!--<span class="complete">80% Complete</span>-->
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group circle-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="dot-space-1"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <span class="bubble">
+                                                                            <li><h6>Projects in Budget</h6></li>
+                                                                            <li><a href="#">In Budget</a></li>
+                                                                            <li><a href="#">Slightly over Budget</a></li>
+                                                                            <li><a href="#">Over Budget</a></li>
+                                                                        </span>
+                                                                    </ul>
+                                                                </div>{{project.budget}}
+                                                            </td>
+                                                            <td> <div class="jsbullet">
+                                                                    <span class="team color{{$index + 1}}" ng-repeat="team in project.team| limitTo : 3 track by $index ">{{team.name| nickname:" " | uppercase}}</span>
+                                                                    <span ng-if="project.team.length - 3 > 0" class="team color4">+{{project.team.length - 3}}</span>
+                                                                </div></td>
+                                                            <td class="d-flex" ng-if="assigned_projects_active==true"></td>
+                                                            <td class="d-flex" ng-if="assigned_projects_active==false">
+                                                                <a class="btn" title="Add Team Member" ui-sref="teamList({id:project._id})"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn" title="Add Task" ui-sref="taskList({id:project._id})"> <img src="home/img/menuplus.png"></a>
+                                                                <a class="btn" title="Open Planner" ui-sref="teamList({id:project._id})"> <img src="home/img/clipboard.png"></a>												  
+                                                                <div title="Click to see actions" class="btn-group circle-btn card-details">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <img src="home/img/threedots.png">
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li>
+                                                                            <a class="btn btn-primary rename-user" data-toggle="modal" ng-click="renameproject._id = project._id; renameproject.name = project.name" data-target="#myModal"><img class="card-edit-icon" src="/home/img/rename-icon.svg">Rename</a>
+                                                                        </li>
+                                                                        <li><a ui-sref="project_input({id:project._id})"><img class="card-edit-icon" src="/home/img/editedit.svg">Update Details</a></li>
+                                                                        <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/clipboard.png">Open Planner</a></li>
+                                                                        <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/task-add-1.svg">Add a Task</a></li>
+                                                                        <li><a ui-sref="teamList({id:project._id})"><img class="card-edit-icon" src="/home/img/add-teammate.svg">Add a Teammate</a></li>
+                                                                        <li><a ng-click = "deletePost(project.name, project._id)"><img class="card-edit-icon" src="/home/img/delete-icon.svg"><span class="del-color">Delete Project</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>            
+                                                </table>
+                                                <div class="row" ng-if="view == 'list'">
+                                                    <div class="col-sm-5 col-12">
+                                                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{length.completed}} of {{length.completed}} <1></div>
+                                                    </div>
+                                                </div>
+                                                <!-- Grid View starts from here -->
+                                                <div ng-if="view == 'grid'" class="grid-view-listing">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-3" ng-repeat="project in projects" ng-if="project.status == 2">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+                                                                        <div class="btn-group circle-btn card-details" title="Click to see actions">
+                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                                    <img class="more" ng-src="home/img/more.svg"/>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu">
+                                                                                <li>
+                                                                                    <a class="btn btn-primary rename-user" data-toggle="modal" ng-click="renameproject._id=project._id; renameproject.name=project.name" data-target="#myModal"><img class="card-edit-icon" src="/home/img/rename-icon.svg">Rename</a>
+                                                                                </li>
+                                                                                <li><a ui-sref="project_input({id:project._id})"><img class="card-edit-icon" src="/home/img/editedit.svg">Update Details</a></li>
+                                                                                <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/clipboard.png">Open Planner</a></li>
+                                                                                <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/task-add-1.svg">Add a Task</a></li>
+                                                                                <li><a ui-sref="teamList({id:project._id})"><img class="card-edit-icon" src="/home/img/add-teammate.svg">Add a Teammate</a></li>
+                                                                                <li><a ng-click = "deletePost(project.name,project._id)"><img class="card-edit-icon" src="/home/img/delete-icon.svg"><span class="del-color">Delete Project</span></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-head">
+                                                                            <h5>{{project.name}}</h5>
+                                                                            <span>Client: {{project.client.name}}</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>{{project.start_date| date: 'dd/MM/y'}}</p></li>
+                                                                                <li><span>Location</span><p>{{project.client.location}}</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color{{$index + 1}}" ng-repeat="team in project.team| limitTo : 3 track by $index ">{{team.name| nickname:" " | uppercase}}</span>
+                                                                            <span ng-if="project.team.length - 3 > 0" class="team color4">+{{project.team.length - 3}}</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <!--ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr">80%</span>
+                                                                            </li>
+                                                                        </ul-->
+                                                                        <div class="progress progress-new progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box-create-box">
+                                                                        <div class="create-project-box">
+                                                                            <a ui-sref="createProject.basicinfo">
+                                                                                <div class="create-pro">
+                                                                                    <img class="plus-shape-icon" src="home/img/shape-1.svg">
+                                                                                </div>
+
+                                                                                <h5>Create New Project</h5>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="Drafts({{length.drafts}})">
+                                            <md-content class="md-padding">
+                                                <table ng-if="view == 'list'" id="example2" class="table  table-hover dataTable project-table" role="grid" aria-describedby="example2_info">
+                                                    <thead>
+                                                        <tr role="row " class="header"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"><div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">PROJECT NAME</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">CLIENT</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">START DATE</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">LOCATION</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">DETAILS</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">BUDGET</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">TEAM</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">ACTION</th></tr>
+                                                    </thead>
+                                                    <tbody>                
+                                                        <tr role="row" class="odd" ng-repeat="project in projects" ng-if="project.status == 0">
+                                                            <td class="sorting_1">
+                                                                <div class="form-check">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input" value="">
+                                                                        <span class="custom-check"></span> 
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span>{{project.name}}</span></td>
+                                                            <td class="indicate"><span class="dot high ">{{project.client.name}}</span>
+                                                            </td>
+                                                            <td><span>{{project.start_date| date: 'dd/MM/y'}}</span></td>
+                                                            <td><span>{{project.client.location}}</span></td>
+                                                            <td>
+                                                                <!--<span class="complete">80% Complete</span>-->
+                                                            </td>
+                                                            <td>
+                                                                <div class="btn-group circle-btn">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <span class="dot-space-1"></span>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <span class="bubble">
+                                                                            <li><h6>Projects in Budget</h6></li>
+                                                                            <li><a href="#">In Budget</a></li>
+                                                                            <li><a href="#">Slightly over Budget</a></li>
+                                                                            <li><a href="#">Over Budget</a></li>
+                                                                        </span>
+                                                                    </ul>
+                                                                </div>{{project.budget}}
+                                                            </td>
+                                                            <td> <div class="jsbullet">
+                                                                    <span class="team color{{$index + 1}}" ng-repeat="team in project.team| limitTo : 3 track by $index ">{{team.name| nickname:" " | uppercase}}</span>
+                                                                    <span ng-if="project.team.length - 3 > 0" class="team color4">+{{project.team.length - 3}}</span>
+                                                                </div></td>
+                                                            <td class="d-flex" ng-if="assigned_projects_active==true"></td>
+                                                            <td class="d-flex" ng-if="assigned_projects_active==false">
+                                                                <a class="btn" title="Add Team Member" ui-sref="teamList({id:project._id})"> <img src="home/img/personplus.png"></a>
+                                                                <a class="btn" title="Add Task" ui-sref="taskList({id:project._id})"> <img src="home/img/menuplus.png"></a>
+                                                                <a class="btn" title="Open Planner" ui-sref="teamList({id:project._id})"> <img src="home/img/clipboard.png"></a>												  
+                                                                <div title="Click to see actions" class="btn-group circle-btn card-details">
+                                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                        <img src="home/img/threedots.png">
+                                                                    </button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li>
+                                                                            <a class="btn btn-primary rename-user" data-toggle="modal" ng-click="renameproject._id = project._id; renameproject.name = project.name" data-target="#myModal"><img class="card-edit-icon" src="/home/img/rename-icon.svg">Rename</a>
+                                                                        </li>
+                                                                        <li><a ui-sref="project_input({id:project._id})"><img class="card-edit-icon" src="/home/img/editedit.svg">Update Details</a></li>
+                                                                        <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/clipboard.png">Open Planner</a></li>
+                                                                        <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/task-add-1.svg">Add a Task</a></li>
+                                                                        <li><a ui-sref="teamList({id:project._id})"><img class="card-edit-icon" src="/home/img/add-teammate.svg">Add a Teammate</a></li>
+                                                                        <li><a ng-click = "deletePost(project.name, project._id)"><img class="card-edit-icon" src="/home/img/delete-icon.svg"><span class="del-color">Delete Project</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>            
+                                                </table>
+                                                <div class="row" ng-if="view == 'list'">
+                                                    <div class="col-sm-5 col-12">
+                                                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing {{length.drafts}} of {{length.drafts}} <1></div>
+                                                    </div>
+                                                </div>
+                                                <!-- Grid View Starts Here -->
+                                                <div ng-if="view == 'grid'" class="grid-view-listing">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-3" ng-repeat="project in projects" ng-if="project.status == 0">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+                                                                        <div ng-if="assigned_projects_active==false" class="btn-group circle-btn card-details" title="Click to see actions">
+                                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                                                    <img class="more" ng-src="home/img/more.svg"/>
+                                                                            </button>
+                                                                            <ul class="dropdown-menu">
+                                                                                <li>
+                                                                                    <a class="btn btn-primary rename-user" data-toggle="modal" ng-click="renameproject._id=project._id; renameproject.name=project.name" data-target="#myModal"><img class="card-edit-icon" src="/home/img/rename-icon.svg">Rename</a>
+                                                                                </li>
+                                                                                <li><a ui-sref="project_input({id:project._id})"><img class="card-edit-icon" src="/home/img/editedit.svg">Update Details</a></li>
+                                                                                <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/clipboard.png">Open Planner</a></li>
+                                                                                <li><a ui-sref="taskList({id:project._id})"><img class="card-edit-icon" src="/home/img/task-add-1.svg">Add a Task</a></li>
+                                                                                <li><a ui-sref="teamList({id:project._id})"><img class="card-edit-icon" src="/home/img/add-teammate.svg">Add a Teammate</a></li>
+                                                                                <li><a ng-click = "deletePost(project.name,project._id)"><img class="card-edit-icon" src="/home/img/delete-icon.svg"><span class="del-color">Delete Project</span></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-head">
+                                                                            <h5>{{project.name}}</h5>
+                                                                            <span>Client: {{project.client.name}}</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>{{project.start_date| date: 'dd/MM/y'}}</p></li>
+                                                                                <li><span>Location</span><p>{{project.client.location}}</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color{{$index + 1}}" ng-repeat="team in project.team| limitTo : 3 track by $index ">{{team.name| nickname:" " | uppercase}}</span>
+                                                                            <span ng-if="project.team.length - 3 > 0" class="team color4">+{{project.team.length - 3}}</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <!--ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr">80%</span>
+                                                                            </li>
+                                                                        </ul-->
+                                                                        <div class="progress progress-new progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+                                                                        <div class="icons-image">
+                                                                            <a href="#"> <img class="more-circle" src="home/img/more.svg"></a>	
+                                                                        </div>
+                                                                        <div class="box-head">
+                                                                            <h5>Taj Wedding</h5>
+                                                                            <span>Client: Ray Kroc</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>6/7/2018</p></li>
+                                                                                <li><span>Location</span><p>Heydrabad</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color1">JS</span>
+                                                                            <span class="team color2">MS</span>
+                                                                            <span class="team color3">SS</span>
+                                                                            <span class="team color4">+1</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr-1">60%</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="progress progress-new-1 progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+                                                                        <div class="icons-image">
+                                                                            <a href="#"> <img class="more-circle" src="home/img/more.svg"></a>	
+                                                                        </div>
+                                                                        <div class="box-head">
+                                                                            <h5>Taj Wedding</h5>
+                                                                            <span>Client: Ray Kroc</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>6/7/2018</p></li>
+                                                                                <li><span>Location</span><p>Heydrabad</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color1">JS</span>
+                                                                            <span class="team color2">MS</span>
+                                                                            <span class="team color3">SS</span>
+                                                                            <span class="team color4">+1</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr">80%</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="progress progress-new progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+                                                                        <div class="icons-image">
+                                                                            <a href="#"> <img class="more-circle" src="home/img/more.svg"></a>	
+                                                                        </div>
+                                                                        <div class="box-head">
+                                                                            <h5>Taj Wedding</h5>
+                                                                            <span>Client: Ray Kroc</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>6/7/2018</p></li>
+                                                                                <li><span>Location</span><p>Heydrabad</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color1">JS</span>
+                                                                            <span class="team color2">MS</span>
+                                                                            <span class="team color3">SS</span>
+                                                                            <span class="team color4">+1</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr-1">60%</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="progress progress-new-1 progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+                                                                        <div class="icons-image">
+                                                                            <a href="#"> <img class="more-circle" src="home/img/more.svg"></a>	
+                                                                        </div>
+                                                                        <div class="box-head">
+                                                                            <h5>Taj Wedding</h5>
+                                                                            <span>Client: Ray Kroc</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>6/7/2018</p></li>
+                                                                                <li><span>Location</span><p>Heydrabad</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color1">JS</span>
+                                                                            <span class="team color2">MS</span>
+                                                                            <span class="team color3">SS</span>
+                                                                            <span class="team color4">+1</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr">80%</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="progress progress-new progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box">
+                                                                        <div class="icons-image">
+                                                                            <a href="#"> <img class="more-circle" src="home/img/more.svg"></a>	
+                                                                        </div>
+                                                                        <div class="box-head">
+                                                                            <h5>Taj Wedding</h5>
+                                                                            <span>Client: Ray Kroc</span>
+                                                                        </div>
+                                                                        <div class="box-location">
+                                                                            <ul>
+                                                                                <li><span>Start date</span><p>6/7/2018</p></li>
+                                                                                <li><span>Location</span><p>Heydrabad</p></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="box-budget">
+                                                                            <span>Budget</span>
+                                                                            <p>$12000</p>
+                                                                        </div>
+                                                                        <div class="team-new">
+                                                                            <p>Team</p>
+                                                                            <span class="team color1">JS</span>
+                                                                            <span class="team color2">MS</span>
+                                                                            <span class="team color3">SS</span>
+                                                                            <span class="team color4">+1</span>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="details-completed">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <span>Project Details Completed</span>
+                                                                            </li>
+                                                                            <li>
+                                                                                <span class="prog-clr-1">60%</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="progress progress-new-1 progress-xs">
+                                                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div-->
+                                                            <div class="col-md-3">
+                                                                <div class="boxgrid">
+                                                                    <div class="box-create-box">
+                                                                        <div class="create-project-box">
+                                                                            <a ui-sref="createProject.basicinfo">
+                                                                                <div class="create-pro">
+                                                                                    <img class="plus-shape-icon" src="home/img/shape-1.svg">
+                                                                                </div>
+
+                                                                                <h5>Create New Project</h5>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                    </md-tabs>
+                                </md-content>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!--/register_new-->
+
+
+    </section><!--./st_wrapper-->
+</main>
+<!--Modal HTML Include Here -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Rename Project
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form ng-submit="rename()">
+                <div class="modal-body">
+                    <label>New Name</label>
+                    <!--<h5>punjabi wedding</h5>-->
+                    <input type="text" class="form-control" ng-model="renameproject.name">
+                </div>
+                <div class="modal-footer mod-footr">
+                    <span class="cancelled" data-dismiss="modal">cancel</span>
+                    <button type="submit" class="btn btn-default remove-user">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

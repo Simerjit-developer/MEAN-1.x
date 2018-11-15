@@ -1,0 +1,266 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="team-list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 border-sides">
+                        <div ng-include="'/home/templates/Planner/sidebar.html'"></div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="jobs">
+                            <div class="nav nav-tabs tabs-header jobs-tab" id="jobs-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-job-requirements-tab" data-toggle="tab" data-target="#jobs-requirements" role="tab" aria-controls="nav-job-requirements" aria-selected="true"><img class="job-bag" ng-src="home/img/job-bag.png"/>&nbsp; Jobs</a>
+                                <a class="nav-item nav-link" id="nav-vendor-tab" data-toggle="tab" data-target="#vendor" role="tab" aria-controls="nav-guests" aria-selected="true"><img class="" ng-src="home/img/house.svg"/>&nbsp; Vendor</a>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="jobs-tab">
+                            <div class="tab-pane fade active show" id="jobs-requirements" role="tabpanel" aria-labelledby="nav-job-requirements-tab">
+                                <div class="change-wedding">
+                                    <form class="form-inline">
+                                        <label>Event Type</label>
+                                        <!--<input type="text" name="firstname" placeholder="Enter Type">-->
+                                        <select class="short-filter" ng-model="selectedEvent" >
+                                            <option ng-selected="selectedEvent=='all'" value="all">All</option>
+                                            <option ng-repeat="singleEvent in project.events" value="{{singleEvent._id}}">{{singleEvent.name}}</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="main_outer" ng-repeat="myjob in myjobs" ng-if="selectedEvent=='all' || selectedEvent==myjob.event_id">
+                                    <div class="caterers-card" style="margin-bottom: 0px;">
+                                    <div class="card-head">
+                                        <h6>{{myjob.title}}</h6>
+                                        <span class="duration ng-binding">
+                                            <img src="/home/img/watch-1.svg" alt="Calander-Icon"> &nbsp; {{myjob.created_at | datediff}} &nbsp; 
+                                        </span>
+                                        <span class="flag-icon-clr">
+                                            <img src="/home/img/flag.svg" alt="Calander-Icon">
+                                        </span>
+                                        <p style="width:100%;" class="card-detail-card">{{myjob.description}}</p>
+                                        <ul class="event-budget">
+                                            <li><span class="team-member-icon color-1"><img class="" ng-src="home/img/employees.svg"></span>
+                                                <p>Event <br/><label>{{myjob.project_detail.events.name}}</label></p>
+                                            </li>
+                                            <li><span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>
+                                                <p>No of Pax <br/><label>400</label></p>
+                                            </li>
+                                            <li><span class="team-member-icon-color"><img class="" ng-src="home/img/dollar.svg"></span>
+                                                <p>Budget<br/><label>{{myjob.budget}}</label></p>
+                                            </li>
+                                        </ul>
+                                        <div class="bids">
+                                            <a ui-sref="jobsDetail({id:myjob._id})"><span class="bids-color">{{myjob.proposals_count}} Bids {{myjob.new_bids}} new &nbsp; <img class="" ng-src="home/img/double-angle.svg"></span></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div ng-if="myjob.is_finalised==1" class="shorlisted-listing">
+                                    <ul>
+                                        <li class="left-list"><img src="/home/img/bookmark-ribbon.svg" alt="Calander-Icon"><span class="green">Vendor Finalized</span></li>
+                                        <li class="right-list"><span ng-repeat="proposal in myjob.myproposals" ng-if="proposal.status==2">{{proposal.user[0].firstname}} {{proposal.user[0].lastname}}<small>finalized</small></span></li>
+                                    </ul>
+                                </div>
+                                <div ng-if="myjob.is_shortlisted==1" class="shorlisted-listing">
+                                    <ul>
+                                        <li class="left-list"><img src="/home/img/bookmark-ribbon.svg" alt="Calander-Icon"><span>Vendors Shortlisted</span></li>
+                                        <li class="right-list"><span ng-repeat="proposal in myjob.myproposals" ng-if="proposal.status==1">{{proposal.user[0].firstname}} {{proposal.user[0].lastname}} {{myjob.shortlisted_count>1 ? ',':''}} {{myjob.shortlisted_count>2?myjob-shortlisted_count +'more':''}}</span><small>shortlisted</small></li>
+                                    </ul>
+                                </div>
+                                </div>
+                                <!--<div class="caterers-card">
+                                    <div class="card-head">
+                                        <h6>Need quality caterers for a punjabi wedding.</h6>
+                                        <span class="duration ng-binding">
+                                            <img src="/home/img/watch-1.svg" alt="Calander-Icon"> &nbsp; 2 days ago &nbsp; 
+
+                                        </span>
+                                        <p class="card-detail-card">Sangeet dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <ul class="event-budget">
+                                            <li><span class="team-member-icon color-1"><img class="" ng-src="home/img/employees.svg"></span>
+                                                <p>Event <br/><label>Wedding</label></p>
+                                            </li>
+                                            <li><span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>
+                                                <p>No of Pax <br/><label>400</label></p>
+                                            </li>
+                                            <li><span class="team-member-icon-color"><img class="" ng-src="home/img/dollar.svg"></span>
+                                                <p>Budget<br/><label>$12000</label></p>
+                                            </li>
+                                        </ul>
+                                        <div class="bids">
+                                            <span class="bids-color">14 Bids new &nbsp; <img class="" ng-src="home/img/double-angle.svg"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shorlisted-listing">
+                                    <ul>
+                                        <li class="left-list"><img src="/home/img/bookmark-ribbon.svg" alt="Calander-Icon"><span>Vendors shortlisted</span></li>
+                                        <li class="right-list"><span>ramesh nayar,Prithvi shaw, +2<small>more Shortlisted</small></span></li>
+                                    </ul>
+                                </div>
+                                <div class="caterers-card">
+                                    <div class="card-head">
+                                        <h6>Need quality caterers for a punjabi wedding.</h6>
+                                        <span class="duration ng-binding">
+                                            <img src="/home/img/watch-1.svg" alt="Calander-Icon"> &nbsp; 2 days ago &nbsp; 
+
+                                        </span>
+                                        <span class="flag-icon-clr">
+                                            <img src="/home/img/flag.svg" alt="Calander-Icon">
+                                        </span>
+                                        <p class="card-detail-card">Sangeet dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <ul class="event-budget">
+                                            <li><span class="team-member-icon color-1"><img class="" ng-src="home/img/employees.svg"></span>
+                                                <p>Event <br/><label>Wedding</label></p>
+                                            </li>
+                                            <li><span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>
+                                                <p>No of Pax <br/><label>400</label></p>
+                                            </li>
+                                            <li><span class="team-member-icon-color"><img class="" ng-src="home/img/dollar.svg"></span>
+                                                <p>Budget<br/><label>$12000</label></p>
+                                            </li>
+                                        </ul>
+                                        <div class="bids">
+                                            <span class="bids-color">14 Bids new &nbsp; <img class="" ng-src="home/img/double-angle.svg"></span>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="nav-vendor-tab">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 m-auto">
+                                        <div class="allocation-sec" ng-repeat="event in project.events" ng-if="event.vendorsRequired">
+                                            <span class="icon"><img src="/home/img/mehendi.svg" alt=""></span>
+                                            <h6>{{event.name}}</h6>
+                                            <span class="date-event">{{event.start_date |date: 'd MMMM yyyy' }}</span>
+                                            <ul ng-repeat="vendorRequire in event.vendorsRequired" class="card-sec" ng-if="event.vendorsRequired">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/caterer.svg" alt=""/>
+                                                    <h5 ng-if="vendorRequire.servicedetail.length>0">{{vendorRequire.servicedetail[0].title}}</h5>
+                                                    <h5 ng-if="vendorRequire.servicedetail.length==0 && vendorRequire.vendordetail.length>0">{{vendorRequire.vendordetail[0].title}}</h5>
+                                                </li>
+                                                <li class="requirment-added" ng-if="vendorRequire.jobDetails && !vendorRequire.budget">
+                                                    <img class="exclamation" src="/home/img/spinner-circle.svg" alt=""/> &nbsp; 80% Requirments added
+                                                </li>
+                                                <li class="requirment-added" ng-if="!vendorRequire.jobDetails">
+                                                    <input type="button" value="Add vendor requirments" data-toggle="modal" data-target="#AddvendorModal">
+                                                </li>
+                                                <li ng-if="vendorRequire.jobDetails && vendorRequire.budget && vendorRequire.posted_live==false" class="requirment-added-new">
+                                                    <a ui-sref="PostJob.basicinfo({id:vendorRequire._id})" class="postjob">
+                                                    <button class="button" type="button" data-hover="Post a Job" data-active="Post a Job">
+                                                        <span><img class="exclamation"  src="/home/img/green-check-new.svg" alt=""/>Requirments added</span>
+                                                    </button>
+                                                    </a>
+                                                </li>
+                                                <li ng-if="vendorRequire.jobDetails && vendorRequire.budget && vendorRequire.posted_live==true" class="requirment-added">
+                                                    <img  class="exclamation"  src="/home/img/green-check-new.svg" alt=""/> &nbsp; Posted Live
+                                                    
+                                                </li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>
+                                            
+                                            <!--ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/caterer.svg" alt=""/>
+                                                    <h5>Caterer</h5>
+                                                </li>
+                                                <li class="requirment-added"><img class="exclamation" src="/home/img/spinner-circle.svg" alt=""/> &nbsp; 80% Requirments added</li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>
+                                            <ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/photographer.svg" alt=""/>
+                                                    <h5>Photographer</h5>
+                                                </li>
+                                                <li class="requirment-added-new"><button class="button" type="button" data-hover="Post a Job" data-active="Post a Job"><span>Requirments added</span></button></li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul-->
+
+                                        </div>
+                                        <!--div class="allocation-sec">
+                                            <span class="icon-1"><img src="/home/img/engagemen.svg" alt=""></span>
+                                            <h6>Engagement</h6>
+                                            <span class="date-event">20 August 2018</span>
+                                            <ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/caterer.svg" alt=""/>
+                                                    <h5>Caterer</h5>
+                                                </li>
+                                                <li class="requirment-added"><img class="exclamation" src="/home/img/spinner-circle.svg" alt=""/> &nbsp; 80% Requirments added</li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>
+                                            <ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/photographer.svg" alt=""/>
+                                                    <h5>Photographer</h5>
+                                                </li>
+                                                <li class="requirment-added">
+                                                    <input type="button" value="Add vendor requirments" data-toggle="modal" data-target="#AddvendorModal">
+                                                </li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>
+                                            <ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/tent-house.svg" alt=""/>
+                                                    <h5>Tent Housing</h5>
+                                                </li>
+                                                <li class="requirment-added">&nbsp; 80% Requirments added</li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>														
+                                        </div-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="members">
+                            <!--<a class="add-member" ui-sref="PostJob.basicinfo"><img class="" ng-src="home/img/job-bag.png"/>&nbsp; Post a job</a>-->
+                        </div>
+                        <ul class="total-team">
+                            <li>Total jobs posted <span class="color">{{myjobs.length}}</span></li>
+                            <li>Job with bids<span class="blue">{{jobs_with_bids}}</span></li>
+                            <li>Negotiating<span class="green">--</span></li>
+                        </ul>
+                        <h5 class="team-headings">Vendors Required</h5>
+                        <ul class="total-team">
+                            <li>Total <span class="color">{{total_vendor_required}}</span></li>
+                            <li>Requirment added <span class="blue">{{jobs_with_requirements}}</span></li>
+                            <li>Job Posted in marketplace<span class="green">{{jobs_in_marketplace}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="modal fade" id="AddvendorModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="team-member-icon redirect"><img class="" src="home/img/event-star.svg"></span>
+                    <h5 class="redirect-page">Redirecting Page</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <p>You will be taken to the event manager page to add the vendor requirements.</p>
+                    </div>
+                </div>
+                <div class="modal-footer mod-footr">
+                    <button type="submit" class="btn btn-default" data-dismiss="modal" ui-sref="project_input({id:project._id,view:'eventmanager'})">Ok, take me there</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,16 @@
+<div id="vendor-st4" class="tab-pane">
+    <h5>Budget and milestones</h5>
+    <div class="form-group">
+        <label>Budget</label>
+        <input type="text" class="form-control" ng-model="jobdata.budget" name="budget" placeholder="" ng-required="true">
+    </div>
+    <div class="form-group">
+        <label>Milestones</label>
+        <span class="form-control" ng-repeat="milestone in jobdata.milestones">{{milestone.title}}</span>
+        <!--<input type="text" class="form-control"  placeholder="abc@gmail.com">-->
+    </div>
+    <div class="btn-sec">
+        <!--<button type="button" ui-sref="createProject.events" class="btn-back"><i class="fas fa-arrow-left"></i></button>-->
+        <input type="submit" class="btn btn-primary btn-st" value="Post job in marketplace">
+    </div>
+</div>

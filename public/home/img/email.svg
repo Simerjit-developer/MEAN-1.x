@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="13px" viewBox="0 0 16 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Guests" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Add-guest" transform="translate(-908.000000, -545.000000)">
+            <rect fill="#FAFAFA" x="0" y="0" width="1440" height="1179"></rect>
+            <g id="Group-15" transform="translate(458.000000, 340.000000)" fill="#747474">
+                <path d="M464.4,205 L451.6,205 C450.72,205 450.008,205.73125 450.008,206.625 L450,216.375 C450,217.26875 450.72,218 451.6,218 L464.4,218 C465.28,218 466,217.26875 466,216.375 L466,206.625 C466,205.73125 465.28,205 464.4,205 L464.4,205 Z M464.4,208.25 L458,212.3125 L451.6,208.25 L451.6,206.625 L458,210.6875 L464.4,206.625 L464.4,208.25 L464.4,208.25 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

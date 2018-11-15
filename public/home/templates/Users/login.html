@@ -1,0 +1,150 @@
+<main>
+    <section class="login-wraper">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-md-6 p-0">
+                    <div class="login-left">
+                        <div class="overlay"></div>
+                        <div class="logo"><img src="/home/img/logo1.png" alt="logo"/></div>
+                        <div class="text"><p class="quotetext">
+                                A first-of-its-kind digital wedding planning platform for India! Now plan, organize and execute weddings efficiently! 
+                                </p></div>
+                        <div class="sociallinks">
+                            <ul class="d-flex p-0">
+                                <li><a target="_blank" href="https://www.facebook.com/DOST-395460647567679/" class="" role="button" aria-pressed="true"><img src="/home/img/fb.png"/></a></li>
+                                <li><a target="_blank" href="https://twitter.com/login?lang=en" class="" role="button" aria-pressed="true"><img src="/home/img/tw.png"/></a></li>
+                                <li><a target="_blank" href="https://www.instagram.com/yourshaadidost/" class="" role="button" aria-pressed="true"><img src="/home/img/Instagram.png"></a></li>
+                            </ul>
+                        </div>
+                        <div class="likebtns ">
+                            <!--<button type="submit" class="btn likebtn btn-lg"><i class="fas fa-thumbs-up"></i>2.2k Likes</button>-->
+                            <!--<button type="submit" class="btn likebtn btn-lg float-right">Invite Friends</button>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-0">
+                    <div class="login-right">
+                        <div class="vendor d-flex justify-content-end">
+                            <ul class="p-0  d-flex">
+                                <li><a class="coming-img login_browse"><img class="coming-soon-imgs" src="/home/img/comingsoon.png" alt="Logo">Browse Vendors</a></li>
+                                <li><a style="cursor: pointer;" data-toggle="modal" data-target="#contactus">Contact Us</a></li>
+                            </ul>									
+                        </div>
+                        <div class="mt-5 d-flex justify-content-center align-items-center" ng-controller="LoginCtrl">
+                            <div class="col-md-8 col-12 ">
+                                <!--<form name="loginform" ng-submit="login()">-->
+                                <form name="loginform" method="post" action="/dostlogin">
+                                    <h2><!--Login--></h2>
+                                    <div class="form-group">
+                                        <label for="phone number">Phone Number</label>								
+                                        <div class="input-group">
+                                            <!--<span class="input-group-addon phone"><select><option>+91</option></select></span>-->
+                                            <input type="tel" name="phone_intl" intl-tel-input ng-model="user.phone" intl-tel-input-options="{ preferredCountries: ['in', 'sg','us']}" class="form-control" ng-required="true" >
+                                            <input type="hidden" value="{{user.phone}}" name ="phone" />
+                                        </div>
+                                        <span ng-show="loginform.phone.$error.phoneNumber">
+                                            Please enter a correct phone number!
+                                        </span>
+                                    </div>
+                                    <div class="form-group eyeinput">
+                                        <label for="exampleInputPassword1">Password</label><a href='/dost#/forgotPassword' class="float-right">Forgot?</a>
+                                        <input type="password" name="password" id="eye" class="form-control" ng-model="user.password" ng-required="true" >
+                                        <span ng-click="showpwd()" class="" style="cursor: pointer;"><img src="/home/img/eye.png"/></span>
+                                    </div>								
+                                    <button ng-disabled="loginform.$invalid && loginform.$dirty" type="submit" class="btn custmbtn btn-lg mt-5">Login</button>								  
+                                    <p class="text-center registertext">First Time User? <a href='/dost#/onBoarding' class="" role="button" aria-pressed="true">Register</a></p>
+									<div class="checkout-icon">
+										<a href="#" class="check-btnn-icon"  data-toggle="modal" data-target="#myModalcheckout">Check out our Demo</a>
+									</div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>		
+</main>  
+<!-- Add Guest Modal starts here -->
+<div class="modal fade add-guest-pop" id="contactus" role="dialog" ng-controller="LoginCtrl">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Contact</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form name="contact_form" ng-submit="contact()" >
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <div class="form-group">   
+                            <label>Name*</label>
+                            <input type="text" class="form-control" ng-model="data.name" ng-required="true">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/user.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label style="width:100%;">Phone*</label>
+                            <input type="tel" name="phone_intl" intl-tel-input ng-model="data.phone" intl-tel-input-options="{ preferredCountries: ['in', 'sg','us']}" class="form-control" ng-required="true" >
+                            <!--<input type="text" class="form-control" ng-model="data.phone" ng-required="true">-->
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/tablet.svg">
+                            </div>
+                            <span class="error" ng-show="contact_form.phone_intl.$error.phoneNumber">
+                                Please enter a correct phone number!
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" ng-model="data.email">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/emails.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>City</label>
+                            <select class="form-control" ng-model="data.city" >
+                                <option value="{{city.name}}" ng-repeat="city in cities">{{city.name}}</option>
+                            </select>
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/location.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>Message*</label>
+                            <textarea class="form-control" ng-model="data.message" ng-required="true"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mod-footr">
+                    <button type="submit" class="btn btn-default guest-clr">{{button}}</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!--checkout-model----->
+<div id="myModalcheckout" class="modal fade" role="dialog" ng-controller="LoginCtrl">
+  <div class="modal-dialog">
+ 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+	  <h4 class="modal-title">Checkout our Demo</h4>
+        <button type="button" class="close stop-video" ng-click="stopVideo()">&times;</button>
+        
+      </div>
+      <div class="modal-body">
+        <iframe class="youtube-video" width="470" height="315" src="https://www.youtube.com/embed/nJeCnYciOBs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="stopVideo()">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+ 

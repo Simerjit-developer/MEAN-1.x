@@ -1,0 +1,213 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="team-list">
+            <section class="breadcrumb-sec">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="inner-sec">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a >Projects</a></li>
+                                    <li class="breadcrumb-item"><a >Planner</a></li>
+                                    <li class="breadcrumb-item active">{{livejob._id.project_detail.name}}</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1 side-arrow">
+                        <span style="cursor:pointer;" ui-sref="jobs({id:livejob._id.project_detail._id})" class="left-arrows"><img class="like-immg" src="/home/img/left-arrows.svg" alt="Calander-Icon"></span>
+                    </div>
+                    <div class="col-md-9 m-auto">
+                        <div class="caterers-card job-details">
+                            <div class="card-head">
+                                <h6>{{livejob._id.title}}</h6>
+                                <span class="duration ng-binding">
+                                    <img src="/home/img/watch-1.svg" alt="Calander-Icon"> &nbsp; {{livejob._id.created_at| date | datediff}} &nbsp; 
+                                </span>
+                                <p style="width:100%;" class="card-detail-card">{{livejob._id.description}}</p>
+
+                                <ul class="event-budget">
+                                    <li><span class="team-member-icon color-1"><img class="" ng-src="home/img/employees.svg"></span>
+                                        <p>Event <br/><label>{{livejob._id.project_detail.events.name}}</label></p>
+                                    </li>
+                                    <li><span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>
+                                        <p>No of Pax <br/><label>400</label></p>
+                                    </li>
+                                    <li><span class="team-member-icon-color"><img class="" ng-src="home/img/dollar.svg"></span>
+                                        <p>Budget<br/><label>{{livejob._id.budget}}</label></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bids-head">
+                            <h6>Bids({{livejob.proposals.length}})</h6>
+                            <form class="bids-form">
+                                <select class="short-filter">
+                                    <option value="Sort by: Highest Rating first">Filter by:Client</option>
+                                </select>
+                                <select class="short-filter">
+                                    <option value="Sort by: Highest Rating first">Sort by:Date</option>
+                                </select>
+                            </form>
+                        </div>
+                        <div class="caterers-card bids-details">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card" ng-class="(proposal.myproposals.status == 4?'is_declined':(proposal.myproposals.status == 1)?'is_shortlisted':'')" ng-repeat="(index,proposal) in livejob.proposals">
+                                    <div class="card-header" id="headingOne">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{index}}" aria-expanded="true" aria-controls="collapseOne">
+                                            <div class="bids-detail-data">
+                                                <div class="circle">
+                                                    <span class="round-circle">
+                                                        <img ng-if="proposal.myproposals.bid_details[0].image" src="{{proposal.myproposals.bid_details[0].image}}"/>
+                                                    </span>
+                                                </div>
+                                                <div class="vendor-bids-info">
+                                                    <h6>{{proposal.myproposals.bid_details[0].firstname}} {{proposal.myproposals.bid_details[0].lastname}}</h6>
+                                                    <p>Service</p>
+                                                </div>
+                                                <div class="bids-star-rating">
+                                                    <span class="star-rating"><img class="" ng-src="home/img/star-rating.svg"><img class="" ng-src="home/img/star-rating.svg"><img class="" ng-src="home/img/star-rating.svg"><img class="" ng-src="home/img/star-rating.svg"><img class="" ng-src="home/img/star-rating.svg">
+                                                        <small>9 reviews</small></span>
+                                                    <p>Bid value:{{proposal.myproposals.budget}}</p>
+                                                </div>
+                                                <div class="bids-shortlisted">
+                                                    <!--p ng-if="proposal.myproposals.status > 0">
+                                                        {{ proposal.myproposals.status ==1 ? 'Shortlisted':''}}
+                                                        {{ proposal.myproposals.status ==2 ? 'Finalized':''}}
+                                                        {{ proposal.myproposals.status ==3 ? 'Completed':''}}
+                                                        {{ proposal.myproposals.status ==4 ? 'Declined':''}}
+                                                    </p-->
+                                                    <p class="blue" ng-if="proposal.myproposals.status == 1">
+                                                        {{ proposal.myproposals.status ==1 ? 'Shortlisted':''}}
+                                                    </p>
+                                                    <p class="green" ng-if="proposal.myproposals.status == 2">
+                                                        <b>{{ proposal.myproposals.status ==2 ? 'Finalized':''}}</b>
+                                                    </p>
+                                                    <p class="green" ng-if="proposal.myproposals.status == 3">
+                                                        {{ proposal.myproposals.status ==3 ? 'Completed':''}}
+                                                    </p>
+                                                    <p class="red" ng-if="proposal.myproposals.status == 4">
+                                                        <b>{{proposal.myproposals.status ==4 ? 'Vendor Declined':''}}</b>
+                                                    </p>
+                                                    <span ng-if="proposal.myproposals.status == 0" class="blue-star"><img class="" ng-src="home/img/blue-star.svg"><label style="cursor:pointer;" ng-click="update_status(proposal.myproposals._id, 1)">Shortlisted vendor</label></span>
+                                                    <p class="red" ng-if="proposal.myproposals.status <= 1" style="cursor:pointer;" ng-click="update_status(proposal.myproposals._id, 4)">Decline</p>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div id="collapse{{index}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+
+                                            <div class="card-description">
+                                                <h6>Owner name:&nbsp; {{proposal.myproposals.bid_details[0].firstname}} {{proposal.myproposals.bid_details[0].lastname}}</h6>
+                                                <span>{{proposal.myproposals.bid_details[0].location}}</span>
+                                            </div>
+                                            <p class="bid-info-details">
+                                                {{proposal.myproposals.description}}
+                                            </p>
+                                            <div class="photo">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <a href="#">
+                                                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <a href="#">
+                                                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <a href="#">
+                                                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <a href="#">
+                                                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <a href="#">
+                                                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <a href="#">
+                                                                    <img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <!--.row-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="budget-box">
+                                                <div class="milestone-1">
+                                                    <h6>Budget</h6>
+                                                </div>
+                                                <div class="milestone-2">
+                                                    <ul ng-repeat="(milestoneindex, milestone) in proposal.myproposals.milestones"><li>Milestone {{milestoneindex + 1}}</li>
+                                                        <li class="amount">{{milestone.title}}</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="milestone-3">
+                                                    <ul>
+                                                        <li class="total-bud">Total Budget</li>
+                                                        <li class="amount"><span class="budget-color">{{proposal.myproposals.budget}}</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bids-head new hh">
+                                            <ul ng-show="proposal.myproposals.status!=2">
+                                                <!--<li ng-show="proposal.myproposals.status!=4"><h6>Negotiate</h6></li>-->
+                                                <li ng-show="proposal.myproposals.status!=4"><span class="accept-bid" style="cursor:pointer;" ng-click="update_status(proposal.myproposals._id, 2)">Accept Bid</span></li>
+                                                <li class="send-bid-msg"><button data-toggle="modal" data-target="#SendMsg_{{proposal.myproposals._id}}" class="button send-bid"><img src="/home/img/envelope.svg" alt="enevelope"/> &nbsp; Send a message</button></li>
+                                            </ul>
+                                            <ul ng-show="proposal.myproposals.status==2">
+                                                <li class="send-bid-msg"><button data-toggle="modal" data-target="#SendMsg_{{proposal.myproposals._id}}" class="button send-bid"><img src="/home/img/envelope.svg" alt="enevelope"/> &nbsp; Send a message</button></li>
+                                            </ul>
+                                            
+                                            <!-- Send a Message Popup -->
+                                            <div class="modal fade" id="SendMsg_{{proposal.myproposals._id}}" role="dialog">
+                                                <div class="modal-dialog">
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; Message Area</h4>
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="add-member-modl">
+                                                                    <div class="form-group" >   
+                                                                        <label>Message</label>
+                                                                        <textarea class="form-control" ng-model="message.content"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer mod-footr">
+                                                                <button type="submit" ng-click="sendMessage(proposal.myproposals.bid_details[0]._id,proposal.myproposals._id)" class="btn btn-default">Send</button>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <!-- Send a Message Popup ends here-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

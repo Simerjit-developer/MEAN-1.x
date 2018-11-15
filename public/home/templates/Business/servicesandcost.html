@@ -1,0 +1,35 @@
+<div id="vendor-st2" class="tab-pane">
+    <h5>Services and costs</h5>
+    <div class="form-group">
+        <label>Starting price</label>
+        <input type="text" class="form-control" ng-model="post.starting_price" placeholder="">
+    </div>
+    <div class="form-group checkbox-group" ng-if="services.length > 0">
+        <label class="check-label">Add on services </label>
+        <label class="check-outer" ng-repeat="service in services track by $index">
+            <input type="checkbox" ng-model="post.services[service._id][service.title]" class="form-check-input">
+            <span class="checkbox-new"></span>
+            {{service.title}}
+        </label>
+        <a style="cursor: pointer">+Add more</a>
+    </div>
+    <div class="form-group checkbox-group" style="border:none;" ng-if="highlights.length > 0">
+        <label class="check-label">Highlights</label>
+        <label class="check-outer" ng-repeat="highlight in highlights track by $index">
+            <input type="checkbox" ng-model="post.highlights[highlight._id][highlight.title]" class="form-check-input" value="">
+            <span class="checkbox-new"></span>
+            {{highlight.title}}
+        </label>
+        <!--label class="check-outer">
+            <input type="checkbox" class="form-check-input" value="">
+            <span class="checkbox-new"></span>
+            Highlights 1
+        </label-->
+        <a style="cursor: pointer">+Add more</a>
+    </div>
+    <div class="btn-sec">
+        <button type="button" class="btn-back" ng-click="moveback('registerBusiness.vendortype',1)"><i class="fas fa-arrow-left"></i></button>
+        <button type="button" class="btn btn-primary btn-st" ng-click="movetocontact()">Continue</button>
+        <button type="button" class="btn-skip" ng-click="movetocontact()">Skip this step</button>
+    </div>
+</div>

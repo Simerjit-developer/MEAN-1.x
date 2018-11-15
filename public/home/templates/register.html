@@ -1,0 +1,315 @@
+<main>
+    <div ng-include="'/home/templates/headerbeforelogin.html'"></div>
+    <section class="signup-wraper">
+        <form name="regForm" ng-submit="signup()" ng-controller="SignupCtrl">
+
+            <!-- One "tab" for each step in the form: -->
+            <div class="container">
+
+                <div class="detailtab">
+                    <div class="tab formdetail">
+                        <div class="row">
+                            <div class="col-md-4 col-12 d-flex align-items-center">		
+                                <div class="pic">
+                                    <img src="/home/img/prsn.png"/>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-12">
+                                <h1>Enter details</h1>
+                                <!--<form>-->
+                                <div class="form-row">
+                                    <label for="name" class="w-100">Name</label>
+                                    <div class="form-group input-group col-md-6">			
+                                        <span class="input-group-prepend">
+                                            <select ng-model="user.title" required="true">
+                                                <option ng-selected="titleSelected">Ms</option>
+                                                <option>Mr</option>
+                                                <option>Mrs</option>
+                                            </select>
+                                        </span>								 								
+                                        <input ng-model="user.firstname" name="firstname" ng-required="true" type="text" class="form-control" placeholder="First Name">
+                                    </div>
+                                    <div class="form-group col-md-6">  
+                                        <input ng-model="user.lastname" required="true" type="text" class="form-control" placeholder="Last Name">
+                                    </div>			
+                                </div>
+
+                                <div class="form-row">
+                                    <label for="dob" class="w-100">Date of Birth</label>
+                                    <div class="form-group col-md-6">  
+                                        <input required="true" ng-model="user.dob" type="date" class="form-control" placeholder="DD/MM/YYYY">
+                                    </div>			
+                                </div>
+
+                                <div class="form-row">
+                                    <label for="location" class="w-100">City</label>
+                                    <div class="form-group location col-md-6" class="form-control location"> 
+                                        <select required="true" ng-model="user.location">
+                                            <option ng-repeat="city in cities">{{city.name}}</option>
+                                        </select>
+                                        <!--<input required="true" ng-model="user.location" type="text" class="form-control location" placeholder="City">-->
+                                        <span class=""><img src="/home/img/location.png"/></span>
+                                    </div>			
+                                </div>
+                                <!--</form>-->
+                            </div>
+                        </div>
+                        <div class="row  justify-content-end">
+
+                            <div class="col-8 d-flex justify-content-start ">
+                                <div style="overflow:auto;">
+                                    <div style="" class="d-flex mt-5">
+                                        <a class="cancelbtn btn btnwidth mr-2" ui-sref="onBoarding">Cancel</a>
+                                        <!--<button type="button" id="prevBtn" class="cancelbtn btn btnwidth mr-2" ng-click="nextPrev(1)">Cancel</button>-->
+                                        <button  ng-disabled="regForm.firstname.$invalid" id="nextBtn" class="continuebtn btn btnwidth" ng-click="getOTP()">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="otptab">
+                    <div class="tab formdetail">
+                        <div class="row">
+                            <div class="col-4">		
+                                <div class="phone">
+                                    <img src="/home/img/phone4.png"/>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <h1>Enter OTP</h1>
+                                <p>Please Enter the <span>6 digit OTP</span> that has been sent tou your phone number <span>{{user.phone}}</span> for verfication.</p>
+
+                                <div class="d-flex otp-input">
+                                    <div otp-input-directive options="otpInput"></div>
+
+                                </div>
+
+                                <p class="text-left otp">Didn't receive OTP? <a href="#"  ng-click="getOTP()" class="" role="button" aria-pressed="true">Resend</a></p>
+                                <div style="" class="d-flex">
+                                    <button type="button" id="prevBtn" class="cancelbtn btn btnwidth mr-2" ng-click="nextPrev(-1)">Cancel</button>
+                                    <button type="button" id="nextBtn" ng-click="verifyOTP()" class="continuebtn btn btnwidth">Verify</button>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="passtab">
+                    <div class="tab formdetail">
+                        <div class="row">
+                            <div class="col-4">		
+                                <div class="arror">
+                                    <img src="/home/img/passwordimg.png"/>
+                                </div>
+                                <!--div class="">
+                                    <div><img src="/home/img/lock.png"/></div>
+                                    <p class="pass">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </p>
+                                </div-->
+                            </div>
+                            <div class="col-8">
+                                <h1>Set password</h1>
+                                <!--<form name="setPassword">-->
+                                <div class="form-row">
+                                    <label for="password" class="w-100">Password</label>		
+                                    <div class="form-group col-md-6">  
+                                        <!--                                            <input type="password" id="password" name="password" ng-model="password" ng-required="true" class="form-control eye"  placeholder="********"/>
+                                                                                    <span class="float-right strong">strong password</span>-->
+                                        <input type="password" required="true" id="password" name="password" ng-model="user.password" password-strength="user.password" class="form-control eye"  placeholder="********" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/"/>
+                                        <span class="float-right" data-ng-class="strength">{{strength}}</span>
+                                        <span class="error" ng-show="regForm.password.$error.pattern">Not a valid password!</span>
+                                    </div>
+
+                                    <div class="form-group col-md-6">  
+                                        <div class="d-flex">
+                                            <div><img src="/home/img/info.png" alt="info"/></div>
+                                            <p class="info">password should be between 8-15 characters. Should contains alphabets, numbers and special characters.</p>	
+                                        </div>
+
+                                    </div>			
+                                </div>
+
+                                <div class="form-row">
+                                    <label for="re-enter password" class="w-100">Re-enter Password</label>
+                                    <div class="form-group col-md-6">  
+                                        <input type="password" id="cpassword" name="c_password" value-matches="user.password" ng-model="user.cpassword" ng-required="true" class="form-control" placeholder="********"/>
+                                        <span class='error' ng-show='user.password != user.cpassword'>Password Mismatch</span>
+                                    </div>			
+                                </div>
+
+                                <!--                                     <div style="" class="d-flex mt-5">
+                                                                        <button type="button" id="prevBtn" class="cancelbtn btn btnwidth mr-2" onclick="nextPrev(1)">Back</button>
+                                                                        <button ng-disabled="regForm.$invalid && regForm.$dirty" type="submit" id="nextBtn" class="continuebtn btn btnwidth" onclick="nextPrev(1)">Confirm</button>
+                                                                    </div>-->
+                                <!--user.password!=user.cpassword &&-->
+                                <!--</form>-->
+                            </div>
+                        </div>
+                        <div class="row  justify-content-end">
+
+                            <div class="col-8 d-flex justify-content-start ">
+                                <div style="overflow:auto;">
+                                    <div style="" class="d-flex mt-5">
+                                        <button type="button" id="prevBtn" class="cancelbtn btn btnwidth mr-2" onclick="nextPrev(1)">Back</button>
+                                        <button ng-disabled="user.password != user.cpassword && regForm.password.$invalid" type="submit" id="nextBtn" class="continuebtn btn btnwidth" ng-click="setPassword()">Confirm</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Circles which indicates the steps of the form: -->
+
+
+                <div class="row">
+                    <div class="col-sm-4 mr-auto">
+                        <div class="slide-bullet">
+                            <span class="step"></span>
+                            <span class="step"></span>
+                            <span class="step"></span>
+                            <span class="step"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>	
+</main>
+<script>
+//    var currentTab = 0; // Current tab is set to be the first tab (0)
+//    showTab(currentTab); // Display the crurrent tab
+//
+//    function showTab(n) {
+//        // This function will display the specified tab of the form...
+//        var x = document.getElementsByClassName("tab");
+//        x[n].style.display = "block";
+//        //... and fix the Previous/Next buttons:
+//        if (n == 0) {
+//            document.getElementById("prevBtn").style.display = "inline";
+//        } else {
+//            document.getElementById("prevBtn").style.display = "inline";
+//        }
+//        if (n == (x.length - 1)) {
+//            document.getElementById("nextBtn").innerHTML = "Submit";
+//        } else {
+//            document.getElementById("nextBtn").innerHTML = "continue";
+//        }
+//        //... and run a function that will display the correct step indicator:
+//        fixStepIndicator(n)
+//    }
+//
+//    function nextPrev(n) {
+//        // This function will figure out which tab to display
+//        var x = document.getElementsByClassName("tab");
+//        // Exit the function if any field in the current tab is invalid:
+//        if (n == 1 && !validateForm())
+//            return false;
+//        // Hide the current tab:
+//        x[currentTab].style.display = "none";
+//        // Increase or decrease the current tab by 1:
+//        currentTab = currentTab + n;
+//        // if you have reached the end of the form...
+//        if (currentTab >= x.length) {
+//            // ... the form gets submitted:
+//            document.getElementById("regForm").submit();
+//            return false;
+//        }
+//        // Otherwise, display the correct tab:
+//        showTab(currentTab);
+//    }
+//
+//    function validateForm() {
+//        // This function deals with validation of the form fields
+//        var x, y, i, valid = true;
+//        x = document.getElementsByClassName("tab");
+//        y = x[currentTab].getElementsByTagName("input");
+//        // A loop that checks every input field in the current tab:
+//        for (i = 0; i < y.length; i++) {
+//            // If a field is empty...
+//            if (y[i].value == "") {
+//                // add an "invalid" class to the field:
+//                y[i].className += " invalid";
+//                // and set the current valid status to false
+//                valid = false;
+//            }
+//        }
+//        // If the valid status is true, mark the step as finished and valid:
+//        if (valid) {
+//            document.getElementsByClassName("step")[currentTab].className += " finish";
+//        }
+//        return valid; // return the valid status
+//    }
+//
+//    function fixStepIndicator(n) {
+//        // This function removes the "active" class of all steps...
+//        var i, x = document.getElementsByClassName("step");
+//        for (i = 0; i < x.length; i++) {
+//            x[i].className = x[i].className.replace(" active", "");
+//        }
+//        //... and adds the "active" class on the current step:
+//        x[n].className += " active";
+//    }
+// OTP SECTION
+    var obj = document.getElementById('partitioned');
+    obj.addEventListener("keydown", stopCarret);
+    obj.addEventListener("keyup", stopCarret);
+
+    function stopCarret() {
+        if (obj.value.length > 6) {
+            setCaretPosition(obj, 6);
+        }
+    }
+
+    function setCaretPosition(elem, caretPos) {
+        if (elem != null) {
+            if (elem.createTextRange) {
+                var range = elem.createTextRange();
+                range.move('character', caretPos);
+                range.select();
+            } else {
+                if (elem.selectionStart) {
+                    elem.focus();
+                    elem.setSelectionRange(caretPos, caretPos);
+                } else
+                    elem.focus();
+            }
+        }
+    }
+</script>
+<style>
+    #partitioned {
+        padding-left: 15px;
+        letter-spacing: 42px;
+        border: 0;
+        background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+        background-position: bottom;
+        background-size: 50px 1px;
+        background-repeat: repeat-x;
+        background-position-x: 35px;
+        width: 295px;
+        min-width:295px;
+        text-align: left;
+    }
+
+    .strong   { color: #060; border-color: #0F0;}
+    .medium   { color: #C60; border-color: #FC0;}
+    .weak     { color: #900; border-color: #F00;}
+    .strength { padding: 1px 10px; border: 2px solid; color: #FFF;}
+</style>

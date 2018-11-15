@@ -1,0 +1,255 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <!--<header class="st_header">
+        <nav class="navbar navbar-expand-lg navbar-light st_menu">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html"><img src="/home/img/logo1.png" alt="Logo"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dark-menu" aria-controls="dark-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="dark-menu">
+                    <ul class="navbar-nav mr-auto left_menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Planner</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Marketplace</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Jobs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Performance</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto right_menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-plus"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="far fa-calendar-alt"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="message"><i class="far fa-envelope"></i><i class="indicator"></i></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="notification"><i class="fas fa-bell"></i><i class="indicator"></i></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="avatar"><img src="/home/img/bg.jpg" alt="avatar"> <i class="notice"></i></span> Jimmy carter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>--><!--./st_header-->
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Marketplace</a></li>
+                                <li class="breadcrumb-item active">Browse vendors</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+        <section class="vendor-br-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <h5 class="col-md-2 col-sm-2">Browse vendors</h5><!--/.end here -->
+                            <div class="col-md-2 col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><img src="/home/img/vendor-type.svg" alt="Icon"></span>
+                                    </div>
+                                    <select class="form-control" ng-change="updateFilter()" ng-model="filter.city">
+                                        <option selected="">Select City</option>
+                                        <option ng-repeat="city in cities" value="{{city.name}}">{{city.name}}</option>
+                                    </select>
+                                </div>
+                            </div><!--/.end here -->
+                            <div class="col-md-2 col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><img src="/home/img/vendor-type.svg" alt="Icon"></span>
+                                    </div>
+                                    <select class="form-control" ng-change="updateFilter()" ng-model="filter.vendortype_id">
+                                        <option value="" selected="">Vendor type</option>
+                                        <option ng-repeat="vendortype in VendorTypes" value="{{vendortype._id}}">{{vendortype.title}}</option>
+                                    </select>
+                                </div>
+                            </div><!--/.end here -->
+                            <div class="col-md-2 col-sm-2 ml-auto">
+                                <a href="#"><img src="/home/img/post-job.png" alt="Basket-Icon"> Post a job</a>
+                            </div><!--/.end here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--/.Browse-Sec End Here -->
+        <section class="result-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                        <div class="filed-inner-sec">
+                            <form class="filter-form" id="" name="Filter-Form" method="post" action="">
+                                <div class="head-sec">
+                                    <h6>Filter</h6><input type="reset" value="Reset Filters">
+                                </div>
+                                <div class="filed-sec">
+                                    <div class="head-sec">
+                                        <h6>Ratings</h6>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 5
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 4
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 3 - 4
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> < 2
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filed-sec">
+                                    <div class="head-sec">
+                                        <h6>Experience in years</h6>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 5 +
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 3 - 4
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 2 - 3
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 1 - 2 
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> < 1 
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filed-sec">
+                                    <div class="head-sec">
+                                        <h6>Budget in dollars</h6>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 10,000+
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 8,000+
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 6,000+
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 3,000+
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> < 3,000
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="add-more">
+                                    <button type="button">Add more filters</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!--/.col-md-2 end here -->
+                    <div class="col-md-10 col-sm-10">
+                        <div class="sort-sec">						
+                            <div class="head-sec">
+                                <h6>Showing {{businesses.length}} results</h6> 
+                                <select class="short-filter">
+                                    <option>Sort by: Highest Rating first</option>
+                                </select>
+                            </div>
+                            <div class="row"> 
+                                <div ng-if="businesses.length==0">No data found!</div>
+                                <div class="col-md-4 col-sm-4" ng-repeat="business in businesses" ng-if="businesses.length >0">
+                                    <div class="pr_wrapper">
+                                        <div class="img_sec">
+                                            <img src="/home/img/bg.jpg" alt="Product Image">
+                                            <span class="wishlist checked"><i class="fas fa-heart"></i></span>
+                                        </div>
+                                        <div class="text-sec">
+                                            <div class="pr_name">
+                                                <h6><a ui-sref="vendorProfile({id:business._id})">{{business.company_name}}</a></h6>
+                                                <span class="location">{{business.city}}</span>
+                                                <span class="rated"><img src="/home/img/top-rated.svg" alt="Image"> Top rated</span>
+                                            </div>
+                                            <div class="pr_review">
+                                                <ul>
+                                                    <li>4.9 <img src="/home/img/star.svg" alt="Star"> <span>12 Reviews</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--/.Result-Sec End Here -->
+    </section><!--/.content-sec-->
+</main>

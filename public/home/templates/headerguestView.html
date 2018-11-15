@@ -1,0 +1,85 @@
+<header class="st_header" ng-controller="globalCtrl">
+    <nav class="navbar navbar-expand-lg navbar-light st_menu">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img src="/home/img/logo1.png" alt="Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dark-menu" aria-controls="dark-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="dark-menu">
+                <ul class="navbar-nav mr-auto left_menu">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref="editUser">My Profile</a>
+                    </li>
+                    <li class="nav-item" ng-class="{'active': activePage.invitations == true}"> 
+                        <a class="nav-link" ui-sref="myInvitations">Invitations</a>
+                    </li>
+                    <li class="nav-item" ng-class="{'active': activePage.marketplace == true}">
+                        <a class="nav-link" ui-sref="events">Events</a>
+                    </li>
+                    <li class="search-icon">
+                        <a class="nav-link" href=""><img src="/home/img/search-1.svg" alt="avatar"></a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav ml-auto right_menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><span class="message"><i class="far fa-envelope"></i><i class="indicator"></i></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><span class="notification"><i class="fas fa-bell"></i><i class="indicator"></i></span></a>
+                    </li>
+                    <li class="nav-item dropdown" ng-if="currentUser">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><span class="avatar"><img src="/home/img/bg.jpg" alt="avatar"> <i class="notice"></i></span>{{currentUser.firstname}} {{currentUser.lastname}}</a>
+                        <div class="dropdown-menu">
+                            <div class="body-sec">
+                                <div class="avatar-sec">
+                                    <img ng-if="currentUser.image" src="{{currentUser.image}}" alt="avatar">
+                                    <img ng-if="!currentUser.image" src="/home/img/bg.jpg" alt="avatar">
+                                </div>
+                                <div class="profile-dt">
+                                    <p>{{currentUser.firstname}} {{currentUser.lastname}}</p>
+                                    <a href="#">{{currentUser.email}}</a>
+                                    <a href="/dost#/editUser" class="btn btn-info btn-pro">Planner profile</a>
+                                </div>
+                            </div>
+                            <div class="footer-sec">
+                                <a style="cursor:pointer;" data-toggle="modal" data-target="#SwitchView">Switch profile</a>
+                                <a href="/logout" class="log_out">Sign out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Switch View -->
+<div class="modal fade" id="SwitchView" role="dialog">
+    <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/event-star.svg"></span>&nbsp; Select View</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <div class="form-group">   
+                            <label><a data-dismiss="modal" ui-sref="projectlist">Planner</a></label>
+                            <!--<label><a data-dismiss="modal" ui-sref="taskList({id:project._id})">Guest</a></label>-->
+                        </div>
+                        <div class="form-group">
+                            <label><a data-dismiss="modal" ui-sref="browseJobs">Vendor</a></label>
+                        </div>
+                        <div class="form-group">
+                            <label><a data-dismiss="modal" ui-sref="myInvitations">Guest</a></label>
+                        </div>
+                    </div>
+                </div>
+                <!--div class="modal-footer mod-footr">
+                    <button type="submit" class="btn btn-default">Send</button>
+                </div-->
+            </div>
+    </div>
+</div>
+</header><!--./st_header-->
+

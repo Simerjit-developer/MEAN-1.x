@@ -1,0 +1,543 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a>Project</a></li>
+                                <li class="breadcrumb-item"><a>Planner</a></li>
+                                <li class="breadcrumb-item active">{{project.name}}</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="team-list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 border-sides">
+                        <div ng-include="'/home/templates/Planner/sidebar.html'"></div>
+                    </div>
+					<div class="col-md-9 m-auto">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="bud-overview">
+									<h6>Budget Overview</h6>
+									 <div class="caterers-card">
+										<div class="row">
+											<div class="col-md-4">
+												Chart
+											</div>
+											<div class="col-md-8">
+												<ul class="bud-locked">
+													<li><img class="ellip" src="/home/img/credit-card.svg" alt="card">&nbsp; Total Budget Locked</li>
+													<li><span class="expense">Rs {{project.overall_budget}}</span>&nbsp;
+														<div class="dropdown demo-project">
+															<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+															<img class="ellip" src="/home/img/more.svg" alt="arrow"/></button>
+																<ul class="dropdown-menu">
+																	<li>
+																		<span class="Agar-Gram">Agar Graham</span>
+																	</li>
+																	<li>
+																		<span class="Agar-Gram">Fox Mulder</span>
+																	</li>
+																	<li>
+																		<span class="Agar-Gram">Agar Graham</span>
+																	</li>
+																</ul>
+														</div>
+													</li>
+													<li><img class="ellip" src="/home/img/tag.svg" alt="card">&nbsp; Expense</li>
+													<li><span class="expense">Rs 12,320</span>&nbsp;</li>
+												</ul>
+											</div>
+										</div>
+									 </div>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="bud-overview-1">
+									<ul class="upcome-exp">
+										<li><h6 class="expense-head">Upcoming Expenses</h6></li>
+										<li>1 day <input type="radio" ng-model="days" value="1" ng-change="get_upcoming_expenses(days)"></li>
+										<li><span class="week">Week</span><input type="radio" ng-model="days" value="7" ng-change="get_upcoming_expenses(days)"></li>
+										<li>30 days <input type="radio" ng-model="days" value="30" ng-change="get_upcoming_expenses(days)"></li>
+										<li>Custom date <md-datepicker md-open-on-focus md-hide-icons="calendar" md-min-date="today" md-max-date="project.end_date" ng-model="selected_date" ng-change="updateCalcs(selected_date)"></md-datepicker></li>
+										<li><span class="week">Filter By</span></li>
+										<li>
+											<div class="form-group row expense-lab">
+												<label>No. of Rows</label>
+												<div class="select"> 
+													<select name="slct" id="slct" ng-model="perPage" ng-change=get_upcoming_expenses(perPage)> 
+														<option value="5">5 per page</option>
+														<option value="10">10 per page</option>
+														<option value="20">20 per page</option>
+														<option value="50">50 per page</option>
+														<option value="100">100 per page</option>
+													</select>
+												 </div>
+											</div>
+										</li>
+									</ul>
+									<div class="caterers-card exp-events">
+										<table class="table">
+											 <tbody>
+											   <tr>
+												<th>Expense</th>
+												<th>Event</th>
+												<th>Amount</th>
+												<th>Due in</th>
+											   </tr>
+												<tr ng-if="upcoming_expenses.length != 0" ng-repeat="item in upcoming_expenses">
+													<td>{{$index + 1}}. {{item.item}}</td>
+													<td>{{item.project_details.events.name}}</td>
+													<td>Rs {{item.cost}}</td>
+													<td> {{item.due_date | datediff}}</td>
+												</tr> 
+												<tr ng-if="upcoming_expenses.length == 0">
+													<td > No results found for this criteria. </td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 m-auto">
+								<div class="caterers-card">
+									<div class="row">
+										<div class="col-md-4">
+											<h6>Service level Budget Allocation</h6>
+										</div>
+										<div class="col-md-8">
+											<div class="bud-allocation">
+												<ul class="decoration">
+													<li><span class="Deco"></span>
+														<span class="Decoration-expns">Decoration</span>
+														<span class="rupes">6,000Rs</span>
+													</li>
+													<li><span class="Deco Deco-1"></span>
+														<span class="Decoration-expns">Entertainment</span>
+														<span class="rupes">6,000Rs</span>
+													</li>
+													<li><span class="Deco Deco-2"></span>
+														<span class="Decoration-expns">Logistics</span>
+														<span class="rupes">6,000Rs</span>
+													</li>
+													<li><span class="Deco Deco-3"></span>
+														<span class="Decoration-expns">Mehendi</span>
+														<span class="rupes">6,000Rs</span>
+													</li>
+													<li><span class="Deco Deco-4"></span>
+														<span class="Decoration-expns">Catering</span>
+														<span class="rupes">6,000Rs</span>
+													</li>
+													<li><span class="Deco Deco-5"></span>
+														<span class="Decoration-expns">Makeup</span>
+														<span class="rupes">6,000Rs</span>
+													</li>
+													<li><span class="Deco Deco-6"></span>
+														<span class="Decoration-expns">Decoration</span>
+														<span class="rupes">6,000Rs</span>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 m-auto">
+								<div class="view-vendor-list">
+									<table class="table">
+										<thead>										
+											<tr>
+												<th>Service Name </th>
+												<th>Budget Allocated</th>
+												<th>Budget Spent</th>
+												<th>Spending %</th>
+												<th>Number of Events</th>
+												<th>Number of Vendors</th>
+												<th></th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="service-deco" ng-show="data_to_work.length == 0">
+												<td colspan="6"> No records yet.  </td>
+											</tr>
+											
+											<tr class="service-deco" ng-repeat="(index1 ,item) in data_to_work">
+												<td>{{item.vendor}}  </td>
+												<td>Rs 10,000</td>
+												<td>9,000</td>
+												<td>90%</td>
+												<td>04</td>
+												<td>04</td>
+												<td>
+												<button type="button" class="budget-btnnn" ng-click="my_Function(item,index1)">View Vendors</button></td>
+												<td>
+													<div class="dropdown demo-project">
+														<button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown" aria-expanded="false">
+														<img class="ellip" src="/home/img/more-icon-color.svg" alt="arrow"/></button>
+															<ul class="dropdown-menu budd">
+																<li>
+																	<span class="Agar-Gram">Agar Graham</span>
+																</li>
+																<li>
+																	<span class="Agar-Gram">Fox Mulder</span>
+																</li>
+																<li>
+																	<span class="Agar-Gram">Agar Graham</span>
+																</li>
+															</ul>
+													</div>
+												</td>
+												<table id='collapsetable_{{index1}}' class="budgettables" style="display:none;width:100%">
+														<!-- ng-if="item.show == true"  -->
+													<thead>										
+														<tr>
+															<th>Vendor Name</th>
+															<th>Event</th>
+															<th>Proposed Budget</th>
+															<th>Finalized Budget</th>
+															<th>Budget Spent</th>
+															<th>Spending %</th>
+															<th>Upcoming expense</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="service-deco" >
+																<!-- ng-repeat="event in item.events"  -->
+															<td>{{item.vendor}}</td>
+															<td>{{event.project_details.events.name}}</td>
+															<td>Rs {{event.jobs.budget}}</td>
+															<td>Rs {{event.proposal_details.budget}}</td>
+															<td>Rs {{event.cost}}</td>
+															<td>85%</td>
+															<td>Rs 1,000</td>
+														</tr>
+													</tbody>
+												</table>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 m-auto">
+								<div class="jobs guest">
+									<div class="nav nav-tabs tabs-header jobs-tab" id="jobs-tab" role="tablist">
+										<a class="nav-item nav-link active" id="nav-job-requirements-tab" data-toggle="tab" data-target="#jobs-requirements" role="tab" aria-controls="nav-job-requirements" aria-selected="true">Past Expenses</a>
+										<a class="nav-item nav-link" id="nav-vendor-tab" data-toggle="tab" data-target="#vendor" role="tab" aria-controls="nav-guests" aria-selected="true">Upcoming Expenses </a>
+									</div>
+								</div>
+								<div class="tab-content" id="jobs-tab">
+									<div class="tab-pane fade active show" id="jobs-requirements" role="tabpanel" aria-labelledby="nav-job-requirements-tab">
+										<div class="guest-head-sec">
+										<form class="form-inline">
+											<div class="form-group event-wed">
+												<label class="Event-type">Event type</label>
+												<select class="short-filter guest-page" ng-model="selected_event" ng-change="changeEvent(selected_event)">
+													<option value="0" >View all</option>
+													<option ng-repeat="event in project.events" value="{{event._id}}"> {{event.name}}</option> 
+												</select>
+											</div>
+											<div class="form-group event-wed">
+												<label class="Event-type">Service</label>
+												<select class="short-filter guest-page" ng-model="selected_service" ng-change="event_service_based_records()">
+													<option  value="0" >View all</option>
+													<option ng-repeat="service in event_based_services" value="{{service.service_details._id}}"> {{service.vendortype_details.title }}</option>
+												</select>
+											</div>
+											<div class="form-group event-wed">
+												<label class="Event-type">No. of Rows</label>
+												<select class="short-filter guest-page" ng-model="perPage" ng-change=fetchResults(perPage) >
+													<option value="1" >1 per page</option> 
+													<option value="5" >5 per page</option> 
+													<option value="10">10 per page</option> 
+													<option value="20">20 per page</option> 
+													<option value="50">50 per page</option> 
+												</select>
+											</div>
+										</form>
+										<div class="dropdown demo-project guest-invitation event-wed-invite">
+												<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Export Expense list
+												<span class="down-arr-icon white"><img src="/home/img/down-arrow-white.svg" alt="down arrow"></span></button>
+												<ul class="dropdown-menu guest-menu-invite" x-placement="bottom-start" style="position: absolute;transform: translate3d(0px, 25px, 0px);top: 0px;left: 0px;will-change: transform;">
+													<li><span>Upload invoices to drive</span></li>
+																	
+												</ul>
+											</div>
+										</div>
+										<div class="guest-listing">
+											<table id="example2" class="table  table-hover dataTable project-table" role="grid" aria-describedby="example2_info">
+															<thead>
+																<tr role="row " class="header">
+																	<th></th>
+																	<th>Item</th>
+																	<th>Date</th>
+																	<th>Event</th>
+																	<th>Service</th>
+																	<th>Added By</th>
+																	<th>Cost</th>
+																	<th> </th>
+																	<th></th>
+																</tr>
+															</thead>
+															<tbody> 
+																<tr role="row" class="odd" ng-if="all_basic_records.length == 0">
+																	<td colspan="7">
+																		<div class="form-check">
+																			<label class="form-check-label" style="text-align: center">
+																				 No records for this criteria.
+																			</label>
+																		</div>
+																	</td>
+																</tr>
+																<tr role="row" class="odd" ng-if="all_basic_records.length != 0" ng-repeat="record in all_basic_records | past_dates" >
+																	<td>
+																		<div class="form-check">
+																			<label class="form-check-label">
+																				<input type="checkbox" class="form-check-input" value="">
+																				<span class="custom-check"></span> 
+																			</label>
+																		</div>
+																	</td>
+																	<td> {{record.item}}</td>
+																	<td> {{record.due_date | date }} </td>
+
+																	<td> {{record.project_details.events.name}}</td>
+																	<td ng-if="record.vendortype_details"> {{record.vendortype_details.title}} </td>
+																	<td ng-if="!record.vendortype_details"> NA</td> 
+																	<td> {{record.added_by.firstname}} {{record.added_by.lastname}}</td>
+																	<td> Rs {{record.cost}}</td>
+																	<td> <a  ng-if="record.invoice" href="{{record.invoice}}" target="_blank"> <img class="ellip" src="/home/img/attach.svg" alt="arrow"/> </a></td>
+																 
+																	<td>
+																		<div class="dropdown demo-project">
+																			<button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown" aria-expanded="false">
+																				<img class="ellip" src="/home/img/more-icon-color.svg" alt="arrow"/></button>
+																					<ul class="dropdown-menu budd">
+																						<li ng-click="removeRecord(record._id,$index)">
+																							<span class="Agar-Gram">Delete Expense</span>
+																						</li>
+																						<li >
+																							<span class="Agar-Gram"><a  ng-if="record.invoice" href="{{record.invoice}}" target="_blank">Export Invoice</a></span>
+																						</li>
+																					</ul>
+																		</div>
+																	</td>
+																</tr>
+																<tr class="record-exp">
+																	<td><a style="cursor: pointer;text-decoration: underline" data-toggle="modal" data-target="#myModalguest1">+ Record expense</a></td>
+																	<td>+ Record multiple expenses</td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td><span class="total-expens">Total expense</span></td>
+																	<td><span class="total-expens"> Rs {{basic_past_records_total}}</span></td>
+																	<td></td>
+																	<td></td>
+																</tr>
+															
+															</tbody>
+												</table>
+											</div>
+									</div>
+									<div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="nav-vendor-tab">
+											<div class="guest-head-sec">
+												<form class="form-inline">
+													<div class="form-group event-wed">
+														<label class="Event-type">Event type</label>
+														<select class="short-filter guest-page" ng-model="selected_event" ng-change="changeEvent(selected_event)">
+															<option value="0">View all</option>
+															<option ng-repeat="event in project.events" value="{{event._id}}"> {{event.name}}</option>
+														</select>
+													</div>
+													<div class="form-group event-wed">
+														<label class="Event-type">Service</label>
+														<select class="short-filter guest-page" ng-model="selected_service" ng-change="event_service_based_records()">
+															<option value="0">View all</option>
+															<option ng-repeat="service in event_based_services" value="{{service.service_details._id}}">
+																{{service.vendortype_details.title }}</option>
+														</select>
+													</div>
+													<div class="form-group event-wed">
+														<label class="Event-type">No. of Rows</label>
+														<select class="short-filter guest-page" ng-model="perPage" ng-change=fetchResults(perPage)>
+															<option value="5">5 per page</option>
+															<option value="10">10 per page</option>
+															<option value="20">20 per page</option>
+															<option value="50">50 per page</option>
+															<option value="100">100 per page</option>
+														</select>
+													</div>
+												</form>
+												<!-- <div class="delete expense" >
+													<button type="button" class="delet-exp-btnn">Delete Expense</button>
+													<button type="button" class="delet-exp-btnn-1">Export Invoice</button>
+												</div> -->
+											</div>
+										<div class="guest-listing">
+											<table id="example2" class="table  table-hover dataTable project-table" role="grid" aria-describedby="example2_info">
+															<thead>
+																<tr role="row " class="header">
+																	<th></th>
+																	<th>Item</th>
+																	<th>Date</th>
+																	<th>Event</th>
+																	<th>Service</th>
+																	<th>Added By</th>
+																	<th>Cost</th>
+																	<th></th>
+																	<th></th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr role="row" class="odd" ng-if="all_basic_records.length == 0">
+																	<td colspan="7">
+																		<div class="form-check">
+																			<label class="form-check-label" style="text-align: center">
+																				No records for this criteria.
+																			</label>
+																		</div>
+																	</td>
+																</tr>
+																<tr role="row" class="odd" ng-repeat="record in all_basic_records | upcoming_dates "  ng-if="all_basic_records.length != 0" >
+																	<td>
+																		<div class="form-check">
+																			<label class="form-check-label">
+																				<input type="checkbox" class="form-check-input" value="">
+																				<span class="custom-check"></span>
+																			</label>
+																		</div>
+																	</td>
+																	<td> {{record.item}}</td>
+																	<td> {{record.due_date | date }} </td>
+
+																	<td> {{record.project_details.events.name}}</td>
+																	<td ng-if="record.vendortype_details"> {{record.vendortype_details.title}} </td>
+																	<td ng-if="!record.vendortype_details"> NA</td> 
+																	<td> {{record.added_by.firstname}} {{record.added_by.lastname}}</td>
+																	<td> Rs {{record.cost}}</td>
+																	<td > <a  ng-if="record.invoice" href="{{record.invoice}}" target="_blank"> <img class="ellip" src="/home/img/attach.svg" alt="arrow"/> </a></td>
+																	<td>
+																		<div class="dropdown demo-project">
+																			<button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown" aria-expanded="false">
+																				<img class="ellip" src="/home/img/more-icon-color.svg" alt="arrow" /></button>
+																			<ul class="dropdown-menu budd">
+																				<li ng-click="removeRecord(record._id,$index)">
+																					<span class="Agar-Gram">Delete Expense</span>
+																				</li>
+																				<li  >
+																					<span class="Agar-Gram">Export Invoice</span>
+																				</li>
+																			</ul>
+																		</div>
+																	</td>
+																</tr>
+																<tr class="record-exp">
+																	<td data-toggle="modal" data-target="#myModalguest1">+ Record expense </td>
+																	<td>+ Record multiple expenses</td>
+																	<td></td>
+																	<td></td>
+																	<td></td>
+																	<td><span class="total-expens">Total expense</span></td>
+																	<td><span class="total-expens">$ {{basic_coming_records_total}}</span></td>
+																	<td></td>
+																	<td></td>
+																</tr>
+															
+															</tbody>
+												</table>
+											</div>
+									</div>
+								</div>
+							<div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </section>
+    </div>
+	<div class="modal fade " id="myModalguest1" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<form name='recordexpense' novalidate>
+					<div class="modal-header">
+						<h4 class="modal-title guest-accomodate"> <span class="team-member-icon flight"><img class="" ng-src="home/img/credit-card.svg"></span>&nbsp;
+							New Expense</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="add-member-modl"> 
+							<div class="form-group">
+								<label>Item Name</label>
+								<input type="text" class="form-control" ng-model="record.item" placeholder="Enter item name" required>
+							</div>
+							<div class="form-group">
+								<label>Item cost</label>
+								<input type="number" class="form-control" ng-model="record.cost" placeholder="12000" required>
+							</div>
+							<div class="form-group">
+								<label>Date of Expense</label>
+								<!-- <input type="date" class="form-control" placeholder="29 march 2018" required> -->
+								
+								<div class="modl-img"> 
+									<img class="" ng-src="home/img/calendar-page.svg">
+								</div>
+								<md-datepicker md-open-on-focus md-hide-icons="calendar" md-min-date="project.start_date" md-max-date="project.end_date" ng-model="record.due_date"></md-datepicker>
+								
+							</div>
+							<div class="form-group">
+								<label>Event Name</label>
+								<select class="form-control service-service" ng-model="record.event_id" ng-change="getServices(record.event_id,1)" required>
+									<option ng-repeat="event in project.events" value="{{event._id}}"> {{event.name}}</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Service Name </label>
+								<select class="form-control service-service" ng-model="record.service_id"  >
+									 <option value=""> NA </option> 
+									 <option ng-repeat="service in event_based_services_modal" value="{{service.service_details._id}}"> {{service.service_details.title }}</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Attach Invoice  </label>
+								<input class="form-control" onchange="angular.element(this).scope().uploadFile(this)" type="file" id="exampleInputFile" name="invoice">
+								<span style="float:right;" ng-if="loading == true">
+									File is uploading.....
+								</span>
+							</div> 											 
+						</div>
+					</div>
+					<div class="modal-footer mod-footr">
+						<button ng-disabled="recordexpense.$valid == false || loading == true" ng-click="add_new_record(record)" type="submit" class="btn btn-default" data-dismiss="modal">Record Expense</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</main>
+<script>
+function myFunction00() { 
+    var x = document.getElementById("collapsetable");
+    if (x.style.display === "none") {
+	console.log('here2');
+        x.style.display = "table";
+    } else {
+	console.log('here1');
+        x.style.display = "none";
+    }
+}
+</script>

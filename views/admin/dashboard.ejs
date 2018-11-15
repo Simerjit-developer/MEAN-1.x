@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" ng-app='dost.admin'>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOST - admin</title>
+  <meta name="description" content="Dost::A Wedding Platform">
+  <meta name="author" content="Simerjit Kaur">
+
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="/admin/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/admin/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="/admin/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/admin/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/admin/dist/css/skins/_all-skins.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <div ng-include='"/admin/templates/common/header.html"'></div>
+        <div ng-include='"/admin/templates/common/left-sidebar.html"'></div>
+        <div ui-view class='full-height' id='main-content'></div>
+    </div>
+    <!-- adminLTE scripts starts from here -->
+   <!-- jQuery 3 -->
+    <script src="/admin/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="/admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- adminLTE scripts ends from here -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-sanitize.js"></script>
+   <script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.2/dist/showdown.min.js"></script>
+
+  <script src='/admin/js/lib/markdown.js'></script>
+  <script src='/admin/js/app.js'></script>
+  <script src='/admin/js/filter.js'></script>
+  <script src='/admin/js/controllers.js'></script>
+  
+  <!-- Add controllers starts here -->
+  <script src='/admin/js/controllers/users.controllers.js'></script>
+  <script src='/admin/js/controllers/vendortypes.controllers.js'></script>
+  <script src='/admin/js/controllers/services.controllers.js'></script>
+  <script src='/admin/js/controllers/highlights.controllers.js'></script>
+  <script src='/admin/js/controllers/business.controllers.js'></script>
+  <script src='/admin/js/controllers/cities.controllers.js'></script>
+  <script src='/admin/js/controllers/events.controllers.js'></script>
+  <script src='/admin/js/controllers/milestones.controllers.js'></script>
+  <script src='/admin/js/controllers/groups.controllers.js'></script>
+  <!-- Add controllers ends here -->
+  <!--<script src='/common/modules/posts.js'></script>-->
+  <script src='/common/modules/users.js'></script>
+  <script src='/common/modules/vendortypes.js'></script>
+  <script src='/common/modules/services.js'></script>
+  <script src='/common/modules/highlights.js'></script>
+  <script src='/common/modules/business.js'></script>
+  <script src='/common/modules/cities.js'></script>
+  <script src='/common/modules/events.js'></script>
+  <script src='/common/modules/milestones.js'></script>
+  <script src='/common/modules/fields.js'></script>
+  <script src='/common/modules/groups.js'></script>
+  
+  <!-- adminLTE scripts starts from here -->
+    
+    <!-- Slimscroll -->
+    <script src="/admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="/admin/bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/admin/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/admin/dist/js/demo.js"></script>
+    <!-- adminLTE scripts ends here -->
+    <script src="/admin/dist/js/inlineSVG.js"></script>
+  <!-- include toaster libraries -->
+    <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
+  <!-- include confirmation box libraries -->
+    <script src="/admin/bower_components/angular-confirm/dist/angular-confirm.min.js"></script>
+    <link rel="stylesheet" href="/admin/bower_components/angular-confirm/dist/angular-confirm.min.css" />
+  <script type='text/javascript'>
+    var currentUser = <%- JSON.stringify(user); %>;
+    adminApp.run(function($rootScope){
+      $rootScope.currentUser = currentUser;
+    });
+      // re-Initialize menu sidebar tree view
+    $(document).ready(function(){
+        setTimeout(function(){ 
+            $('.sidebar-menu').tree(); 
+            /* Replace all SVG images with inline SVG */
+            jQuery('img.svg').each(function(){
+                console.log('fdg');
+                var $img = jQuery(this);
+                var imgID = $img.attr('id');
+                var imgClass = $img.attr('class');
+                var imgURL = $img.attr('src');
+
+                jQuery.get(imgURL, function(data) {
+                    /* Get the SVG tag, ignore the rest */
+                    var $svg = jQuery(data).find('svg');
+
+                    /* Add replaced image's ID to the new SVG */
+                    if(typeof imgID !== 'undefined') {
+                        $svg = $svg.attr('id', imgID);
+                    }
+
+                    /* Add replaced image's classes to the new SVG */
+                    if(typeof imgClass !== 'undefined') {
+                        $svg = $svg.attr('class', imgClass+' replaced-svg');
+                    }
+
+                    /* Remove any invalid XML tags as per http://validator.w3.org */
+                    $svg = $svg.removeAttr('xmlns:a');
+
+                    /* Replace image with new SVG */
+                    $img.replaceWith($svg);
+
+                }, 'xml');
+
+            });
+            inlineSVG.init({
+                svgSelector: 'img.svg', // the class attached to all images that should be inlined
+                initClass: 'js-inlinesvg', // class added to <html>
+              }, function () {
+                console.log(' wsdAll SVGs inlined');
+              });
+        }, 2000);
+    })
+    </script>
+    
+</body>
+</html>

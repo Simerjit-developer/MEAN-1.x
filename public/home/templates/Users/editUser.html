@@ -1,0 +1,117 @@
+<main>
+   <div ng-include="'/home/templates/header.html'"></div><!--./st_header-->
+    <section class="content-sec">
+        <section class="my-pr-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="outer-sec">
+                            <form class="pr-form" name="Profile-Form" ng-submit="updateUser()">
+                                <div class="form-head">
+                                    <div class="col-md-8 col-sm-8 m-auto">
+                                        <div class="inner-sec">
+                                            <h3>My Profile</h3>
+                                            <input type="submit" class="btn btn-info btn-st" value="Update profile">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-sec">
+                                    <div class="col-md-8 col-sm-8 m-auto">
+                                        <div class="inner-sec">
+                                            <div class="avatar-sec">
+                                                <span ng-if="loading==true">Image is uploading</span>
+                                                <img ng-if="imgshow" ng-src="{{imgshow}}" />
+                                                <img ng-if="user.image && !imgshow" src="{{user.image}}"/>
+                                                <img ng-if="!imgshow && !user.image" src="/home/img/bg.jpg" alt="Avatar">
+                                                
+                                                <input type="file" id="fileInput" class="form-control" name="file">
+<!--                                                <input type="file" onchange="angular.element(this).scope().uploadFile(this)" class="form-control" name="file">-->
+                                                <span class="edit"><i class="fas fa-pencil-alt"></i></span>
+                                            </div>
+                                            <div class="group-outer">
+                                                <div class="form-group half">
+                                                    <label>Name</label>
+                                                    <input type="text" ng-model="user.firstname" class="form-control">
+                                                </div>
+                                                <div class="form-group half mycustom_half">
+                                                    <label>Date of birth</label>
+                                                    
+                                                    <input type="date" ng-model="user.dob" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="email" ng-model="user.email" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input type="tel" ng-model="user.phone" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <select class="form-control"  ng-model="user.location">
+                                                        <option ng-repeat="city in cities" value="{{city.name}}" ng-selected="user.location== city.name" >{{city.name}}</option>
+                                                    </select>
+                                                    <!--<input type="text" ng-model="user.location" class="form-control">-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form><!--/.Profile Form End Here -->
+                            <form class="pr-form pass-form" name="ProfileForm" ng-submit="changePassword()"> 
+                                <div class="form-sec">
+                                    <div class="col-md-8 col-sm-8 m-auto">
+                                        <div class="inner-sec">
+                                            <div class="group-outer">
+                                                <div class="form-group half border-none">
+                                                    <label>Password</label>
+                                                    <input type="password" ng-required="true" ng-model="user.password" class="form-control" placeholder="***********">
+                                                </div>
+                                                <div class="form-group half">
+                                                    <label>&nbsp;</label>
+                                                    <input type="submit" ng-disabled="ProfileForm.$invalid" class="btn btn btn-outline-info btn-out-st" value="Change password">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form><!--/.Password Form End Here -->
+                            <!--Demo Section starts here -->
+                                
+                            <!--Select an image file: <input type="file" id="fileInput" />-->
+                            
+                            <div class="modal fade add-guest-pop" id="crop_profile" role="dialog" >
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Adjust Image</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+                <div class="modal-body">
+                    
+                    <div>Cropped Image:</div>
+                    <div><img ng-src="{{myCroppedImage}}" /></div>
+
+                    <div class="cropArea"><div ng-hide="myCroppedImage">Select an image file: <input type="file" id="fileInput" /></div>    
+                    <ui-cropper image="myImage" area-type="circle" chargement="'Loading'" result-image="myCroppedImage" canvas-scalemode="true"></ui-cropper>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer mod-footr">
+                    <button type="button" ng-click="uploadProfileImage()" class="btn btn-default guest-clr">{{uploading_button}}</button>
+                </div>
+        </div>
+
+    </div>
+</div>
+                            
+                            <!-- Ends here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section><!--/.content-sec-->
+</main>

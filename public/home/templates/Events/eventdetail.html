@@ -1,0 +1,391 @@
+<main>
+    <div ng-include="'/home/templates/headerguestView.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a>Events</a></li>
+                                <li class="breadcrumb-item"><a>Event details</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+        <section class="result-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 m-auto col-sm-10">
+                        <div class="caterers-card">
+                            <ul class="reception-events">
+                                <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                <li><span class="budget-level">{{invitation.eventsInvited[0].event.name}}</span><p class="budget-level-1">{{invitation._id.groom_name}} and {{invitation._id.bride_name}} 's</p></li>
+                                <li class="recp-date"><span class="budget-level">{{invitation.eventsInvited[0].invited_on| date}} &nbsp;<small>(1 day ago)</small></span></li>			
+                            </ul>
+                            <p class="evnt-txt-desc">
+                                {{invitation.eventsInvited[0].event.description}}
+                            </p>
+                            <div class="date-menu">
+                                <ul class="reception-events">
+                                    <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                    <li><span class="budget-level">Date and Venue</span></li>
+                                </ul>
+                            </div>
+                            <div class="venue-info">
+                                <ul>
+                                    <li class="venue-date">Date</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].event.start_date| date:'d MMM, yyyy'}}</li>
+                                    <li class="venue-date">Duration</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].event.duration}}</li>
+                                    <li class="venue-date">Time</li>
+                                    <li class="venue-date-list">From {{invitation.eventsInvited[0].event.start_date| date:'h a'}} onwards</li>
+                                    <li class="venue-date">Venue</li>
+                                    <li class="venue-date-list">1-23/21-2D, Paradise hotel, Lukhnow, India.500213</li>
+                                </ul>
+                            </div>
+                            <div class="date-menu">
+                                <ul class="reception-events">
+                                    <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                    <li><span class="budget-level">Dress Code and Theme</span></li>
+                                </ul>
+                            </div>
+                            <div class="venue-info">
+                                <ul>
+                                    <li class="venue-date">Dress code</li>
+                                    <li class="venue-date-list">Black and Blue</li>
+                                    <li class="venue-date">Theme</li>
+                                    <li class="venue-date-list">Holiday</li>
+                                </ul>
+                            </div>
+                            <div class="date-menu">
+                                <ul class="reception-events">
+                                    <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                    <li><span class="budget-level">Attending?</span></li>
+                                </ul>
+                                <p class="evnt-txt-desc accomo" ng-show="invitation.eventsInvited[0].guest_response.guest_response!=1">{{invitation.eventsInvited[0].guest_response.guest_response==3?'Yes':'No'}}</p>
+                                <form class="evnt-txt-desc accomo" ng-show="invitation.eventsInvited[0].guest_response.guest_response==1">
+                                    <input type="radio" ng-model='attending' name='attending' value="3">Yes
+                                    <input type="radio" ng-model='attending' name='attending' value="2">No
+                                </form>
+                                <button ng-show="invitation.eventsInvited[0].guest_response.guest_response==1" ng-click='response()' class="button prefrence">Update</button>
+                            </div>
+                            <div class="date-menu" ng-show="invitation.eventsInvited[0].guest_response.accomodation.length == 0 && invitation.eventsInvited[0].guest_response.accomodation_request == true">
+                                <ul class="reception-events">
+                                    <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                    <li><span class="budget-level">Accomodation and Pick up</span></li>
+                                </ul>
+                                <p class="evnt-txt-desc accomo"> 
+                                    <i>Accommodation and Pick-up details aren’t available yet. Please provide your accommodation preferences and Pickup time and date for the planners to arrange accordingly.</i>
+                                </p>
+                                <button class="button prefrence" data-toggle="modal" data-target="#myModalprefrence">Update Prefrences</button>
+                            </div>
+                        </div>
+                        <div class="caterers-card">
+                            <h6 class="guest-det">Guest Detail</h6>
+                            <div class="date-menu">
+                                <ul class="reception-events">
+                                    <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                    <li><span class="budget-level">Guest Basic Info</span></li>
+                                </ul>
+                                <table class="table accordion-table guest-inv-table">
+                                    <tbody>
+                                        <tr ng-repeat="guest in allguests">
+                                            <td class="label">{{guest.name}}</td>
+                                            <td class="total color-diff">{{guest.group}}</td>
+                                            <td class="invited color-diff">{{guest.phone}}</td>
+                                            <td class="rsvp color-diff">{{guest.email}}</td>
+                                            <td class="rsvp color-diff">{{guest.location}}</td>
+                                            <td class="rsvp color-diff drop"> 
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <img src="/home/img/ellipsis.svg" alt="arrow"/>
+                                                </button>
+                                                <ul class="dropdown-menu guest-invite-list">
+                                                    <li><a >Action 1</a></li>
+                                                    <li><a >Action 2</a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <span style="cursor:pointer;" data-toggle="modal" data-target="#addGuestModal" class="Add-new-guest">+ Add new Guest</span>
+                            </div>
+                            <!-- Accommodation and Pickup Section -->
+                            <div class="date-menu" ng-if="invitation.eventsInvited[0].guest_response.accomodation.length > 0">
+                                <ul class="reception-events">
+                                    <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                    <li><span class="budget-level">Arrival department date and pickup</span></li>
+                                    <li class="drop"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <img class="ellipsis" src="/home/img/ellipsis.svg" alt="arrow"/>
+                                        </button>
+                                        <ul class="dropdown-menu guest-invite-list">
+                                            <li><a>Action 1</a></li>
+                                            <li><a>Action 1</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="venue-info" ng-if="invitation.eventsInvited[0].guest_response.accomodation.length > 0">
+                                <ul>
+                                    <li class="venue-date">Arrival date and time</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].pickupDetails.date|date:'dd MMMM y hh:mm a'}}</li>
+                                    <li class="venue-date">Pick up Point</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].pickupDetails.address}}</li>
+                                    <li class="venue-date">Departure date time</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].dropoffDetails.date|date:'dd MMMM y hh:mm a'}}</li>
+                                    <li class="venue-date">Pick up Point</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].dropoffDetails.address}}</li>
+                                </ul>
+                            </div>
+                            <!-- Hotel and Driver Details -->
+                            <div class="date-menu" ng-if="invitation.eventsInvited[0].guest_response.accomodation[0].hotel">
+                                <ul class="reception-events">
+                                    <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                    <li><span class="budget-level">Hotel and Vehicle details</span></li>
+                                    <!--li class="drop"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <img class="ellipsis" src="/home/img/ellipsis.svg" alt="arrow"/>
+                                        </button>
+                                        <ul class="dropdown-menu guest-invite-list">
+                                            <li><a>Action 1</a></li>
+                                            <li><a>Action 1</a></li>
+                                        </ul>
+                                    </li-->
+                                </ul>
+                            </div>
+                            <div class="venue-info" ng-if="invitation.eventsInvited[0].guest_response.accomodation[0].hotel">
+                                <ul>
+                                    <li class="venue-date">Hotel</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].hotel}}</li>
+                                    <li class="venue-date">Room no</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].room_no}}</li>
+                                    <li class="venue-date">Address</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].address}}</li>
+                                    <li class="venue-date">Pick up Vehicle</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].pickupDetails.vehicle}}</li>
+                                    <li class="venue-date">Pick up Driver name and phone number</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].pickupDetails.driver}}</li>
+                                    <li class="venue-date">Drop off Vehicle</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].dropoffDetails.vehicle}}</li>
+                                    <li class="venue-date">Drop off Driver name and phone number</li>
+                                    <li class="venue-date-list">{{invitation.eventsInvited[0].guest_response.accomodation[0].dropoffDetails.driver}}</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Food Restriction Section -->
+                            <div ng-init="showAddArea = false; EditableArea = false;" >
+                            <div class="date-menu" ng-show="invitation.eventsInvited[0].guest_response.food_restrictions_request == true">
+                                <ul class="reception-events">
+                                    <li class="recept-cake event-imgtxt"><span><img class="like-immg" src="/home/img/engagemen.svg" alt="engagemen"></span></li>
+                                    <li><span class="budget-level" ng-click="showAddArea=true; a=2;">Food Restriction</span></li>
+                                    <li class="drop"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <img class="ellipsis" src="/home/img/ellipsis.svg" alt="arrow"/>
+                                        </button>
+                                        <ul class="dropdown-menu guest-invite-list" >
+                                            <li><a ng-click="EditableArea = true;" style="cursor:pointer;">Edit</a></li>
+                                            <li><a ng-click="showAddArea = true;" style="cursor:pointer;">Add Restriction</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="venue-info" ng-show="invitation.eventsInvited[0].guest_response.food_restrictions_request == true">
+                                <div>
+                                    <ul ng-repeat="food_restriction in invitation.eventsInvited[0].guest_response.food_restrictions">
+                                        <li class="venue-date">{{food_restriction}}</li>
+                                    </ul>
+                                    <ul ng-show="EditableArea">
+                                        <li ng-show="EditableArea" class="venue-date-list"><!--{{food_restriction.meals}} ng-checked="test('No onion garlic')"-->
+                                           <span ng-repeat="(index,val) in data.type"><input type="checkbox" ng-model="data.type[index]"/> {{index}}</span>
+                                        </li>
+                                        <li ng-show="EditableArea">
+                                            <span ng-click="addRestriction()">Update</span>
+                                            <span ng-click="removeFoodRestriction()">Delete</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="addNewRestriction" ng-show="showAddArea">
+                                    <ul>
+                                        <li class="venue-date">
+                                            <span ng-repeat="(index,val) in data.type"><input type="checkbox" ng-model="data.type[index]"/> {{index}}</span>
+<!--                                            <input type="checkbox" ng-model="data.type['No onion garlic']" />No onion garlic
+                                            <input type="checkbox" ng-model="data.type['Diebatic meal']" />Diebatic meal-->
+                                    
+                                            <!--select ng-model="data.type">
+                                                <option value="No onion garlic">No onion garlic</option>
+                                                <option value="Diebatic meal">Diebatic meal</option>
+                                            </select-->
+                                        </li>
+                                        <!--li class="venue-date-list">
+                                            <select ng-model="data.meals">
+                                                <option value="1">1 Meal</option>
+                                                <option value="2">2 Meals</option>
+                                                <option value="3">3 Meals</option>
+                                            </select>
+                                        </li-->
+                                        <li><button ng-click="addRestriction()">Add</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section><!--/.content-sec-->
+    <div class="modal fade " id="myModalprefrence" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title guest-accomodate"> <span class="team-member-icon flight"><img class="" ng-src="home/img/acc.svg"></span>&nbsp;Accomodation</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="add-member-modl">
+                        <div class="form-group">
+                            <label>No of rooms required</label>
+                            <input type="text" class="form-control" ng-model="accommodation.rooms_required" placeholder="02">
+                        </div>
+                        <div class="form-group form-inline">   
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" ng-model="accommodation.room_type" class="custom-control-input" id="customRadio1" name="example1">
+                                <label class="custom-control-label" for="customRadio1">AC</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" ng-model="accommodation.room_type" class="custom-control-input" id="customRadio2" name="example1">
+                                <label class="custom-control-label" for="customRadio2">Non AC</label>
+                            </div>
+                        </div>
+                        <h4 class="modal-title guest-accomodate new"> <span class="team-member-icon flight"><img class="" ng-src="home/img/flight.svg"></span>&nbsp;Pickup Detail</h4>
+
+                        <div class="form-group">   
+                            <label>Date and Time</label>
+                            <!--<md-input-container flex-gt-md="30">-->
+                            <input class="form-control" mdc-datetime-picker="" date="true" time="true" type="text" id="datetime"
+                                   placeholder="Date" show-todays-date="" min-date="date" ng-model="accommodation.pickupDetails.date" class=" md-input"
+                                   readonly="readonly">
+                            <!--</md-input-container>-->
+                            <!--<input type="text" class="form-control" ng-model="post.date_birth" placeholder="12/08/2018 at 12pm noon">-->
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/calendar-page.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>Pickup Address</label>
+                            <input type="text" class="form-control" ng-model="accommodation.pickupDetails.address" placeholder="1-9-2D, Lukhnow, India. 500021">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/location.svg">
+                            </div>
+                        </div>
+                        <h4 class="modal-title guest-accomodate new"> <span class="team-member-icon flight"><img class="" ng-src="home/img/flight.svg"></span>&nbsp;Drop-off Details</h4>
+
+                        <div class="form-group">   
+                            <label>Date and Time</label>
+                            <input class="form-control" mdc-datetime-picker="" date="true" time="true" type="text" id="datetime"
+                                   placeholder="Date" show-todays-date="" min-date="date" ng-model="accommodation.dropoffDetails.date" class=" md-input"
+                                   readonly="readonly">
+                            <!--<input type="text" class="form-control" ng-model="accommodation.dropoffDetails.date" placeholder="12/08/2018 at 12pm noon">-->
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/calendar-page.svg">
+                            </div>
+                        </div>
+                        <div class="form-group">   
+                            <label>Pickup Address</label>
+                            <input type="text" class="form-control" ng-model="accommodation.dropoffDetails.address" placeholder="1-9-2D, Lukhnow, India. 500021">
+                            <div class="modl-img">
+                                <img class="" ng-src="home/img/location.svg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mod-footr">
+                    <button ng-click="addAccommodationDetails()" type="button" class="btn btn-default guest-clr" data-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Guest Modal starts here -->
+    <div class="modal fade add-guest-pop" id="addGuestModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>&nbsp; Add Guest</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form ng-submit="addGuestMe()">
+                    <div class="modal-body">
+                        <div class="add-member-modl">
+                            <div class="form-group">
+                                <label> Name</label>
+                                <input type="text" class="form-control" ng-model="guest.name" placeholder="Raj Chopra">
+                                <div class="modl-img">
+                                    <img class="" ng-src="home/img/user.svg">
+                                </div>
+                            </div>
+                            <div class="form-group">   
+                                <label>Email Id</label>
+                                <input type="text" class="form-control" ng-model="guest.email" placeholder="raj.chopra@company.com">
+                                <div class="modl-img">
+                                    <img class="" ng-src="home/img/emails.svg">
+                                </div>
+                            </div>
+                            <div class="form-group">   
+                                <label>Phone</label>
+                                <div style="width:100%">
+                                    <input type="tel" name="phone" placeholder="9324331312" intl-tel-input ng-model="guest.phone" intl-tel-input-options="{ preferredCountries: ['in', 'sg','us'] }" class="form-control mr-3" ng-required="true" >
+                                    <!--<input type="text" class="form-control" ng-model="guest.phone" placeholder="91-9324331312">-->
+                                    <div class="modl-img">
+                                        <img class="" ng-src="home/img/tablet.svg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">   
+                                <label>Location</label>
+                                <select class="form-control" ng-model="guest.location" >
+                                    <option value="{{city.name}}" ng-repeat="city in cities">{{city.name}}</option>
+                                </select>
+                                <div class="modl-img">
+                                    <img class="" ng-src="home/img/location.svg">
+                                </div>
+                            </div>
+                            <div class="form-group">   
+                                <label>Group</label>
+                                <div class="dropdown demo-project">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">{{guest.group}}
+                                        <span class="down-arr-icon-new"><img src="/home/img/down-arr.svg" alt="down arrow"></span></button>
+                                    <ul class="dropdown-menu" x-placement="top-start" style="position: absolute; transform: translate3d(0px, -177px, 0px); top: 0px; left: 0px; will-change: transform; width:100%">
+                                        <li>
+                                            <input type="radio" ng-model='guest.group' name="group" class="form-check-input" value="Family">
+                                            <i class="custom-check"></i>
+                                            Family
+                                        </li>
+                                        <li>
+                                            <input type="radio" ng-model='guest.group' name="group" class="form-check-input" value="Friends">
+                                            <i class="custom-check"></i>
+                                            Friends
+                                        </li>
+                                        <li>
+                                            <input type="radio" ng-model='guest.group' name="group" class="form-check-input" value="Others">
+                                            <i class="custom-check"></i> 
+                                            Others
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mod-footr">
+                        <button type="submit" class="btn btn-default guest-clr">Add Guest</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</main>

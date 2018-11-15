@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en" ng-app='dost.home'>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dost - A Wedding Platform</title>
+        <meta name="description" content="ghost clone javascript blog node.js angular.js">
+        <meta name="author" content="Connor Leech">
+
+        <!-- Angular Material CSS -->
+        <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.10/angular-material.min.css" />
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- Website Css starts here -->
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/home/css/bootstrap.css">
+        <link rel="stylesheet" href="/home/css/bootstrap-grid.css">
+        <link rel="stylesheet" href="/home/css/bootstrap-reboot.css">
+
+        <!-- font family CSS -->
+        <link rel="stylesheet" href="/home/font/font.css">
+
+        <!-- fontawsome CSS -->
+        <link rel="stylesheet" href="/home/css/fontawesome.css" >
+        <link rel="stylesheet" href="/home/css/fa-brands.css" >
+        <link rel="stylesheet" href="/home/css/fa-regular.css" >
+        <link rel="stylesheet" href="/home/css/fa-solid.css" >
+        <!-- style CSS -->
+        <link rel="stylesheet" href="/home/css/style.css">
+        <!-- Website Css ends here -->
+        <link rel="stylesheet" href="/home/bower_components/intl-tel-input/build/css/intlTelInput.css">
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <!-- Main Content -->
+        <div ui-view></div>
+        <!-- Website jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="/home/bower_components/jquery/dist/jquery.min.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="/home/assets_js/bootstrap.min.js" ></script>
+        <!-- Website Js Ends here -->
+        <!-- Angular Material Dependencies 1.3.15 -->
+        <!--<script src="/home/bower_components/jquery/dist/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+
+        <!-- UI Router -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+        <!-- Angular Material -->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.10/angular-material.min.js"></script>
+
+
+        <!-- Countries Phone Code List  -->
+        <script src="/home/bower_components/intl-tel-input/build/js/intlTelInput.js"></script>
+        <script src="/home/bower_components/intl-tel-input/build/js/utils.js"></script>
+        <script src="/home/bower_components/betsol-ng-intl-tel-input/dist/scripts/betsol-ng-intl-tel-input.js"></script>
+        
+
+        <!-- Custom JS -->
+        <script src='/home/js/app.js'></script>
+        <script src='/home/js/directives.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
+        <script src="/home/js/otpInputDirective.js"></script>
+        <script src='/home/js/filter.js'></script>
+        <script src='/home/js/controllers/main.js'></script>
+        <script src='/home/js/controllers/global.js'></script>
+        <script src='/home/js/controllers/business.js'></script>
+        <script src='/home/js/controllers/projects.js'></script>
+        <script src='/home/js/controllers/planner.js'></script>
+        <script src='/home/js/controllers/guests.js'></script>
+        <script src='/home/js/controllers/livejobs.js'></script>
+        
+
+        <!-- add modules -->
+        <script src='/common/modules/users.js'></script>
+        <script src='/common/modules/vendortypes.js'></script>
+        <script src='/common/modules/services.js'></script>
+        <script src='/common/modules/highlights.js'></script>
+        <script src='/common/modules/business.js'></script>
+        <script src='/common/modules/cities.js'></script>
+        <script src='/common/modules/projects.js'></script>
+        <script src='/common/modules/events.js'></script>
+        <script src='/common/modules/tasks.js'></script>
+        <script src='/common/modules/jobposts.js'></script>
+        <script src='/common/modules/milestones.js'></script>
+        <script src='/common/modules/fields.js'></script>
+        <script src='/common/modules/groups.js'></script>
+        <script src='/common/modules/guests.js'></script>
+        <script src='/common/modules/livejobs.js'></script>
+        <script src='/common/modules/proposals.js'></script>
+        <script src='/common/modules/invitations.js'></script>
+        <script src='/common/modules/clients.js'></script>        
+        <script src='/common/modules/budgets.js'></script>
+        <script src='/common/modules/hotels.js'></script>
+        <script src='/common/modules/foodRestrictions.js'></script>
+        <script src='/common/modules/messages.js'></script>
+        <script src='/common/modules/favourites.js'></script>
+        <script src='/common/modules/jobmilestones.js'></script>
+        <script src='/common/modules/payments.js'></script>
+
+        <!-- include toaster libraries -->
+        <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+        <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
+
+        <!-- include confirmation box libraries -->
+        <script src="/admin/bower_components/angular-confirm/dist/angular-confirm.min.js"></script>
+        <link rel="stylesheet" href="/admin/bower_components/angular-confirm/dist/angular-confirm.min.css" />
+        
+        <!-- Angular Material Date Time Picker -->
+        
+        
+        <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+        <script src="/home/bower_components/angular-material-datetimepicker/dist/angular-material-datetimepicker-new.js"></script>
+        <script src="/home/bower_components/angular-material-datetimepicker/beautifier.js"></script>
+        <link rel="stylesheet" href="/home/bower_components/angular-material-datetimepicker/dist/material-datetimepicker.min.css" />
+<!--        <script src="https://cdn.jsdelivr.net/npm/ng-material-datetimepicker/dist/angular-material-datetimepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ng-material-datetimepicker/dist/angular-material-datetimepicker.min.js.map"></script>
+<link href="https://cdn.jsdelivr.net/npm/ng-material-datetimepicker/dist/material-datetimepicker.min.css" rel="stylesheet" type="text/css">-->
+
+        <!-- Image Cropper -->
+<script src="https://crackerakiua.github.io/ui-cropper/ui-cropper.js"></script>
+        <script>
+          
+             var currentUser = <%- JSON.stringify(user); %>;
+            app.run(function($rootScope){
+              $rootScope.currentUser = currentUser;
+            });
+            $(document).ready(function(){
+                setTimeout(function(){ 
+                    // Slide Images Automatically on OnBoarding page
+                    if($('#carouselExampleControls').length>0){
+                        $('#carouselExampleControls').carousel({
+                            interval: 2000,
+                            cycle: true
+                        }); 
+                    }
+                },2000)
+            })
+        </script>
+        
+    </body>
+</html>

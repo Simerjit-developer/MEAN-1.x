@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="17px" viewBox="0 0 14 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Upload csv</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Guests" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Remove-user" transform="translate(-654.000000, -1062.000000)">
+            <rect fill="#FAFAFA" x="0" y="0" width="1440" height="1179"></rect>
+            <g id="Group-10" transform="translate(654.000000, 1060.000000)" fill="#747474">
+                <path d="M4,15 L10,15 L10,9 L14,9 L7,2 L0,9 L4,9 L4,15 Z M0,17 L14,17 L14,19 L0,19 L0,17 Z" id="Upload-csv"></path>
+            </g>
+        </g>
+    </g>
+</svg>

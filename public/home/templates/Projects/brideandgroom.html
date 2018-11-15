@@ -1,0 +1,97 @@
+<div id="vendor-st2" class="tab-pane">
+    <h5>Bride and Groom</h5>
+    <div class="bridegroomtabs">
+        <ul class="nav nav-pills" id="sr" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active show" id="home-tab" data-toggle="tab" data-target="#groom" role="tab" aria-controls="bride" aria-selected="true"><span class="radio_inner">
+                        <img class="groom-imgs" ng-src="home/img/groom.svg"/>
+                    </span>
+                </a>
+                <p title="Groom">Groom</p>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" data-target="#bride" role="tab" aria-controls="groom" aria-selected="false">
+                    <span class="radio_inner">
+                        <img class="groom-imgs" ng-src="home/img/bride.svg" src="home/img/bride.svg">
+
+                    </span>
+                </a>
+                <p title="Bride">Bride</p>
+            </li>
+        </ul>
+        <div class="tab-content" id="src">
+            <div class="tab-pane fade show active" id="groom" role="tabpanel" aria-labelledby="home-tab">
+                <div class="form-group">
+                    <label>Groom's name</label>
+                    <input type="text" class="form-control" ng-model="post.groom.name" >
+
+                </div>
+                <div class="form-group input-group">
+                    <label>Date of birth</label>
+                    <md-datepicker md-open-on-focus md-hide-icons="calendar" ng-model="post.groom.dob"></md-datepicker>
+                    <!--<input type="text" class="form-control" ng-model="post.groom.dob" placeholder="12/12/1988">-->
+                    <span class="birthday-icon"><img class="" ng-src="home/img/calander-project.svg"></span>
+
+                </div>
+                <div class="form-group input-group input-phone-custom">
+                    <label>Phone number</label>
+                    <input type="tel" intl-tel-input intl-tel-input-options="{ preferredCountries: ['in', 'sg','us']}" class="form-control no-border" ng-model="post.groom.phone">
+                    <span class="birthday-icon"><img src="/home/img/phone number.png" alt="birthday-Icon"></span>
+                </div>
+                
+                <div class="form-group input-group city-type">
+                    <label>City</label>
+                    <!--select class="form-control"
+                        ng-selected="{{post.groom.city==value.name}}"
+                        ng-model="post.groom.city"
+                        ng-options="value.name as value.name for value in cities" >
+                    </select-->
+                    <select class="form-control" ng-model="post.groom.city">
+                        <option ng-selected="post.groom.city == city.name" ng-repeat="city in cities" value="{{city.name}}" >{{city.name}}</option>
+                    </select>
+                    <!--<input type="text" class="form-control" ng-model="post.groom.city" placeholder="New Delhi">-->
+                    <span class="birthday-icon"><img src="/home/img/location.png" alt="birthday-Icon"></span>
+
+                </div>
+                <div class="btn-sec">
+                    <button type="button" class="btn-back" ng-click="moveback('createProject.basicinfo', 1)"><i class="fas fa-arrow-left"></i></button>
+                    <button type="button" class="btn btn-primary btn-st" ng-click="movetonext('createProject.events', 3)">Continue</button>
+                    <button type="button" class="btn-skip" ng-click="movetonext('createProject.events', 3)">Skip this step</button>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="bride" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="form-group">
+                    <label>Bride name</label>
+                    <input type="text" class="form-control" ng-model="post.bride.name" >
+
+                </div>
+                <div class="form-group input-group">
+                    <label>Date of birth</label>
+                    <md-datepicker md-open-on-focus md-hide-icons="calendar" ng-model="post.bride.dob"></md-datepicker>
+                    <!--<input type="text" class="form-control" ng-model="post.bride.dob" placeholder="12/12/1988">-->
+                    <span class="birthday-icon"><img class="" ng-src="home/img/calander-project.svg"></span>
+                </div>
+                <div class="form-group input-group input-phone-custom">
+                    <label>Phone number</label>
+                    <input type="tel" intl-tel-input intl-tel-input-options="{ preferredCountries: ['in', 'sg','us']}" class="form-control no-border" ng-model="post.bride.phone">
+                    <span class="birthday-icon"><img src="/home/img/phone number.png" alt="birthday-Icon"></span>
+                </div>
+                <div class="form-group input-group city-type">
+                    <label>City</label>
+                    <select class="form-control" ng-model="post.bride.city">
+                        <option ng-selected="post.bride.city == city.name" value="{{city.name}}" ng-repeat="city in cities">{{city.name}}</option>
+                    </select>
+                    <!--<input type="text" class="form-control" placeholder="New Delhi">-->
+                    <span class="birthday-icon"><img src="/home/img/location.png" alt="birthday-Icon"></span>
+
+                </div>
+                <div class="btn-sec">
+                    <button type="button" class="btn-back" ng-click="moveback('createProject.basicinfo', 1)"><i class="fas fa-arrow-left"></i></button>
+                    <button type="button" class="btn btn-primary btn-st" ng-click="movetonext('createProject.events', 2)">Continue</button>
+                    <button type="button" class="btn-skip" ng-click="movetonext('createProject.events', 2)">Skip this step</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

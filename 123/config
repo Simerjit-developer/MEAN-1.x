@@ -1,0 +1,21 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[credential]
+	UseHttpPath = true
+	helper = !aws codecommit credential-helper $@
+[remote "codecommit-origin"]
+	url = https://simerjitparmar%40gmail.com@github.com/Simerjit-developer/MEAN1
+	url = https://git-codecommit.us-east-1.amazonaws.com/v1/repos/newcode
+	pushurl = https://git-codecommit.us-east-1.amazonaws.com/v1/repos/newcode
+	fetch = +refs/heads/*:refs/remotes/codecommit-origin/*
+[branch "master"]
+	remote = codecommit-origin
+	merge = refs/heads/master
+[branch "newcodemaster"]
+	remote = codecommit-origin
+	merge = refs/heads/newcodemaster
+[pack]
+	buildbitmaps = false

@@ -1,0 +1,90 @@
+<section class="sidebar">
+    <div class="nav-side-menu">
+        <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+                <li  data-toggle="collapse" data-target="#products" class="collapsed active">
+                    <a class="taj-wedding">{{project.name}}<span class="arrow"><img class="more" ng-src="home/img/downarrow2.png"/></span></a>
+                    <span class="star-btn"><img class="" ng-src="home/img/star-new.svg"/></span>
+                </li>
+                <ul class="sub-menu collapse" id="products">
+                    <span class="planner">
+                        Weddings
+                    </span>
+                    <li ng-class="{active:(singleProject._id == project._id)}" ng-repeat="singleProject in projectlist" ><a ng-click="changeProject(singleProject._id)">{{singleProject.name}}</a></li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+</section>
+<div class="nav-side-menu">
+    <div class="menu-list">
+        <ul class="sub-menu" id="products">
+            <span class="planner">
+                PLANNER
+            </span>
+            <li ng-class="{'active': activePage.innerSidebar.overview == true}" >
+                    <a ng-if="!assigned_project" class="coming-img job-cooming-soon" >
+                <img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">
+                    <ng-include src="'/home/img/overview.svg'" />
+                    <!--<img class="overview-icon" ng-src="home/img/overview.svg">-->
+                    Overview
+                </a>
+            </li>
+            <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Task')>-1)" ng-class="{'active': activePage.innerSidebar.taskList == true}">
+                <a ui-sref="taskList({id:project._id})">
+                    <ng-include src="'/home/img/tasks.svg'" />
+                    Tasks
+                </a>
+            </li>
+            <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Team')>-1)" ng-class="{'active': activePage.innerSidebar.teamList == true}">
+                <a ui-sref="teamList({id:project._id})">
+                    <ng-include src="'/home/img/team.svg'" />
+                    Team
+                </a></li>
+            <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Budget')>-1)" ng-class="{'active': activePage.innerSidebar.budget == true}">
+            <a  ui-sref="budget({id:project._id})"  >
+                <!--<img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">-->        
+            <ng-include src="'/home/img/budget.svg'" />
+                    Budget</a></li>
+            <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Items')>-1)" ng-class="{'active': activePage.innerSidebar.items == true}">
+                <a class="coming-img job-cooming-soon" >
+                <img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">
+                    <ng-include src="'/home/img/items.svg'" />
+                    Items</a></li>
+            <ul class="guest-border">
+                <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Guests')>-1)" ng-class="{'active': activePage.innerSidebar.guests == true}">
+                    <a ui-sref="guests({id:project._id})">
+                        <ng-include src="'/home/img/guests.svg'" />
+                        Guest </a></li>
+                <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Clients')>-1)" ng-class="{'active': activePage.innerSidebar.clients == true}">
+                    <a ui-sref="clients({id:project._id})">
+                        <ng-include src="'/home/img/clients.svg'" />
+                        Clients
+                    </a>
+                </li>
+            </ul>
+            <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Job')>-1)" ng-class="{'active': activePage.innerSidebar.jobs == true}">
+<!--                <a ui-sref="jobs({id:project._id})" class="coming-img job-cooming-soon" >
+                <img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">-->
+                <a ui-sref="jobs({id:project._id})">    
+                    <ng-include src="'/home/img/jobs.svg'" />
+                    Job</a>
+            </li>
+                    
+            <!--li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Job')>-1)" ng-class="{'active': activePage.innerSidebar.jobs == true}"><a ui-sref="jobs({id:project._id})">
+                    <ng-include src="'/home/img/jobs.svg'" />
+                    Job</a></li-->
+            <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Vendors')>-1)" ng-class="{'active': activePage.innerSidebar.vendors == true}">
+<!--                <a class="coming-img job-cooming-soon" ui-sref="vendors({id:project._id})" >
+                <img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">-->
+                <a ui-sref="vendors({id:project._id})" >
+                    <ng-include src="'/home/img/vendors.svg'" />
+                Vendors</a></li>
+            <li ng-if="!assigned_project || (assigned_project==true && project.my_permissions.share_metrics.indexOf('Performance')>-1)" ng-class="{'active': activePage.innerSidebar.performance == true}">
+                <a class="coming-img job-cooming-soon" >
+                <img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">
+                    <ng-include src="'/home/img/performance.svg'" />
+                    Performance</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div id="vendor-st1" class="tab-pane">
+    <h5>Basic Info</h5>
+    <div class="form-group">
+        <label style="cursor:pointer" title="Project Name should contain atleast 3 characters">Project name*</label>
+        <input type="text" class="form-control" ng-model="post.name" name="name" placeholder="" ng-minlength="3" ng-required="true">
+    </div>
+    <div class="form-group">
+        <label>Client name*</label>
+        <input type="text" class="form-control" ng-model="post.client.name" name="client_name" placeholder="" ng-required="true">
+    </div>
+    <div class="half-input">
+        <div class="form-group">
+            <label>No of events*</label>
+            <input type="text" class="form-control" ng-model="post.no_of_events" name="event_number"  ng-required="true">
+        </div>
+        <div class="form-group">
+            <div class="btn-group bordr-btm values" >
+                <label class="btn event_number">
+                    <input type="radio" ng-change="post.no_of_events=total_events" ng-model="total_events" name="total_events" value="1">
+                    <span class="glyphicon">1</span>
+                </label>
+                <label class="btn event_number">
+                    <input type="radio" ng-change="post.no_of_events=total_events" ng-model="total_events" name="total_events" value="2">
+                    <span class="glyphicon">2</span>
+                </label>
+                <label class="btn event_number">
+                    <input type="radio" ng-change="post.no_of_events=total_events" ng-model="total_events" name="total_events" value="3">
+                    <span class="glyphicon">3</span>
+                </label>
+                <label class="btn event_number"> 
+                    <input type="radio" ng-change="post.no_of_events=total_events" ng-model="total_events" name="total_events" value="4">
+                    <span class="glyphicon">4</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Start date*</label>
+            <md-datepicker md-open-on-focus md-hide-icons="calendar" md-min-date="post.min_date" md-max-date="post.end_date" ng-model="post.start_date"></md-datepicker>
+            <!--<input type="date" data-date-format="DD/MMMM/YYYY" class="form-control" ng-model="post.start_date" name="start_date" placeholder="12/08/18" ng-required="true">-->
+        </div>
+        <div class="form-group">
+            <label>End date*</label>
+            <md-datepicker md-open-on-focus md-hide-icons="calendar" md-min-date="post.start_date" ng-model="post.end_date"></md-datepicker>
+            <!--<input type="date" data-date-format="DD/MMMM/YYYY" class="form-control" ng-model="post.end_date" name="end_date" placeholder="20/08/18" ng-required="true">-->
+        </div>
+    </div>
+    <div class="btn-sec">
+        <!--&& new_project.client_name.$invalid || new_project.no_of_events.$invalid || new_project.end_date.$invalid-->
+        <button type="button" ng-disabled="new_project.name.$invalid || new_project.client_name.$invalid || new_project.event_number.$invalid" class="btn btn-primary btn-st" ng-click="eventcount=post.no_of_events; movetonext('createProject.brideandgroom',2)">Continue</button>
+    </div>
+</div>

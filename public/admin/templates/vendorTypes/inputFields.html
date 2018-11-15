@@ -1,0 +1,196 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Input Fields
+            <small>Preview</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Input Fields</a></li>
+            <li class="active">Add</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Add Input Fields</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form enctype="multipart/form-data" role="form" ng-submit="add()">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="VendorType Title">Select Vendor Type</label>
+                                <select ng-change="findServices(service.vendortype_id)" ng-model='service.vendortype_id' class='form-control'>
+                                    <option ng-repeat="vendortype in vendorTypes" value="{{vendortype._id}}">{{vendortype.title}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group" ng-if="servicesall.length>0">
+                                <label for="VendorType Title">Select Service Type</label>
+                                <select ng-model='service.service_id' class='form-control'>
+                                    <option ng-repeat="myservice in servicesall" value="{{myservice._id}}">{{myservice.title}}</option>
+                                </select>
+                            </div>
+                            <!-- Additional Fields starts here -->
+                            
+                            <div class="box">
+                                <div class="box-header">
+                                  <h3 class="box-title">Additional Fields</h3>
+                                  <span class="pull-right btn btn-success" ng-click="addRow()">Add Row</span>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body no-padding">
+                                  <table class="table table-striped">
+                                      <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Field Title</th>
+                                            <th>Field Type</th>
+                                            <th>Field Value</th>
+                                            <th>Required?</th>
+                                            <th>Add Child</th>
+                                        </tr>
+                                      </thead>
+                                        
+                                      <tbody>
+                                          
+                                          <tr>
+                                              <td colspan="6" style="padding: 0;">
+                                                  <table class="table" ng-repeat="n in [] | range:counter">
+                                                      <tr>
+                                                          <td>
+                                                              <table class="table" style="margin-bottom: 0;">
+                                                                  <tr>
+                                                                    <td>{{n+1}}.</td>
+                                                                    <td><input class="form-control" ng-model="service.fields[n].title" type="text" placeholder="Field Title"></td>
+                                                                    <td>
+                                                                        <select class="form-control" ng-model="service.fields[n].type">
+                                                                            <option>Text</option>
+                                                                            <option>Number</option>
+                                                                            <option>Radio Button</option>
+                                                                            <option>Check box</option>
+                                                                            <option>Check box(multiple)</option>
+                                                                            <option>Dropdown</option>
+                                                                            <option>Dropdown(multiple)</option>
+                                                                            <option>Date</option>
+                                                                            <option>Textarea</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input ng-model="service.fields[n].value" class="form-control" type="text" placeholder="Field Value/Placeholder">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="checkbox" name="required" ng-model="service.fields[n].required" >
+                                                                    </td>
+                                                                    <td><button type="button" title="Add Child" ng-click="addChild(n,'show')"><i class="fa fa-plus-square"></i></button></td>
+                                                                  </tr>
+                                                              </table>
+                                                          </td>
+                                                      </tr>
+                                                      <tr ng-if="(service.fields[n].child && parentRowNumber == n) ||(status=='show' && parentRowNumber == n)" ng-init="mylength=childCounter"> <!-- Next Loop-->
+                                                          <td>
+                                                              <table class="table" style="margin-bottom: 0;">
+                                                                  
+                                                                  <tr class="childCounter ">
+                                                                      <td colspan="6">
+                                                                            <table class="table table-striped">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>#</th>
+                                                                                        <th>
+                                                                                            Parent
+                                                                                        </th>
+                                                                                        <th>
+                                                                                            Field Title
+                                                                                        </th>
+                                                                                        <th>
+                                                                                            Field Type
+                                                                                        </th>
+                                                                                        <th>
+                                                                                            Field Value
+                                                                                        </th>
+                                                                                        <th>
+                                                                                            Required
+                                                                                        </th>
+                                                                                        <th>
+                                                                                            Add More
+                                                                                        </th>
+                                                                                    </tr>
+
+                                                                                </thead>
+                                                                                {{childCounter}}
+                                                                                <tbody ng-init="(parentRowNumber)? parentRowNumber : parentRowNumber=n">
+                                                                                    <tr class="{{parentRowNumber}}_{{childN}}" ng-repeat="(index_key,childN) in [] | range:childCounter">
+                                                                                        <td>#{{parentRowNumber+1}}.{{childN+1}}</td>
+                                                                                        <td ng-if="service.fields[parentRowNumber].field_value.includes(',')" ng-init="selectvalues = (service.fields[parentRowNumber].field_value  | customSplitString)">
+                                                                                               
+                                                                                            <select class="form-control"  ng-model="myField[parentRowNumber][childN].parent" ng-init="myField[parentRowNumber][childN].parent=(service.fields[parentRowNumber].child | ObjectKey:childN )">
+                                                                                                <option ng-repeat="values in (service.fields[parentRowNumber].field_value  | customSplitString) track by $index">{{values}}</option>
+                                                                                            </select>    
+                                                                                        </td>
+                                                                                        <td><input class="form-control" ng-model="service.fields[parentRowNumber]['child'][index_key].title" type="text" placeholder="Field Title"></td>
+                                                                                        <td>
+                                                                                            <select class="form-control" ng-model="service.fields[parentRowNumber]['child'][index_key].type">
+                                                                                                <option>Text</option>
+                                                                                                <option>Number</option>
+                                                                                                <option>Radio Button</option>
+                                                                                                <option>Check box</option>
+                                                                                                <option>Check box(multiple)</option>
+                                                                                                <option>Dropdown</option>
+                                                                                                <option>Dropdown(multiple)</option>
+                                                                                                <option>Date</option>
+                                                                                                <option>Textarea</option>
+                                                                                            </select>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input ng-model="service.fields[parentRowNumber]['child'][index_key].value" class="form-control" type="text" placeholder="Field Value/Placeholder">
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input type="checkbox" name="required" ng-model="service.fields[parentRowNumber]['child'][index_key].required" >
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <button type="button" title="Add Child" ng-click="addChild(parentRowNumber,'show')"><i class="fa fa-plus-square"></i></button>
+                                                                                            <button type="button" title="Remove Child" ng-click="removeChild(parentRowNumber,childN)"><i class="fa fa-minus-square"></i></button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                              </table>
+                                                              
+                                                          </td>
+                                                      </tr>
+                                                  </table>
+                                                  
+                                              </td>
+                                              
+                                          </tr>
+
+                                      </tbody>
+                                  
+                                  </table>
+            <!-- /.box-body -->
+          </div>
+                        </div>
+                        <!-- Add custom Fields Here -- Start--> 
+                      </div>
+                            <!-- Additional Fields ends here -->
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" ng-disabled="imgshow==''" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+    </section>
+</div>

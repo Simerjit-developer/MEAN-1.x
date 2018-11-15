@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="14px" viewBox="0 0 16 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Vendors</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Tasks" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tasks-Copy" transform="translate(-52.000000, -623.000000)" fill="#747474">
+            <g id="Vendors-tab" transform="translate(52.000000, 622.000000)">
+                <path d="M15,1 L1,1 L1,3 L15,3 L15,1 L15,1 Z M16,9.92307692 L16,8.23076923 L15.1111111,4 L0.888888889,4 L0,8.23076923 L0,9.92307692 L0.888888889,9.92307692 L0.888888889,15 L9.77777778,15 L9.77777778,9.92307692 L13.3333333,9.92307692 L13.3333333,15 L15.1111111,15 L15.1111111,9.92307692 L16,9.92307692 L16,9.92307692 Z M8,14 L3,14 L3,10 L8,10 L8,14 L8,14 Z" id="Vendors"></path>
+            </g>
+        </g>
+    </g>
+</svg>

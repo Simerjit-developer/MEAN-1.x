@@ -1,0 +1,65 @@
+<style>
+    b{
+        text-align: center;
+        width: 100%;
+        float: left;
+    }
+</style>
+<main>
+    <div style="padding:50px">
+        <b>USER MODULE</b> <br/>
+        1. Login <br/>
+        @url: /users/login <br/>
+        @params: phone, password<br/>
+        @method: POST<br/>
+        <hr/>
+        
+        2. Signup <br/>
+        @url: /users<br/>
+        @params: phone,title,firstname,lastname,dob,location, password<br/>
+        @method: POST<br/>
+        <hr/>
+        
+        3. Get OTP <br/>
+        @url: /users/get_otp<br/>
+        @params: phone<br/>
+        @method: POST<br/>
+        <hr/>
+        
+        4. Verify OTP <br/>
+        @url: /users/verify_otp<br/>
+        @params: otp_code<br/>
+        @method: POST<br/>
+        <hr/>
+        
+        5. Update Password <br/>
+        @url: /users/resetpassword<br/>
+        @params: phone, password<br/>
+        @method: POST<br/>
+        <hr/>
+        
+        6. Get User Detail <br/>
+        @url: /users/findById<br/>
+        @params: id<br/>
+        @method: POST<br/>
+        <hr/>
+        
+        7. Update User Details<br/>
+        @url: /users/updateById<br/>
+        @params: id,phone,title,firstname,lastname,dob,location<br/>
+        @method: POST<br/>
+        <hr/>
+        <b>Marketplace/Business</b> <br/>
+        8. Get all Business<br/>
+        @url: /business<br/>
+        @method: Get<br/>
+        <hr/>
+        
+        9. Get Business By Id<br/>
+        @url: /business/findById<br/>
+        @params: id
+        @method: POST<br/>
+        <hr/>
+    </div>
+    
+</main>

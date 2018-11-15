@@ -1,0 +1,265 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="team-list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 border-sides">
+                        <div ng-include="'/home/templates/Planner/sidebar.html'"></div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="jobs">
+                            <div class="nav nav-tabs tabs-header jobs-tab" id="jobs-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-job-requirements-tab" data-toggle="tab" data-target="#jobs-requirements" role="tab" aria-controls="nav-job-requirements" aria-selected="true"><img class="job-bag" ng-src="home/img/job-bag.png"/>&nbsp; Jobs</a>
+                                <a class="nav-item nav-link" id="nav-vendor-tab" data-toggle="tab" data-target="#vendor" role="tab" aria-controls="nav-guests" aria-selected="true"><img class="" ng-src="home/img/house.svg"/>&nbsp; Vendor</a>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="jobs-tab">
+                            <div class="tab-pane fade active show" id="jobs-requirements" role="tabpanel" aria-labelledby="nav-job-requirements-tab">
+                                <md-content>
+                                    <md-tabs md-dynamic-height="" md-border-bottom="">
+                                        <md-tab label="All({{myjobs.length}})">
+                                            <md-content class="md-padding">
+                                                <div class="caterers-card" ng-repeat="myjob in myjobs">
+                                                    <div class="card-head">
+                                                        <h6><a ui-sref="jobsDetail({id:myjob._id})">{{myjob.title}}</a></h6>
+                                                        <span class="duration ng-binding">
+                                                            <img src="/home/img/watch-1.svg" alt="Calander-Icon"> &nbsp; {{myjob.created_at | datediff}} &nbsp; 
+                                                        </span>
+                                                        <span class="flag-icon-clr">
+                                                            <img src="/home/img/flag.svg" alt="Calander-Icon">
+                                                        </span>
+                                                        <p class="card-detail-card" style="width:100%;">{{myjob.description}}</p>
+                                                        <ul class="event-budget">
+                                                            <li><span class="team-member-icon color-1"><img class="" ng-src="home/img/employees.svg"></span>
+                                                                <p>Event <br/><label>{{myjob.project_detail.events.name}}</label></p>
+                                                            </li>
+                                                            <li><span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>
+                                                                <p>No of Pax <br/><label>400</label></p>
+                                                            </li>
+                                                            <li><span class="team-member-icon-color"><img class="" ng-src="home/img/dollar.svg"></span>
+                                                                <p>Budget<br/><label>{{myjob.project_detail.events.budget}}</label></p>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="bids">
+                                                            <span class="bids-color">{{myjob.myproposals.length}} Bids 1 new &nbsp; <img class="" ng-src="home/img/double-angle.svg"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="Shortlisted(06)">
+                                            <md-content class="md-padding">
+                                                <div class="caterers-card" ng-repeat="myjob in myjobs">
+                                                    <div class="card-head">
+                                                        <h6><a ui-sref="jobsDetail({id:myjob._id})">{{myjob.title}}</a></h6>
+                                                        <span class="duration ng-binding">
+                                                            <img src="/home/img/watch-1.svg" alt="Calander-Icon"> &nbsp; {{myjob.created_at | datediff}} &nbsp; 
+                                                        </span>
+                                                        <span class="flag-icon-clr">
+                                                            <img src="/home/img/flag.svg" alt="Calander-Icon">
+                                                        </span>
+                                                        <p class="card-detail-card" style="width:100%;">{{myjob.description}}</p>
+                                                        <ul class="event-budget">
+                                                            <li><span class="team-member-icon color-1"><img class="" ng-src="home/img/employees.svg"></span>
+                                                                <p>Event <br/><label>{{myjob.project_detail.events.name}}</label></p>
+                                                            </li>
+                                                            <li><span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>
+                                                                <p>No of Pax <br/><label>400</label></p>
+                                                            </li>
+                                                            <li><span class="team-member-icon-color"><img class="" ng-src="home/img/dollar.svg"></span>
+                                                                <p>Budget<br/><label>{{myjob.project_detail.events.budget}}</label></p>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="bids">
+                                                            <span class="bids-color">{{myjob.myproposals.length}} Bids 1 new &nbsp; <img class="" ng-src="home/img/double-angle.svg"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="Finalized(03)">
+                                            <md-content class="md-padding">
+                                                <div class="caterers-card" ng-repeat="myjob in myjobs">
+                                                    <div class="card-head">
+                                                        <h6><a ui-sref="jobsDetail({id:myjob._id})">{{myjob.title}}</a></h6>
+                                                        <span class="duration ng-binding">
+                                                            <img src="/home/img/watch-1.svg" alt="Calander-Icon"> &nbsp; {{myjob.created_at | datediff}} &nbsp; 
+                                                        </span>
+                                                        <span class="flag-icon-clr">
+                                                            <img src="/home/img/flag.svg" alt="Calander-Icon">
+                                                        </span>
+                                                        <p class="card-detail-card" style="width:100%;">{{myjob.description}}</p>
+                                                        <ul class="event-budget">
+                                                            <li><span class="team-member-icon color-1"><img class="" ng-src="home/img/employees.svg"></span>
+                                                                <p>Event <br/><label>{{myjob.project_detail.events.name}}</label></p>
+                                                            </li>
+                                                            <li><span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>
+                                                                <p>No of Pax <br/><label>400</label></p>
+                                                            </li>
+                                                            <li><span class="team-member-icon-color"><img class="" ng-src="home/img/dollar.svg"></span>
+                                                                <p>Budget<br/><label>{{myjob.project_detail.events.budget}}</label></p>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="bids">
+                                                            <span class="bids-color">{{myjob.myproposals.length}} Bids 1 new &nbsp; <img class="" ng-src="home/img/double-angle.svg"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                        <md-tab label="Completed(04)">
+                                            <md-content class="md-padding">
+                                                <div class="caterers-card" ng-repeat="myjob in myjobs">
+                                                    <div class="card-head">
+                                                        <h6><a ui-sref="jobsDetail({id:myjob._id})">{{myjob.title}}</a></h6>
+                                                        <span class="duration ng-binding">
+                                                            <img src="/home/img/watch-1.svg" alt="Calander-Icon"> &nbsp; {{myjob.created_at | datediff}} &nbsp; 
+                                                        </span>
+                                                        <span class="flag-icon-clr">
+                                                            <img src="/home/img/flag.svg" alt="Calander-Icon">
+                                                        </span>
+                                                        <p class="card-detail-card" style="width:100%;">{{myjob.description}}</p>
+                                                        <ul class="event-budget">
+                                                            <li><span class="team-member-icon color-1"><img class="" ng-src="home/img/employees.svg"></span>
+                                                                <p>Event <br/><label>{{myjob.project_detail.events.name}}</label></p>
+                                                            </li>
+                                                            <li><span class="team-member-icon"><img class="" ng-src="home/img/employees.svg"></span>
+                                                                <p>No of Pax <br/><label>400</label></p>
+                                                            </li>
+                                                            <li><span class="team-member-icon-color"><img class="" ng-src="home/img/dollar.svg"></span>
+                                                                <p>Budget<br/><label>{{myjob.project_detail.events.budget}}</label></p>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="bids">
+                                                            <span class="bids-color">{{myjob.myproposals.length}} Bids 1 new &nbsp; <img class="" ng-src="home/img/double-angle.svg"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </md-content>
+                                        </md-tab>
+                                    </md-tabs>
+                                </md-content>
+                            </div>
+                            <div class="tab-pane fade" id="vendor" role="tabpanel" aria-labelledby="nav-vendor-tab">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 m-auto">
+                                        <div class="allocation-sec" ng-repeat="event in project.events" ng-if="event.vendorsRequired">
+                                            <span class="icon"><img src="/home/img/mehendi.svg" alt=""></span>
+                                            <h6>{{event.name}}</h6>
+                                            <span class="date-event">{{event.start_date |date: 'd MMMM yyyy' }}</span>
+                                            <ul ng-repeat="vendorRequire in event.vendorsRequired" class="card-sec" ng-if="event.vendorsRequired">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/caterer.svg" alt=""/>
+                                                    <h5 ng-if="vendorRequire.servicedetail.length>0">Caterer</h5>
+                                                    <h5 ng-if="vendorRequire.vendordetail.length>0">{{vendorRequire.vendordetail[0].title}}</h5>
+                                                </li>
+                                                <li class="requirment-added" ng-if="vendorRequire.jobDetails && !vendorRequire.budget">
+                                                    <img class="exclamation" src="/home/img/spinner-circle.svg" alt=""/> &nbsp; 80% Requirments added
+                                                </li>
+                                                <li class="requirment-added" ng-if="!vendorRequire.jobDetails">
+                                                    <input type="button" value="Add vendor requirments" data-toggle="modal" data-target="#AddvendorModal">
+                                                </li>
+                                                <li ng-if="vendorRequire.jobDetails && vendorRequire.budget" class="requirment-added">
+                                                    <a ui-sref="PostJob.basicinfo({id:vendorRequire._id})" class="postjob">Post a Job</a>
+                                                    <img  class="exclamation"  src="/home/img/green-check-new.svg" alt=""/> &nbsp; Requirments added
+                                                    
+                                                    </li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>
+                                            <!--ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/photographer.svg" alt=""/>
+                                                    <h5>Photographer</h5>
+                                                </li>
+                                                <li class="requirment-added"><img class="exclamation"  src="/home/img/green-check-new.svg" alt=""/> &nbsp; Requirments added</li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul-->
+
+                                        </div>
+                                        <!--div class="allocation-sec">
+                                            <span class="icon-1"><img src="/home/img/engagemen.svg" alt=""></span>
+                                            <h6>Engagement</h6>
+                                            <span class="date-event">20 August 2018</span>
+                                            <ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/caterer.svg" alt=""/>
+                                                    <h5>Caterer</h5>
+                                                </li>
+                                                <li class="requirment-added"><img class="exclamation" src="/home/img/spinner-circle.svg" alt=""/> &nbsp; 80% Requirments added</li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>
+                                            <ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/photographer.svg" alt=""/>
+                                                    <h5>Photographer</h5>
+                                                </li>
+                                                <li class="requirment-added">
+                                                    <input type="button" value="Add vendor requirments" data-toggle="modal" data-target="#AddvendorModal">
+                                                </li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>
+                                            <ul class="card-sec">
+                                                <li class="catereing catere">
+                                                    <img src="/home/img/tent-house.svg" alt=""/>
+                                                    <h5>Tent Housing</h5>
+                                                </li>
+                                                <li class="requirment-added"><img class="exclamation" src="/home/img/spinner-circle.svg" alt=""/> &nbsp; 80% Requirments added</li>
+                                                <li>
+                                                    <img class="exclamation" src="/home/img/more.svg" alt=""/>
+                                                </li>
+                                            </ul>														
+                                        </div-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="members">
+                            <a class="add-member" ui-sref="PostJob.basicinfo"><img class="" ng-src="home/img/job-bag.png"/>&nbsp; Post a job</a>
+                        </div>
+                        <ul class="total-team">
+                            <li>Total jobs posted <span>{{tasks.length}}</span></li>
+                            <li>Job with bids<span class="color">{{completed_tasks}}</span></li>
+                            <li>Negotiating<span class="pending-color">{{pending_tasks}}</span></li>
+                        </ul>
+                        <h5 class="team-headings">Vendors Required</h5>
+                        <ul class="total-team">
+                            <li ng-repeat="team in project.team"><span class="jss-team">{{team.name| nickname:" "| uppercase}}</span><b>{{team.name}} </b><br/>{{team.email}}<span>12/16</span></li>
+                            <li>Requirment added <span class="color">07</span></li>
+                            <li>Job Posted in marketplace<span class="pending-color">09</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+	<div class="modal fade" id="AddvendorModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="team-member-icon redirect"><img class="" src="home/img/event-star.svg"></span>
+					<h5 class="redirect-page">Redirecting Page</h5>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="add-member-modl">
+						<p>You will be taken to the event manager page to add the vendor requirements.</p>
+					</div>
+				</div>
+				<div class="modal-footer mod-footr">
+					<button type="submit" class="btn btn-default">Ok, take me there</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

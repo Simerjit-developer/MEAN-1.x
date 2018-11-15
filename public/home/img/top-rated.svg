@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="24px" viewBox="0 0 22 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>2603CD69-51A5-42B0-8CCF-CABB529925BD</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <filter x="-2.6%" y="-2.6%" width="105.1%" height="105.3%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Market-place" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Projects-cardview" transform="translate(-874.000000, -478.000000)" fill="#4A90E2">
+            <g id="Group-11-Copy" filter="url(#filter-1)" transform="translate(628.000000, 238.000000)">
+                <path d="M260.571429,246 L253.428571,246 C252.642857,246 252.007143,246.6 252.007143,247.333333 L252,258 L257,256 L262,258 L262,247.333333 C262,246.6 261.357143,246 260.571429,246 L260.571429,246 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,202 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="team-list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 border-sides">
+                        <div ng-include="'/home/templates/Planner/sidebar.html'"></div>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <div class="detail-top">
+                            <ul class="reception-events">
+                                <li>
+                                    <span class="detail-arrow"><a ui-sref="vendors({id:project._id})"><img class="ellip" src="/home/img/left-arrows.svg" alt="engagemen"></a></span>
+                                </li>
+                                <li><span class="budget-level">{{jobDetail.myproposals.bid_details[0].firstname+' '+jobDetail.myproposals.bid_details[0].lastname}}</span>
+                                    <p class="budget-level-1">{{jobDetail.myproposals.bid_details[0].email}} &nbsp; {{jobDetail.myproposals.bid_details[0].phone}} &nbsp; {{jobDetail.myproposals.bid_details[0].location}}</p></li>
+                                <li class="recp-date"><span class="budget-level"><button class="button accept">Downloaded</button></span></li>			
+                            </ul>
+                        </div>
+                        <div class="detail-detail">
+                            <md-content>
+                                <md-tabs md-dynamic-height="" md-border-bottom="">
+                                    <md-tab label="job Details">
+                                        <md-content class="md-padding">
+                                            <div class="caterers-card vendor-items">
+                                                <div class="card-head">
+                                                    <h6>{{jobDetail.title}}</h6><br/>
+                                                    <h6 style="width:100%">Description</h6>
+                                                    <p style="width:100%" class="card-detail-card">{{jobDetail.description}}</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="caterers-card vendor-items">
+                                                <div class="venue-info">
+
+                                                    <ul class="items-details details-1">
+                                                        <h6>Event Details</h6>
+                                                        <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Event name</li>
+                                                        <li class="venue-date-list">{{jobDetail.project_detail.events.name}}</li>
+                                                        <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Start Date</li>
+                                                        <li class="venue-date-list">{{jobDetail.project_detail.events.start_date|date}}(Duration:{{jobDetail.project_detail.events.duration}})</li>
+                                                        <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Address</li>
+                                                        <li class="venue-date-list">{{jobDetail.project_detail.events.address}}</li>
+                                                        <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; No of Pax</li>
+                                                        <li class="venue-date-list">500+</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!--div class="caterers-card vendor-items">
+                                                <div class="venue-info">
+
+                                                    <ul class="items-details details-1">
+                                                        <h6>Food and restrictions</h6>
+                                                        <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Food</li>
+                                                        <li class="venue-date-list">Veg and non veg</li>
+                                                        <li class="venue-date"><span class="mehndi-vendor"><img class="like-immg" src="/home/img/caterer.svg" alt="engagemen"></span> &nbsp; Food Restrictions</li>
+                                                        <li class="venue-date-list"><ul class="food-restrict"><li>1. Onion</li>
+                                                                <li>50 meals</li>
+                                                                <li>2. Diabtic</li>
+                                                                <li>18 meals</li></ul></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div-->
+                                        </md-content>
+                                    </md-tab>
+                                    <md-tab label="Milestones">
+                                        <md-content class="md-padding">
+                                            <div class="mile"><h6>Milestones</h6></div>
+                                            <div class="caterers-card vendor-items miles-card" ng-repeat="milestone in jobDetail.jobMilestones">
+                                                <div class="venue-info">
+                                                    <ul class="items-details details-1 milestones">
+                                                        <li class="milestone-1">{{milestone.title}}</li>
+                                                        <li>Start Date: {{milestone.start_date|date}}</li>
+                                                        <li>End Date: {{milestone.end_date|date}}</li>
+                                                        <li><div class="progress progress-striped">
+                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                                    <span> </span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!--<div class="caterers-card vendor-items miles-card">
+                                                <div class="venue-info">
+                                                    <ul class="items-details details-1 milestones">
+                                                        <li class="milestone-1">{{milestone.title}}</li>
+                                                        <li>Start Date: 12th Aug 2018</li>
+                                                        <li>End Date: 23rd Aug 2018</li>
+                                                        <li><div class="progress progress-striped">
+                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                                    <span> </span>
+                                                                </div>
+
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="caterers-card vendor-items miles-card">
+                                                <div class="venue-info">
+                                                    <ul class="items-details details-1 milestones">
+                                                        <li class="milestone-1">Milestone 3</li>
+                                                        <li>Start Date: 12th Aug 2018</li>
+                                                        <li>End Date: 23rd Aug 2018</li>
+                                                        <li><div class="progress progress-striped">
+                                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                                    <span> </span>
+                                                                </div>
+
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>-->
+                                            <div class="add more mile">
+                                                <span>+ Add milestones</span>
+                                            </div>
+                                            <div class="mile"><h6>Milestones updated by the Vendor</h6></div>
+                                            <div class="caterers-card vendor-items miles-card">
+                                                <div class="venue-info">
+                                                    <ul class="items-details details-1 milestones">
+                                                        <li class="milestone-1">Milestone 4</li>
+                                                        <li class="update">Start Date: 12th Aug 2018</li>
+                                                        <li class="update">End Date: 23rd Aug 2018</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="buttons-box">
+                                                <button class="button reject">Reject</button>
+                                                <div class="propse-btnn">
+                                                    <button class="button purpose">Propose now</button>
+                                                    <button class="button accept">Accept milestone</button>
+                                                </div>
+                                            </div>
+                                        </md-content>
+                                    </md-tab>
+                                    <md-tab label="payments">
+                                        <md-content class="md-padding">
+                                            <div class="milestone-payment">
+                                                <table class="table accordion-table vendor-table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Milestone</th>
+                                                            <th>Amount</th>
+                                                            <th>Due Date</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                        <tr class="vendor-rw mile-row" ng-repeat="payment in jobDetail.payments">
+                                                            <td>{{payment.milestone_detail[0].title}}</td>
+                                                            <td>${{payment.amount}}</td>
+                                                            <td>{{payment.due_date | date}}</td>
+                                                            <td>
+                                                                <span class="overdue-color">Pending</span>
+                                                                
+<!--                                                            <span class="paid-color">Paid</span>
+                                                            <span class="pending-color">Overdue</span>-->
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </md-content>
+                                    </md-tab>
+                                    <md-tab label="Messages">
+                                        <md-content class="md-padding">
+                                            <div class="col-md-8 m-auto">
+                                                <div class="msg-outer" ng-repeat="message in jobDetail.messages">
+                                                    <div class="message-name" ng-if="message.msg_by==currentUser._id">
+                                                        <span class="you-circle">You</span>
+                                                    </div>
+                                                    <div class="message-name" ng-if="message.msg_by!=currentUser._id">
+                                                        <span class="you-circle-1" ng-if="message.msg_by==message.bid_by">{{(message.bid_by_detail[0].firstname+' '+message.bid_by_detail[0].lastname) | nickname}}</span>
+                                                        <span class="you-circle-1" ng-if="message.msg_by==message.job_by">{{(message.job_by_detail[0].firstname+' '+message.job_by_detail[0].lastname) | nickname}}</span>
+                                                    </div>
+                                                    <div class="caterers-card vendor-items message">
+                                                        <p class="card-detail-card">{{message.content}}</p>
+                                                        <span class="msgs">{{message.created_at|date :'HH:mm a'}} {{message.created_at|date}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="send-message-btn-box">
+                                                    <textarea ng-model="content" class="form-control"></textarea>
+                                                    <button ng-click="SendMsg(content)" class="send-msgg">Send</button>
+                                                </div>
+                                            </div>
+                                        </md-content>
+                                    </md-tab>
+<!--                                    <md-tab label="Activity">
+                                        <md-content class="md-padding">
+                                        </md-content>
+                                    </md-tab>-->
+                                </md-tabs>
+                            </md-content>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

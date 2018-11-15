@@ -1,0 +1,83 @@
+<main>
+    <section class="st_wrapper">
+        <section class="register_new">
+
+            <div class="container-fluid">
+                <div class="head-color">
+                    <div class="row">
+                        <div class="head-sec">
+                            <h4>Create Project</h4>
+                        </div>
+                        <div class="col-md-4 col-sm-4 m-auto">
+                            <ul class="nav nav-tabs nav-justified custom-tab" role="tablist">
+                                <li class="nav-item"> 
+                                    <a class="nav-link active" ng-class="{'green' : activebutton > 1}">
+                                        <span>1</span>
+                                        <i class="check-icon"><img src="/home/img/checked.png"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ng-class="{'green' : activebutton > 2,'active': currentActiveButton == 2}">
+                                        <span>2</span>
+                                        <i class="check-icon"><img src="/home/img/checked.png"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ng-class="{'green' : activebutton > 3,'active': currentActiveButton == 3}">
+                                        <span>3</span>
+                                        <i class="check-icon"><img src="/home/img/checked.png"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ng-class="{'active': currentActiveButton == 4}">4</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="cross-img-create">
+                            <a ui-sref="projectlist"><img src="/home/img/cross-create-project.svg" alt="cross"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section class="register-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 m-auto">
+                        <div class="inner-sec">
+
+                            <!--ul class="nav nav-tabs nav-justified custom-tab" role="tablist">
+                                <li class="nav-item"> 
+                                    <a class="nav-link active" ng-class="{'green' : activebutton > 1}">
+                                        <span>1</span>
+                                        <i class="check-icon"><img src="/home/img/checked.png"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ng-class="{'green' : activebutton > 2,'active': currentActiveButton==2}">
+                                        <span>2</span>
+                                        <i class="check-icon"><img src="/home/img/checked.png"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ng-class="{'green' : activebutton > 3,'active': currentActiveButton==3}">
+                                        <span>3</span>
+                                        <i class="check-icon"><img src="/home/img/checked.png"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ng-class="{'active': currentActiveButton==4}">4</a>
+                                </li>
+                            </ul-->
+                            <form ng-submit="createProject()" name="new_project" class="form-horizontal vendor-fr" novalidate>
+                                <div id="form-views" ui-view></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--/register_new-->
+    </section><!--./st_wrapper-->
+</main>

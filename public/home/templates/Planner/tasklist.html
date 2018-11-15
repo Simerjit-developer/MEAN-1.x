@@ -1,0 +1,187 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+    <div id="vendor-st1" class="tab-pane">
+        <section class="team-list">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div ng-include="'/home/templates/Planner/sidebar.html'"></div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="overdue">
+                            <div class="tasklist-heading">
+                                <h5>Overdue</h5>
+                                <span>	
+                                    <a><img class="sort-list-icon" ng-src="home/img/sort-button-1.svg"/></a>
+                                    <a><img class="sort-list-icon" ng-src="home/img/sort-button.svg"/></a>
+                                </span>
+                            </div>
+                            <div class="row task-listing" ng-repeat="task in tasks" ng-if="lessThanToday(task.date)">
+                                <div class="col-md-12 ">
+                                    <div class="task-box">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input ng-if="!assigned_project && task.status==false" ng-click="markAsComplete(task._id)" type="checkbox" class="form-check-input" value="">
+                                                <input ng-if="!assigned_project && task.status==true" checked ng-click="markAsComplete(task._id)" type="checkbox" class="form-check-input" value="">
+                                                <span ng-if="!assigned_project" style="cursor:pointer;" class="custom-check"></span> 
+                                            </label>
+                                        </div>
+                                        <ul>
+                                            <li ng-if="task.status==true" class="task-name name-line"><strike>{{task.title}}</strike></li>
+                                            <li ng-if="task.status==false" class="task-name">{{task.title}}</li>
+                                            <li ng-class='("{{task.date|datediff}}"=="Today")? "today" : "red"' class="">{{task.date|datediff}}</li>
+                                            <li class="js-list"><span class="js-name">Js</span></li>
+                                            <li ng-if="!assigned_project" class="task-more icon-team-list more-option">
+                                                <div class="btn-group circle-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                         <a style="cursor:pointer;"><img class="more" src="home/img/more.svg"></a>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a style="cursor:pointer;" ng-click="editTask(task._id)">Edit</a></li>
+                                                        <li><a style="cursor:pointer;" ng-click="removeTask(task._id)">Remove</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row task-listing" ng-if="showAddTaskArea">
+                                <div class="col-md-12 ">
+                                    <div class="add-task-box">
+                                        <form ng-submit="addTask()">
+                                            <input type="text" ng-model="newTask.title" placeholder="Task name goes here. it is cut of at certain cha"/>
+                                            <a>
+                                                <md-datepicker style="opacity:0" md-min-date="project.start_date" md-max-date="project.end_date" ng-model="newTask.date" md-placeholder="Enter date" md-is-open="data.isOpen"></md-datepicker>
+                                                <!--<md-button class="md-primary md-raised" ng-click="data.isOpen = true">Open</md-button>-->
+                                                <img ng-click="data.isOpen = true" class="clander-task-img" ng-src="home/img/calan.svg"/>
+                                            </a>
+                                            <div class="user_search">
+                                                <a ng-click="data.focus = true"><img class="clander-task-img" ng-src="home/img/add-user-button.svg"/></a>
+                                                    <div class="search_box" ng-show="data.focus">
+                                                        <div class="inputarea">
+                                                            <input type="text" ng-model="newTask.team_member" placeholder="Search">
+                                                            <ul>
+                                                                <!--<li ng-repeat="team in project.team| filter:newTask.team_member" ng-click="data.focus = false;">{{team.name}}</li>-->
+                                                                <li ng-repeat="team in project.team| filter:newTask.team_member" ng-click="data.focus = false; newTask.team_member_id = team._id; newTask.team_member = team.name;">{{team.name}}</li>
+                                                            </ul>
+                                                        </div>
+                                                <!--</a>-->
+                                            </div>
+                                    </div>
+
+                                    <div class="bottom-save-btn">
+                                        <button type="submit" class="btn btn-default save">Save</button>
+                                        <button type="button" ng-click="reset()" class="btn btn-default discard">Discard</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="float-md-right completed-show">
+                            <span ng-if="show_completed==false">4 completed Task <a class="show-new" ng-click="show_completed=true;">Show</a></span>
+                            <span ng-if="show_completed==true">4 completed Task <a class="show-new" ng-click="show_completed=false;">Hide</a></span>
+                        </div>
+                    </div>
+                    <div class="overdue">
+                        <div class="tasklist-heading">
+                            <h5><span class="upcoming">Upcoming</span></h5>
+                            <span>	
+                                <a href="#"><img class="sort-list-icon" ng-src="home/img/sort-button-1.svg"/></a>
+                                <a href="#"><img class="sort-list-icon" ng-src="home/img/sort-button.svg"/></a>
+                            </span>
+                        </div>
+                        <div class="row task-listing" ng-repeat="task in tasks" ng-if="gtThanToday(task.date)">
+                            <div class="col-md-12 ">
+                                <div class="task-box">
+                                    <div class="form-check">
+                                        <label class="form-check-label" ng-if="!assigned_project">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 
+                                        </label>
+                                    </div>
+                                    <ul>
+                                        <li class="task-name">{{task.content}}</li>
+                                        <li class="datediff">{{task.date|datediff}}</li>
+                                        <li class="js-list"><span class="js-name">Js</span></li>
+                                        <li class="task-more icon-team-list more-option" ng-if="!assigned_project">
+                                            <div class="btn-group circle-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                 <a style="cursor:pointer;"><img class="more" src="home/img/more.svg"></a>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a style="cursor:pointer;" ng-click="removeTask(task._id)">Remove</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--div class="row task-listing">
+                            <div class="col-md-12 ">
+                                <div class="task-box">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 
+                                        </label>
+                                    </div>
+                                    <ul>
+                                        <li class="task-name">Task name goes here.It is cut of at certain character count</li>
+                                        <li class="today-1">3day(s) ago</li>
+                                        <li class="js-list"><span class="js-name">Mm</span></li>
+                                        <li class="task-more">
+                                            <a href="#"><img class="more" src="home/img/more.svg"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row task-listing">
+                            <div class="col-md-12 ">
+                                <div class="task-box">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="">
+                                            <span class="custom-check"></span> 
+                                        </label>
+                                    </div>
+                                    <ul>
+                                        <li class="task-name name-line"><strike>Task name goes here.It is cut of at certain character count</strike></li>
+                                        <li class="today-1">3day(s) ago</li>
+                                        <li class="js-list"><span class="js-name">Mm</span></li>
+                                        <li class="task-more">
+                                            <a href="#"><img class="more" src="home/img/more.svg"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div-->
+                        <div class="float-md-right completed-show">
+                            <span>4 completed Task <a class="show-new" href="#">Hide</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="members">
+                        <a ng-show="!assigned_project" class="add-member" ng-click="showAddTaskArea=true"><img class="follow" ng-src="home/img/add-task.svg"/>Add a task</a>
+                    </div>
+
+                    <ul class="total-team">
+                        <li>Total Task <span>{{tasks.length}}</span></li>
+                        <li>Completed <span class="color">{{completed_tasks}}</span></li>
+                        <li>Pending<span class="pending-color">{{pending_tasks}}</span></li>
+                    </ul>
+
+                    <h5 class="team-headings">Team</h5>
+                    <ul class="total-team">
+                        <li ng-repeat="team in project.team"> <span class="jss-team">{{team.name | nickname:" "| uppercase}}</span><b>{{team.name}} </b><br/>{{team.email}}<span>12/16</span></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+</section>
+</div>
+</main>

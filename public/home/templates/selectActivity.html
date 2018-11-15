@@ -1,0 +1,90 @@
+<main>
+    <div ng-include="'/home/templates/headerbeforelogin.html'"></div>	
+    <section class="activity">
+        <form ng-submit="navigateTo()"> 
+            <div class="container">
+                <div class="inner">	
+                    <h1 class="heading">Select your activity</h1>   
+                    <div class="row ">
+
+                        <div class="col-lg-3 col-12 d-flex justify-content-center">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input ng-change="navigateTo()" type="radio" class="form-check-input" name="selectactivity" value="createProject.basicinfo" ng-model="user.selectactivity">
+                                    <span class="text-content">
+                                        <i class="img-sec">
+                                            <ng-include src="'/home/img/planning.svg'" />
+                                        </i>
+                                        <i class="label-sec">
+                                            I want to <span>plan</span> weddings
+                                        </i>
+                                    </span>
+                                </label>
+                            </div>	
+                        </div>
+                        <div class="col-lg-3 col-12 d-flex justify-content-center">
+                            <div class="activity-coming">
+                                <img class="coming-soon-imgs"src="/home/img/comingsoon.png" alt="Logo">
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="selectactivity" value="marketPlace" ng-model="user.selectactivity">
+                                    <!--                                    <input ng-change="navigateTo()" type="radio" class="form-check-input" name="selectactivity" value="marketPlace" ng-model="user.selectactivity">-->
+                                    <span class="text-content">
+                                        <i class="img-sec">
+                                            <ng-include src="'/home/img/vendors_marketplcace.svg'" />
+                                            <!--<img src="/home/img/vendors.png"/>-->
+                                        </i>
+                                        <i class="label-sec">
+                                            I want to <span>search</span>  for vendors
+                                        </i>
+                                    </span>
+                                </label>
+                            </div>	
+                        </div>
+                        <div class="col-lg-3 col-12 d-flex justify-content-center">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input ng-change="navigateTo()" type="radio" class="form-check-input" name="selectactivity" value="registerBusiness.vendortype" ng-model="user.selectactivity">
+                                    <span class="text-content">
+                                        <i class="img-sec">
+                                            <ng-include src="'/home/img/vendor2.svg'" />
+                                            <!--<img src="/home/img/vendor2.png"/>-->
+                                        </i>
+                                        <i class="label-sec">
+                                            I want to <span>register</span>  as a vendor
+                                        </i>
+                                    </span>
+                                </label>
+                            </div>		
+                        </div>
+                        <div class="col-lg-3 col-12 d-flex justify-content-center">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input ng-change="navigateTo()" type="radio" class="form-check-input" name="selectactivity" value="myInvitations" ng-model="user.selectactivity">
+                                    <span class="text-content">
+                                        <i class="img-sec">
+                                            <ng-include src="'/home/img/guest.svg'" />
+                                            <!--<img src="/home/img/guest.png"/>-->
+                                        </i>
+                                        <i class="label-sec">
+                                            I am a <span>guest</span> that got invited to a wedding
+                                        </i>
+                                    </span>
+                                </label>
+                            </div>		
+                        </div>
+
+                    </div>
+
+                    <!--div class="d-flex mt-5 flex-wrap justify-content-center">
+                        <button type="submit" id="prevBtn" class="cancelbtn btn btnwidth m-2 btn-lg" >Back</button>
+                        <button type="submit" id="nextBtn" class="continuebtn btn btnwidth m-2 btn-lg" >Next</button>		
+                    </div-->	  
+                </div>     
+            </div>
+        </form>
+    </section>		
+
+
+</main>

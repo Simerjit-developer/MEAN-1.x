@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" ng-app='dost.home'>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dost - A Wedding Platform</title>
+        <meta name="description" content="ghost clone javascript blog node.js angular.js">
+        <meta name="author" content="Connor Leech">
+
+        <!-- Angular Material CSS -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!-- Website Css starts here -->
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/home/css/bootstrap.css">
+        <link rel="stylesheet" href="/home/css/bootstrap-grid.css">
+        <link rel="stylesheet" href="/home/css/bootstrap-reboot.css">
+
+        <!-- font family CSS -->
+        <link rel="stylesheet" href="/home/font/font.css">
+
+        <!-- fontawsome CSS -->
+        <link rel="stylesheet" href="/home/css/fontawesome.css" >
+        <link rel="stylesheet" href="/home/css/fa-brands.css" >
+        <link rel="stylesheet" href="/home/css/fa-regular.css" >
+        <link rel="stylesheet" href="/home/css/fa-solid.css" >
+        <!-- style CSS -->
+        <link rel="stylesheet" href="/home/css/style.css">
+        <!-- Website Css ends here -->
+        <link rel="stylesheet" href="/home/bower_components/intl-tel-input/build/css/intlTelInput.css">
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <!-- Main Content -->
+        <div ng-include="'/home/templates/register.html'"></div>
+        <!-- Website jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="/home/assets_js/bootstrap.min.js" ></script>
+        <!-- Website Js Ends here -->
+        <!-- Angular Material Dependencies 1.3.15 -->
+        <script src="/home/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+
+        <!-- UI Router -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+        <!-- Angular Material -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
+
+
+
+        <!-- Countries Phone Code List  -->
+        <script src="/home/bower_components/intl-tel-input/build/js/intlTelInput.js"></script>
+        <script src="/home/bower_components/intl-tel-input/build/js/utils.js"></script>
+        <script src="/home/bower_components/betsol-ng-intl-tel-input/dist/scripts/betsol-ng-intl-tel-input.js"></script>
+
+
+        <!-- Custom JS -->
+        <script src='/home/js/app.js'></script>
+        <script src='/home/js/directives.js'></script>
+        <script src='/home/js/filter.js'></script>
+        <script src='/home/js/controllers/main.js'></script>
+        <script src='/home/js/controllers/global.js'></script>
+        <script src='/home/js/controllers/business.js'></script>
+
+        <!-- add modules -->
+        <script src='/common/modules/users.js'></script>
+        <script src='/common/modules/vendortypes.js'></script>
+        <script src='/common/modules/services.js'></script>
+        <script src='/common/modules/highlights.js'></script>
+        <script src='/common/modules/business.js'></script>
+
+        <!-- include toaster libraries -->
+        <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+        <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
+
+        <!-- include confirmation box libraries -->
+        <script src="/admin/bower_components/angular-confirm/dist/angular-confirm.min.js"></script>
+        <link rel="stylesheet" href="/admin/bower_components/angular-confirm/dist/angular-confirm.min.css" />
+        
+    </body>
+</html>

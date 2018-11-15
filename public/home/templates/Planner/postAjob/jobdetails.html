@@ -1,0 +1,45 @@
+<div id="vendor-st2" class="tab-pane">
+    <h5>Key job details</h5>
+    <div class="form-group">
+        <label>Event name</label>
+        <input type="text" class="form-control" ng-model="jobdata.event_name" name="title" placeholder="" ng-minlength="3" ng-required="true">
+    </div>
+    <div class="form-group" ng-repeat="(key,index) in jobdata.jobDetails">
+        <label>{{key}} </label>
+        <span class="form_summary"> 
+            <!--{{jobdata.jobDetails[key]}} {{index | typeOf}}  {{key.includes('date')?'date':''}}-->
+            {{(index | typeOf)=='string' ? key.includes('date')? (jobdata.jobDetails[key] | date) : jobdata.jobDetails[key]:''}}
+            {{(index | typeOf)=='object'? (jobdata.jobDetails[key]|concatByComma):''}}
+        </span>
+        <!--<input type="text" class="form-control" ng-model="jobdata.jobDetails[key]" name="title" placeholder="" ng-minlength="3" ng-required="true">-->
+    </div>
+    <!--div class="half-input">
+        <div class="form-group">
+            <label>Food Type</label>
+            <select class="form-control" name="duration" ng-model="jobdata.duration">
+                <option value="1 Day">1 Day</option>
+                <option value="2 Days">2 Days</option>
+                <option value="3 Days">3 Days</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Food Restrictions</label>
+            <select class="form-control" name="duration" ng-model="jobdata.duration">
+                <option value="1 Day">1 Day</option>
+                <option value="2 Days">2 Days</option>
+                <option value="3 Days">3 Days</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label>Pre-testing</label>
+        <select class="form-control" name="pretesting_required" ng-model="jobdata.pretesting_required">
+            <option value="Required">Required</option>
+            <option value="Not Required">Not Required</option>
+        </select>
+    </div-->
+    <div class="btn-sec">
+        <button type="button" ng-disabled="new_job.title.$invalid || new_job.start_date.$invalid || new_job.duration.$invalid" class="btn btn-primary btn-st" ng-click="movetonext('PostJob.address',3)">Continue</button>
+    </div>
+</div>

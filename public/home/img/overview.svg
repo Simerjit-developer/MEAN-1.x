@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="17px" viewBox="0 0 16 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Overview</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Tasks" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tasks-Copy" transform="translate(-55.000000, -218.000000)" fill="#747474">
+            <path d="M62.9911111,232.744625 L56.44,227.636602 L55,228.759832 L63,235 L71,228.759832 L69.5511111,227.627687 L62.9911111,232.744625 L62.9911111,232.744625 Z M63,230.480336 L69.5422222,225.372313 L71,224.240168 L63,218 L55,224.240168 L56.4488889,225.372313 L63,230.480336 L63,230.480336 Z" id="Overview"></path>
+        </g>
+    </g>
+</svg>

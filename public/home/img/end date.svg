@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="19px" viewBox="0 0 16 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Start/end date</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Events" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Project-basic-info" transform="translate(-844.000000, -701.000000)">
+            <rect fill="#FAFAFA" x="0" y="0" width="1440" height="991"></rect>
+            <path d="M849.777778,710 L848,710 L848,711.9 L849.777778,711.9 L849.777778,710 L849.777778,710 Z M852.777778,710 L851,710 L851,711.9 L852.777778,711.9 L852.777778,710 L852.777778,710 Z M856.777778,710 L855,710 L855,711.9 L856.777778,711.9 L856.777778,710 L856.777778,710 Z M858.222222,702.9 L857.333333,702.9 L857.333333,701 L855.555556,701 L855.555556,702.9 L848.444444,702.9 L848.444444,701 L846.666667,701 L846.666667,702.9 L845.777778,702.9 C844.791111,702.9 844.008889,703.755 844.008889,704.8 L844,718.1 C844,719.145 844.791111,720 845.777778,720 L858.222222,720 C859.2,720 860,719.145 860,718.1 L860,704.8 C860,703.755 859.2,702.9 858.222222,702.9 L858.222222,702.9 Z M858.444444,718.45 L846,718.45 L846,708 L858.444444,708 L858.444444,718.45 L858.444444,718.45 Z" id="Start/end-date" fill="#E0E0E0"></path>
+        </g>
+    </g>
+</svg>

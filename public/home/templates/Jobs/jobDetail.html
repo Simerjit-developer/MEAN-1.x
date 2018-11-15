@@ -1,0 +1,261 @@
+<main>
+    <div ng-include="'/home/templates/headerVendorView.html'"></div>
+    <section class="content-sec">
+        <section class="breadcrumb-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-sec">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a >Home</a></li>
+                                <li class="breadcrumb-item"><a >Marketplace</a></li>
+                                <li class="breadcrumb-item active">Browse Jobs</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--./Breadcrumb-Sec End Here -->
+
+        <section class="result-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-1 side-arrow">
+                        <span style="cursor:pointer;" ui-sref="browseJobs" class="left-arrows"><img class="like-immg" src="/home/img/left-arrows.svg" alt="Calander-Icon"></span>
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        <section class="browse-jobs">
+                            <!-- Proposal Section starts here -->
+                            <div class="proposal" ng-show="showProposalSection==true">
+                                <!--<div class="detail browse-top-head">-->
+                                <div>
+                                    <h5>Proposal</h5>
+                                </div>
+                                <div class="caterers-card vendor-list" ng-init="showMilestoneArea=false;">
+                                    <textarea ng-model="proposal.description" class="form-control noresize" placeholder="Start your proposal here..."></textarea>
+                                    <div class="total-budget-box">
+                                        <ul>
+                                            <li class="total-budget-text">
+                                                <span class="total-bud">Total Budget</span>
+                                            </li>
+                                            <li class="total-budget-field">
+                                                <input ng-model="proposal.budget" name="budget" placeholder="" class="form-control" type="text">
+
+                                            </li>
+                                        </ul>
+                                        <ul ng-show="showMilestoneArea==true">
+                                            <span ng-repeat="n in []| range:3">
+                                                        
+                                            <li class="total-budget-text">
+                                                <span class="total-bud-1">Milestone {{n+1}}</span>
+                                            </li>
+                                            <li class="total-budget-field">
+                                                <input ng-model="proposal.milestones[n].title" placeholder="" class="form-control"  type="text">
+                                                <span><img class="star-new" ng-src="home/img/cancel-cross.svg"></span>
+                                            </li>
+                                            </span>
+                                        </ul>
+                                        <ul>
+                                            <li class="total-budget-text" ng-click="showMilestoneArea=true">
+                                                <span class="total-bud-1 add">+ Add milestone</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  ng-show="showProposalSection==true" class="cancel-bid">
+                                <ul>
+                                    <li ng-click="showProposalSection=false;">cancel</li>
+                                    <li><span class="preview">Preview</span></li>
+                                    <li style="cursor: pointer;" ng-click="submitProposal()"><a class="Submit-a-Bid"><img class="follow" ng-src="home/img/send-arrow.svg" src="home/img/add-task.svg"> &nbsp; Submit a Bid</a></li>
+                                </ul>
+                            </div>
+                            <!-- Proposal Section ends here -->
+                            
+                            <!-- Job Basic Details starts here -->
+                            <div class="caterers-card">
+                                <div class="card-head">
+                                    <h6 class="need-quality">{{livejob.title}}</h6><label class="start-job"><img class="like-immg" ng-src="home/img/star-circle.svg"> &nbsp; Verified Job</label>
+                                    <label class="start-job"><img class="like-immg" ng-src="home/img/star-circle.svg"> &nbsp; <span class="planner-color">Top Rated Planner</span></label>
+                                    <ul class="event-budget">
+                                        <li>
+                                            <p><label>Posted on {{livejob.created_at|date | datediff}}</label></p>
+                                        </li>
+
+                                    </ul>
+                                    <h4 class="desc-detail">Description</h4>
+                                    <p style="width: 100%;" class="card-detail-card job-details">
+                                        {{livejob.description}}
+                                    </p>
+                                    <ul class="budget-exp">
+                                        <li class="budget-and"><h4>Budget and Experiance</h4></li>
+                                        <li><span class="budget-level">Budget</span><p class="budget-level-1">{{livejob.budget}}</p></li>
+                                        <li><span class="exp-level">Experience Level</span><p class="exp-level-1">3+ years</p></li>
+                                    </ul>
+                                    <ul class="budget-exp">
+                                        <li class="budget-and"><h4>Event detail</h4></li>
+                                        <li><span class="budget-level">Event Name</span><p class="budget-level-1">Wedding</p></li>
+                                        <!--<li><span class="exp-level">Start date</span><p class="exp-level-1">12th Aug 2018</p></li>-->
+                                        <li><span class="exp-level">Duration</span><p class="exp-level-1">1 day(s)</p></li>
+                                    </ul>
+                                    <ul class="budget-exp" ng-repeat="(key,jobdetail) in livejob.jobDetails">
+                                        <li class="budget-and"><h4>{{key}}</h4></li>
+                                        <li><span class="budget-level">
+                                                {{(jobdetail | typeOf)=='string' ? key.includes('date')? (livejob.jobDetails[key] | date) : livejob.jobDetails[key]:''}}
+                                                {{(jobdetail | typeOf)=='object'? (livejob.jobDetails[key]|concatByComma):''}}
+                                                <!--{{jobdetail}}-->
+                                            </span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Job Basic Details ends here -->
+                            <div class="caterers-card" ng-init="showVendorSection=false">
+                                <ul class="budget-exp job-activity">
+                                    <li class="budget-and"><h4>Job Activity</h4></li>
+                                    <li><p class="exp-level-1">Bids Submitted: 14</p></li>
+                                    <li><p class="exp-level-1">Avg bid value: $1200</p></li>
+                                    <!--<li style="cursor: pointer;" ng-click="showVendorSection=true"><span class="exp-level clors">View Vendor list</span></li>-->
+                                </ul>
+                            </div>
+                            <!-- Vendor list starts here -->
+                            <div class="detail browse-top-head" ng-show="showVendorSection==true">
+                                <h5>Vendor list <span class="hide-txt" style="cursor: pointer;" ng-click="showVendorSection=false">Hide</span></h5>
+                            </div>
+                            <div class="vendor-list-listing" ng-show="showVendorSection==true">
+                                <div class="caterers-card vendor-list">
+                                    <div class="card-head">
+                                        <ul class="vendor-listing">
+                                            <li class="circle-vendor"><span></span></li>
+                                            <li class="vend-name"><span>Vendor Name</span><p class="vendor-service">Services</p></li>
+                                            <li class="rating-list"><span class="star-rating"><img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg">
+                                                    <img class="star-new" ng-src="home/img/star-new.svg"><small> &nbsp; 9 reviews</small></span><p class="location-list">Location: Heydrabad</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="caterers-card vendor-list">
+                                    <div class="card-head">
+                                        <ul class="vendor-listing">
+                                            <li class="circle-vendor"><span></span></li>
+                                            <li class="vend-name"><span>Vendor Name</span><p class="vendor-service">Services</p></li>
+                                            <li class="rating-list"><span class="star-rating"><img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg">
+                                                    <img class="star-new" ng-src="home/img/star-new.svg"><small> &nbsp; 9 reviews</small></span><p class="location-list">Location: Heydrabad</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="caterers-card vendor-list">
+                                    <div class="card-head">
+                                        <ul class="vendor-listing">
+                                            <li class="circle-vendor"><span></span></li>
+                                            <li class="vend-name"><span>Vendor Name</span><p class="vendor-service">Services</p></li>
+                                            <li class="rating-list"><span class="star-rating"><img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg">
+                                                    <img class="star-new" ng-src="home/img/star-new.svg"><small> &nbsp; 9 reviews</small></span><p class="location-list">Location: Heydrabad</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="caterers-card vendor-list">
+                                    <div class="card-head">
+                                        <ul class="vendor-listing">
+                                            <li class="circle-vendor"><span></span></li>
+                                            <li class="vend-name"><span>Vendor Name</span><p class="vendor-service">Services</p></li>
+                                            <li class="rating-list"><span class="star-rating"><img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg">
+                                                    <img class="star-new" ng-src="home/img/star-new.svg"><small> &nbsp; 9 reviews</small></span><p class="location-list">Location: Heydrabad</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="caterers-card vendor-list">
+                                    <div class="card-head">
+                                        <ul class="vendor-listing">
+                                            <li class="circle-vendor"><span></span></li>
+                                            <li class="vend-name"><span>Vendor Name</span><p class="vendor-service">Services</p></li>
+                                            <li class="rating-list"><span class="star-rating"><img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg"> <img class="star-new" ng-src="home/img/star-new.svg">
+                                                <img class="star-new" ng-src="home/img/star-new.svg"><small> &nbsp; 9 reviews</small></span><p class="location-list">Location: Heydrabad</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Vendor list ends here -->
+                            
+                            <!--Similar Jobs starts here -->
+                            <div class="detail browse-top-head">
+                                <h5>Similar Jobs</h5>
+                            </div>
+                            <div class="caterers-card" ng-repeat="similarjob in livejob.similar_jobs">
+                                <div class="card-head">
+                                    <h6>{{similarjob.title}}</h6><label class="start-job">Starts Immediatly</label>
+
+                                    <span class="flag-icon-clr">
+                                        <img class="like-immg" src="/home/img/like.svg" alt="Calander-Icon">
+                                    </span>
+                                    <ul class="event-budget">
+                                        <li>
+                                            <p><label>Event name: Wedding</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>Budget: {{similarjob.budget}}</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>No of Guest: 1400</label></p>
+                                        </li>
+                                    </ul>
+                                    <p class="card-detail-card">{{similarjob.description}}</p>
+                                    <ul class="event-budget">
+                                        <li><span class="team-member-icon color-1"><img class="like-immg" ng-src="home/img/star-circle.svg"></span>
+                                            <p>Verified Job</p>
+                                        </li>
+                                        <li><span class="team-member-icon"><img class="like-imgg" ng-src="home/img/star-circle.svg"></span>
+                                            <p class="planner-color">Top Rated Planner</p>
+                                        </li>
+                                        <li class="right-bids">
+                                            <div class="bids">
+                                                <label class="posted-ago">Posted 2 days ago</label><span class="bids-color">14 Bids new</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!--div class="caterers-card">
+                                <div class="card-head">
+                                    <h6>Need quality caterers for a punjabi wedding.</h6><label class="start-job">Starts Immediatly</label>
+                                    <span class="flag-icon-clr">
+                                        <img class="like-immg" src="/home/img/like-fill.svg" alt="Calander-Icon">
+                                    </span>
+                                    <ul class="event-budget">
+                                        <li>
+                                            <p><label>Event name: Wedding</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>Budget: $1200</label></p>
+                                        </li>
+                                        <li>
+                                            <p><label>No of Guest: 1400</label></p>
+                                        </li>
+                                    </ul>
+                                    <p class="card-detail-card">Sangeet dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <ul class="event-budget">
+                                        <li><span class="team-member-icon"><img class="like-immg" ng-src="home/img/like.svg"></span>
+                                            <p>Verified Job</p>
+                                        </li>
+                                        <li><span class="team-member-icon"><img class="like-imgg" ng-src="home/img/like.svg"></span>
+                                            <p class="planner-color">Top Rated Planner</p>
+                                        </li>
+                                        <li class="right-bids">
+                                            <div class="bids">
+                                                <label class="posted-ago">Posted 2 days ago</label><span class="bids-color">14 Bids new</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div-->
+                            <!--Similar Jobs ends here -->
+                        </section>
+                    </div>
+                    <div class="col-md-2 bid-sec" ng-init="showProposalSection=false;">
+                        <a style="cursor: pointer;" ng-click="showProposalSection=true;" class="Submit-a-Bid"><img class="follow" ng-src="home/img/send-arrow.svg" src="home/img/add-task.svg"> &nbsp; Submit a Bid</a>
+                        <span class="favourite" style="position:initial;"><img class="like-imgg" ng-src="home/img/like.svg"> &nbsp; Save to Favourite</span>
+                    </div>
+                </div>
+            </div>
+        </section><!--/.Result-Sec End Here -->
+    </section><!--/.content-sec-->
+</main>

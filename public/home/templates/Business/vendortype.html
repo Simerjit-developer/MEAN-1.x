@@ -1,0 +1,51 @@
+
+    <div id="vendor-st1" class="tab-pane">
+        <div class="form-group select-vendor-type">
+            <label class="radio-bt">Select Vendor Type</label>
+            <!--label class="radio-label" ng-repeat="vendortype in vendortypes">
+                <input ng-required="true" type="radio" ng-change="vendortypeChanged(vendortype._id)" ng-model="post.vendortype_id" ng-value="vendortype._id" name="vendortype_id">
+                <span class="radio_inner">
+                    <ng-include style="width:50px;" src="trustUrl(vendortype.image)" />
+                </span>
+                {{vendortype.title}}
+            </label--> 
+            <label class="radio-label" ng-if="$index<4" ng-repeat="vendortype in vendortypes">
+                <input ng-required="true" type="radio" ng-change="vendortypeChanged(vendortype._id)" ng-model="post.vendortype_id" ng-value="vendortype._id" name="vendortype_id">
+                <span class="radio_inner">
+                    <ng-include style="width:50px;" src="trustUrl(vendortype.image)" />
+                    <!--<img style="width:50px;" ng-src="{{vendortype.image}}">-->
+                </span>
+                <p title="{{vendortype.title}}">{{vendortype.title}}</p>
+            </label> 
+            <div class="dropdown">
+                <button class="btn btn_custom" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-angle-down"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right toggle_select" aria-labelledby="dropdownMenuButton">
+                    <label class="radio-label label_dropdown" ng-if="$index >=4" ng-repeat="vendortype in vendortypes">
+                        <input ng-required="true" type="radio" ng-change="vendortypeChanged(vendortype._id)" ng-model="post.vendortype_id" ng-value="vendortype._id" name="vendortype_id">
+                        <span class="radio_inner">
+                            <ng-include style="width:50px;" src="trustUrl(vendortype.image)" />
+                            <!--<img style="width:50px;" ng-src="{{vendortype.image}}">-->
+                        </span>
+                        <p title="{{vendortype.title}}">{{vendortype.title}}</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Company name</label>
+            <input type="text" class="form-control" ng-model="post.company_name" name="company_name" placeholder="" ng-minlength="3" ng-required="true">
+        </div>
+        <div class="form-group">
+            <label>Established in</label>
+            <input type="text" class="form-control" ng-model="post.established_in" placeholder="">
+        </div>
+        <div class="form-group">
+            <label>Company Phone number <small class="small_text" ng-click="post.company_phone=currentUser.phone">Same as profile</small></label> 
+            <input type="text" name="company_phone" class="form-control" ng-model="post.company_phone" placeholder="" ng-minlength="10" required="true">
+        </div>
+        <div class="btn-sec">
+            <button type="button" ng-disabled="vendor_reg.vendortype_id.$invalid || vendor_reg.company_name.$invalid || vendor_reg.company_phone.$invalid" class="btn btn-primary btn-st" ng-click="movetocost()">Continue</button>
+        </div>
+    </div>

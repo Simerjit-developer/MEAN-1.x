@@ -1,0 +1,333 @@
+<main>
+    <div ng-include="'/home/templates/header.html'"></div>
+<section class="content-sec">
+    <section class="breadcrumb-sec" style="border:none;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inner-sec">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Projects</a></li>
+                            <li class="breadcrumb-item active">{{project.name}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--./Breadcrumb-Sec End Here -->
+    <section class="wedding-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="head-sec">
+                        <h4>{{project.name}} <i class="fas fa-angle-down"></i></h4> 
+                        <span class="star"><i class="fas fa-star"></i></span> 
+                        <p>80% details added</p>
+                        <div class="btn-sec">
+                            <button type="button" class="btn btn-primary btn-update"><i class="fas fa-pencil-alt"></i>  Update Details</button>
+                            <a href="#" class="btn btn-primary btn-planner"><i class="far fa-clipboard"></i> Open Planner</a>
+                        </div>
+                    </div><!--/. end here -->
+                    <div class="details-card">
+                        <div class="card-inner">
+                            <h5>Basic Details</h5>
+                            <h6>Description</h6>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                            <ul class="all-details">
+                                <li>
+                                    <span class="icon"><i class="fas fa-user"></i></span>
+                                    <p>Client</p>
+                                    <span class="sub-title">{{project.client_name}}</span>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="fas fa-dollar-sign"></i></span>
+                                    <p>Budget</p>
+                                    <span class="sub-title">$12,300</span>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                                    <p>Location</p>
+                                    <span class="sub-title">{{project.location}}</span>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="far fa-calendar-alt"></i></span>
+                                    <p>Start Date</p>
+                                    <span class="sub-title"> {{project.start_date | date:'dd MMM y'}}</span>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="far fa-clock"></i></span>
+                                    <p>Duration</p>
+                                    <span class="sub-title">14 Days</span>
+                                </li>
+                            </ul>
+                            <a href="#" class="btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.end here -->
+            <div class="row">
+                <div class="col-sm-8 col-md-8">
+                    <div class="card-bride">
+                        <div class="inner-sec">
+                            <h5>Bride and groom details</h5>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="inner-details">
+                                        <div class="head-sec">										
+                                            <h6>Groom</h6>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-h"></i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </div><!--/.head-sec -->
+                                        <div class="avatar-sec">
+                                            <div class="avatar-img">
+                                                <img src="img/bg.jpg" alt="Avatar">
+                                            </div>
+                                            <h5>{{project.groom.name}}</h5>
+                                            <p>{{project.groom.phone}}</p>
+                                        </div><!--/. end here -->
+                                        <div class="det-here">
+                                            <p><strong>Date of Birth</strong> 12th Aug 2019, 28 Yrs</p>
+                                            <p><strong>Location</strong> {{project.groom.city}}</p>
+                                            <p><strong>Email</strong> NitinKumar42@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="inner-details">
+                                        <div class="head-sec">										
+                                            <h6>Bride</h6>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-h"></i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </div><!--/.head-sec -->
+                                        <div class="avatar-sec">
+                                            <div class="avatar-img">
+                                                <img src="img/bg.jpg" alt="Avatar">
+                                            </div>
+                                            <h5>{{project.bride.name}}</h5>
+                                            <p>{{project.bride.phone}}</p>
+                                        </div><!--/. end here -->
+                                        <div class="det-here">
+                                            <p><strong>Date of Birth</strong> 12th Aug 2019, 28 Yrs</p>
+                                            <p><strong>Location</strong> {{project.bride.city}}</p>
+                                            <p><strong>Email</strong> NitinKumar42@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <div class="card-bride">
+                        <div class="inner-sec">
+                            <h5>Client details</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="inner-details">
+                                        <div class="head-sec">										
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-h"></i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </div><!--/.head-sec -->
+                                        <div class="avatar-sec">
+                                            <div class="avatar-img">
+                                                <img src="img/bg.jpg" alt="Avatar">
+                                            </div>
+                                            <h5>{{project.client_name}}</h5>
+                                            <p>91-9815282351</p>
+                                        </div><!--/. end here -->
+                                        <div class="det-here">
+                                            <p><strong>Date of Birth</strong> 12th Aug 2019, 28 Yrs</p>
+                                            <p><strong>Location</strong> Hyderabad</p>
+                                            <p><strong>Email</strong> NitinKumar42@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.end here -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="event-sec">
+                        <div class="inner-sec">
+                            <h5>Events</h5>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="event_wrap">
+                                        <div class="event-inner">
+                                            <div class="head-sec">
+                                                <h6><span class="icon-sec"><i class="fab fa-dribbble-square"></i></span> Mehendi</h6> 
+                                                <span class="date"><i class="far fa-calendar-alt"></i> 12th June 2019</span>
+                                            </div>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                            <div class="foot-sec">
+                                                <div class="vendors">
+                                                    <ul>
+                                                        <li><strong>Vendors</strong></li>
+                                                        <li><a href="#">Catere</a></li>
+                                                        <li><a href="#">Photographer</a></li>
+                                                        <li><a href="#">+1</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="team">
+                                                    <ul>
+                                                        <li><strong>Team</strong></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="event_wrap">
+                                        <div class="event-inner">
+                                            <div class="head-sec">
+                                                <h6><span class="icon-sec"><i class="fab fa-dribbble-square"></i></span> Mehendi</h6> 
+                                                <span class="date"><i class="far fa-calendar-alt"></i> 12th June 2019</span>
+                                            </div>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                            <div class="foot-sec">
+                                                <div class="vendors">
+                                                    <ul>
+                                                        <li><strong>Vendors</strong></li>
+                                                        <li><a href="#">Catere</a></li>
+                                                        <li><a href="#">Photographer</a></li>
+                                                        <li><a href="#">+1</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="team">
+                                                    <ul>
+                                                        <li><strong>Team</strong></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="event_wrap">
+                                        <div class="event-inner">
+                                            <div class="head-sec">
+                                                <h6><span class="icon-sec"><i class="fab fa-dribbble-square"></i></span> Mehendi</h6> 
+                                                <span class="date"><i class="far fa-calendar-alt"></i> 12th June 2019</span>
+                                            </div>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                            <div class="foot-sec">
+                                                <div class="vendors">
+                                                    <ul>
+                                                        <li><strong>Vendors</strong></li>
+                                                        <li><a href="#">Catere</a></li>
+                                                        <li><a href="#">Photographer</a></li>
+                                                        <li><a href="#">+1</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="team">
+                                                    <ul>
+                                                        <li><strong>Team</strong></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="event_wrap">
+                                        <div class="event-inner">
+                                            <div class="head-sec">
+                                                <h6><span class="icon-sec"><i class="fab fa-dribbble-square"></i></span> Mehendi</h6> 
+                                                <span class="date"><i class="far fa-calendar-alt"></i> 12th June 2019</span>
+                                            </div>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                            <div class="foot-sec">
+                                                <div class="vendors">
+                                                    <ul>
+                                                        <li><strong>Vendors</strong></li>
+                                                        <li><a href="#">Catere</a></li>
+                                                        <li><a href="#">Photographer</a></li>
+                                                        <li><a href="#">+1</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="team">
+                                                    <ul>
+                                                        <li><strong>Team</strong></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                        <li><span><img src="img/bg.jpg" alt="Avatar"></span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="#" class="btn-add"><i class="fas fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="team-sec">
+                        <div class="inner-sec">
+                            <h5>Team</h5>
+                            <div class="row">
+                                <div class="col-sm-2 col-md-2" ng-repeat="team in project.team">
+                                    <div class="team-wrap">
+                                        <div class="team-avatar">
+                                            <img src="img/bg.jpg" alt="Avatar">
+                                        </div>
+                                        <h6>{{team.name}}</h6>
+                                        <p>{{team.phone}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-edit"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/. end here -->
+        </div>
+    </section><!-- Wedding Info Sec End Here -->
+</section><!--/.content-sec-->
+</main>

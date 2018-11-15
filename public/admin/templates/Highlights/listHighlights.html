@@ -1,0 +1,65 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Highlights
+            <small>Preview</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Highlights</a></li>
+            <li class="active">All</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Highlights</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Vendor Type</th>
+                  <th>Title</th>
+                  <th>Created</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="service in highlights track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{service.vendortype_id}}</td>
+                        <td>{{service.title}}</td>
+                        <td> {{service.created_at}}</td>
+                        <td>
+                            <a ui-sref="editHighlights({id: service._id})">Edit</a>
+                            <a ng-click="deletePost(service.title, service._id)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Image</th>
+                  <th>Created</th>
+                  <th>Actions</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+    </section>
+</div>
